@@ -137,8 +137,12 @@ Fuera de la partida, hay también varios efectos de sonido para las interaccione
 El juego cuenta con ocho interfaces:
 ### <a name="_heading=h.5h6jvb3dy1km"></a>**Pantalla de inicio** 
 un fondo blanco con sprites de algunos NPCs repartidos por la pantalla, el título del juego y dos botones con la estética de hacker de configuración y empezar partida. Al darle a comenzar los botones cambian a ser uno de modo de juego en red y otro en modo de juego local.
+
+![](Aspose.Words.d11e08c1-7502-4c34-997f-3d8c28faeb34.010.png)
 ### <a name="_heading=h.teva7zbitlwp"></a>**Pantalla de configuración** 
 La pantalla de configuración tiene la misma estética de películas de hackers. Esta pantalla cuenta únicamente con la configuración del número de NPCs, contando con tres botones con la estética ya mencionada: “Pocos”, “Normales” y “Muchos”.
+
+![](Aspose.Words.d11e08c1-7502-4c34-997f-3d8c28faeb34.011.png)
 ### <a name="_heading=h.3glh2vore5jc"></a>**Pantalla de selección jugador 1**
 Esta se muestra al iniciar partida, está dividida en dos zonas, a la izquierda se muestra, en la estética de hacker la misión a realizar y hay un espacio donde escribir una pista falsa y a la derecha un maniquí con el que seleccionar el atuendo, esto se muestra con un maniquí que tiene flechas a cada lado de la cabeza, torso y piernas, al hacer click izquierdo en esas flechas se le irán cambiando las distintas prendas.
 
@@ -153,3 +157,5 @@ Va después de la del jugador 1 (simultáneamente si se está jugando en línea)
 Durante la partida hay tres interfaces visibles en todo momento. En la esquina superior izquierda de la pantalla aparece un botón en forma de post it en el que pone diario. Al hacerle click izquierdo el jugador 2 se despliega una hoja de cuaderno con las pistas escritas, esta hoja tiene el mismo post it de diario debajo, al darle click izquierdo se cierra. En el lado derecho tiene otro post it: al darle click izquierdo pasa a otra página con todas las posibles misiones del jugador 1 descritas para consultarlas en todo momento. Finalmente, si el jugador hace click derecho en cualquier parte del escenario con una de las armas con zoom una ventana se abrirá en la esquina superior derecha que hace un zoom permanente a la zona clickeada hasta que se hace click derecho en otra zona, lo que hace un zoom nuevo, o en la propia ventana, lo que la cierra.
 ### <a name="_heading=h.oxkqnhw80ffp"></a>**Pantalla de pausa**
 Esta pantalla se puede acceder durante la partida del juego. Sirve para pausar la partida y se puede entrar a ella presionando la tecla esc. En ella se pueden elegir dos opciones, una para continuar la partida que se ha pausado y otra para volver a la pantalla de inicio de manera que se pueda iniciar una nueva partida.
+
+![](Aspose.Words.d11e08c1-7502-4c34-997f-3d8c28faeb34.014.png)
