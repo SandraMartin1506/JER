@@ -15,8 +15,8 @@ Trouble in NPC Town es un juego en red para dos jugadores. El entorno del juego 
 
 **INTEGRANTES DEL EQUIPO DE DESARROLLO:**
 Carlos Escribano González ||
-Sandra Martín-Consuegra Molina-Prados, s.martinm.2021@alumnos.urjc.es, SandraMartin_1506 (sandramcmp@gmail.com) || 
-Hugo Camacho Rodríguez, h.camacho.2021@alumnos.urjc.es, Elaguilaalbina  ||
+Sandra Martín-Consuegra Molina-Prados, s.martinm.2021@alumnos.urjc.es, SandraMartin_1506 (https://github.com/SandraMartin_1506) || 
+Hugo Camacho Rodríguez, h.camacho.2021@alumnos.urjc.es, Elaguilaalbina (https://github.com/Elaguilaalbina)  ||
 Pablo Melgar Álvarez ||
 
 # **MECÁNICAS:**
