@@ -14,10 +14,10 @@
 Trouble in NPC Town es un juego en red para dos jugadores. El entorno del juego se basa en una escena fija, sin movimiento de cámara, en la cual se situará el jugador 1, quien debe camuflarse entre los numerosos NPCs de la escena, haciéndose pasar por uno de ellos. El jugador 2, por su parte, debe identificar cuál de todos los personajes de la escena es el jugador 1, acabando con él clicando sobre su personaje. 
 
 **INTEGRANTES DEL EQUIPO DE DESARROLLO:**
-Carlos Escribano González ||
-Sandra Martín-Consuegra Molina-Prados, s.martinm.2021@alumnos.urjc.es, SandraMartin_1506 (https://github.com/SandraMartin_1506) || 
+Carlos Escribano González, , CarlosEscribano113 (https://github.com/CarlosEscribano113)||
+Sandra Martín-Consuegra Molina-Prados, s.martinm.2021@alumnos.urjc.es, SandraMartin1506 (https://github.com/SandraMartin1506) || 
 Hugo Camacho Rodríguez, h.camacho.2021@alumnos.urjc.es, Elaguilaalbina (https://github.com/Elaguilaalbina)  ||
-Pablo Melgar Álvarez ||
+Pablo Melgar Álvarez, , PabloMelgar (https://github.com/PabloMelgar) ||
 
 # **MECÁNICAS:**
 
