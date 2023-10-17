@@ -1,5 +1,6 @@
 # JER
 **TÍTULO DEL JUEGO: TROUBLE IN NPC TOWN**
+
 **DESCRIPCIÓN GENERAL DEL JUEGO:**
 - Género: Party; Point and Click
 - Perspectiva: 2D Cenital, cámara fija (única escena)
@@ -17,6 +18,7 @@ Carlos Escribano González ||
 Sandra Martín-Consuegra Molina-Prados || s.martinm.2021@alumnos.urjc.es || 
 Hugo Camacho Rodríguez ||
 Pablo Melgar Álvarez ||
+
 # **MECÁNICAS:**
 
 **Pantalla de inicio:**
