@@ -85,24 +85,17 @@ Los objetos del videojuego son las diferentes prendas de ropa que tienen tanto l
 Las prendas de ropa que se utilizan son tan solo 3: pantalones, camiseta y gorro, y tan solo cambiarán los colores, los tipos (un gorro puede ser de lana o de copa, por ejemplo) y los patrones de estos.
 ## **Armas**
 Hay tres armas seleccionables en el juego y cada una tiene sus propias características:
-### **Subfusil**
-Es el arma con la mira más pequeña. Tiene la posibilidad de disparar 8 balas y no permite el zoom. Quita la mitad de la vida del personaje al que haya atacado. Recomendada para tener más margen de error, pero no tiene mucha precisión. ![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.001.png)
-
-
-
-
-
-
-
+FASE 2: SE QUITA UNO DE LOS 3 ARMAS, SE QUITA EL ZOOM, SE QUITAN EL MEDIDOR DE VIDA YA QUE QUITANDO UNA DE LAS ARMAS YA SE JUSTIFICA EL USO DE LAS OTRAS 2.
 ### **Francotirador![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.002.png)**
-El arma tiene una mira mediana. Tiene la posibilidad de disparar 3 balas y es la que más zoom tiene. Mata personajes de una sola bala.
+El arma tiene una mira mediana. Tiene la posibilidad de disparar 3 balas y es la que más zoom tiene. Elimina al personaje seleccionado.
 
 
 
 
 
 ### **Lanzagranadas**
-Es el arma con la mira más grande. Tiene la posibilidad de disparar tan solo una bala y podrá hacer zoom, pero no tendrá tanta profundidad como el francotirador. Sin embargo, es un arma cuyo impacto afecta en áreas y no individualmente como en el caso de las otras dos. Quita la vida entera de los personajes que se encuentren en el área de impacto.
+FASE 2: ELIMINAR ZOOM 
+Es el arma con la mira más grande. Tiene la posibilidad de disparar tan solo una bala cuyo impacto afecta en áreas y no individualmente como en el caso de las otras dos. Elimina a los personajes en el área.
 
 ![Imagen que contiene reloj, jugador
 
@@ -148,7 +141,7 @@ Esta se muestra al iniciar partida, está dividida en dos zonas, a la izquierda 
 
 ![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.010.jpeg)
 ### <a name="_heading=h.bzehxrfmhyr"></a>**Pantalla de selección jugador 2**
-Va después de la del jugador 1 (simultáneamente si se está jugando en línea). Esta muestra ilustraciones de las tres armas en fila con su nombre y descripción en la estética de hackers para que el jugador 2 escoja y debajo las tres pistas que le han tocado.
+Va después de la del jugador 1 (simultáneamente si se está jugando en línea). Esta muestra ilustraciones de las dos armas en fila con su nombre y descripción en la estética de hackers para que el jugador 2 escoja y debajo las tres pistas que le han tocado.
 
 ![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.011.jpeg)
 
