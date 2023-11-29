@@ -5,7 +5,9 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 var imgNPC = new Image();
 imgNPC.src = "Sprites/Enemy.png";
 var npcs;
+var player;
 
+//NPCS:
 function NPC(initialX, initialY)
 {
 	this.x = initialX;
@@ -57,11 +59,71 @@ function NPC(initialX, initialY)
 	}
 }
 
+//JUGADOR:
+function Player(initialX, initialY)
+{
+	this.x = initialX;
+	this.y = initialY;
+	this.direction;
+	this.currentInput; //Input que está pulsando actualmente el jugador
+
+	this.ManageInput = function(e)
+	{
+		e.preventDefault(); //Se previene la acción por defecto de la tecla pulsada
+
+		if (e.key === 'w')
+		{
+			this.direction = "Arriba";
+			this.currentInput = e.key;
+		}
+		else if (e.key === 's')
+		{
+			this.direction = "Abajo";
+			this.currentInput = e.key;
+		}
+		else if (e.key === 'a')
+		{
+			this.direction = "Izquierda";
+			this.currentInput = e.key;
+		}
+		else if (e.key === 'd')
+		{
+			this.direction = "Derecha";
+			this.currentInput = e.key;
+		}
+		
+	}
+
+	this.StopMovement = function (e)
+	{
+		if (this.currentInput === e.key)
+		{
+			this.direction = "Quieto";
+        }
+    }
+
+	this.UpdatePosition = function()
+	{
+		if (this.direction === 'Arriba' && this.y > 0) this.y--;
+		else if (this.direction === "Abajo" && this.y < canvas.clientHeight) this.y++;
+		else if (this.direction === "Izquierda" && this.x > 0) this.x--;
+		else if (this.direction === "Derecha" && this.x < canvas.clientWidth) this.x++;
+    }
+
+	this.PaintPlayer = function ()
+	{
+		ctx.drawImage(imgNPC, this.x, this.y, 50, 50); //De momento usamos la misma foto que para los NPCs de placeholder, pero el doble de grande para saber cuál es
+    }
+}
+
 imgNPC.onload = function()
 {
 	var numberNPC = Math.floor(Math.random() * (60-40+1) + 40); //NPCs son un número aleatorio entre 40 y 60 (de momento)
 	npcs = new Array(numberNPC);
 	InitializeNPCS();
+	InitializePlayer();
+	document.addEventListener("keydown", player.ManageInput.bind(player))
+	document.addEventListener("keyup", player.StopMovement.bind(player))
 	requestAnimationFrame(GameLoop);
 }
 
@@ -75,19 +137,28 @@ function InitializeNPCS()
 	}
 }
 
-function UpdateNPCS()
+function InitializePlayer()
+{
+	var randomX = Math.floor(Math.random() * (1550 - 50 + 1) + 50);
+	var randomY = Math.floor(Math.random() * (850 - 50 + 1) + 50);
+	player = new Player(randomX, randomY);
+}
+
+function UpdateCharacters()
 {
 	for(var i = 0; i < npcs.length; i++)
 	{
 		npcs[i].UpdatePosition();
 		npcs[i].PaintNPC();
 	}
+	if(typeof player.direction !== 'undefined') player.UpdatePosition();
+	player.PaintPlayer();
 }
 
 function GameLoop()
 {
 	ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight); //Se borra el contenido del lienzo para ser repintado
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	UpdateNPCS();
+	ctx.fillRect(0, 0, canvas.width, canvas.height); //Se vuelve a poner el fondo
+	UpdateCharacters();
 	requestAnimationFrame(GameLoop);
 }
