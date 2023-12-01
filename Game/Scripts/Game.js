@@ -8,7 +8,7 @@ class Game extends Phaser.Scene
     preload()
     {
         this.load.image("Character", "./Sprites/Character.png"); //Va estupendo!
-        
+        this.load.spritesheet("placeholder", "./Sprites/SpriteSheet.png", {frameWidth: 172, frameHeight: 269})
     }
 
     create()
@@ -28,7 +28,6 @@ class Game extends Phaser.Scene
     update(time, deltaTime)
     {
         this.UpdateCharacters();
-        
     }
 
     InitializeNPCS() //Inicializa todos los NPCs en posiciones aleatorias
@@ -47,12 +46,12 @@ class Game extends Phaser.Scene
     {
         var randomX = Math.floor(Math.random() * (1550 - 50 + 1) + 50);
 	    var randomY = Math.floor(Math.random() * (850 - 50 + 1) + 50);
-	    this.player = new Player(randomX, randomY, "Character", this);
+	    this.player = new Player(randomX, randomY, "Character", this, "placeholder");
     }
 
     InitializePlayer2() {
         this.player2 = new Player2(this); // Le paso la escena actual. No pongo num balas todavia
-       this.input.on('pointermove',this.player2.UpdatePositionP2,this) //Cada vez que el ratón se mueve le paso la función para cambiar la posición del jugador 2 (que va a ser la del ratón)
+        this.input.on('pointermove',this.player2.UpdatePositionP2.bind(this.player2), this); //Cada vez que el ratón se mueve le paso la función para cambiar la posición del jugador 2 (que va a ser la del ratón)
        //le paso el contexto con el último this para que lo haga bien
     }
 
@@ -63,6 +62,5 @@ class Game extends Phaser.Scene
             this.npcs[i].UpdatePosition();
         }
         this.player.UpdatePosition();
-        
     }
 }
