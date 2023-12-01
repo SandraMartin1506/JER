@@ -41,7 +41,6 @@ class Game extends Phaser.Scene
             var randomX = Math.floor(Math.random() * (1550-50+1) + 50);
             var randomY = Math.floor(Math.random() * (850-50+1) + 50);
             this.npcs[i] = new NPC(randomX, randomY, "Character", this);
-            console.log(this.npcs[i].body)
         }
     }
 
