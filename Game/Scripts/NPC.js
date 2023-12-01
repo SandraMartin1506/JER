@@ -4,6 +4,11 @@ class NPC extends Phaser.GameObjects.Group
     {
         super({key: "NPC"});
 		this.body = scene.add.image(initialX, initialY, img); //Imagen del NPC
+		scene.physics.add.existing(this.body);
+        this.body.setInteractive();
+        this.body.on('pointerdown',function(pointer){
+            this.destroy();
+        })
         this.nextX = this.body.x; //Próxima posición en x
         this.nextY = this.body.y; //Próxima posición en y
         this.calculatingPosition = false; //Indica si el NPC está quieto calculando cuál va a ser su próxima posición
@@ -45,4 +50,8 @@ class NPC extends Phaser.GameObjects.Group
 			}
 		}		
     }
+
+	getBody(){
+		return this.body;
+	}
 }

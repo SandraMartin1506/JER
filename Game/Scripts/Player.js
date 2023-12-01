@@ -7,6 +7,11 @@ class Player extends Phaser.GameObjects.Group
         this.body.setScale(1.5); //De momento está así para diferenciarse del resto
         this.direction; //Dirección en la que camina
         this.currentInput; //Input correspondiente a la dirección actual
+        scene.physics.add.existing(this.body);
+        this.body.setInteractive();
+        this.body.on('pointerdown',function(pointer){
+            this.destroy();
+        })
     }
 
     ManageInput(scene) //Añade al evento keydown la función de detección de direcciones del jugador
