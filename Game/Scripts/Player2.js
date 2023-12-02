@@ -28,7 +28,7 @@ class Player2 extends Phaser.GameObjects.Group
 
         for(var i = 0; i<this.bullets.length; i++)
         {
-            this.bullets[i] = this.scene.add.sprite(1434 + (i*20),456, this.weaponimg) //Aparecen las imágenes una tras otra siguiendo una distancia x+20
+            this.bullets[i] = this.scene.add.sprite(1434 + (i*20),50, this.weaponimg) //Aparecen las imágenes una tras otra siguiendo una distancia x+20
         }
     }
     //Si tiene 0 balas se duerme la escena. Luego meter condición de que sean 0 balas y que el jugador1 siga vivo

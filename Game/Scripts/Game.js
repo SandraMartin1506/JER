@@ -7,24 +7,29 @@ class Game extends Phaser.Scene
 
     preload()
     {
-        this.load.image("Character", "./Sprites/Character.png"); //Va estupendo!
+        this.load.image("Character", "./Sprites/Character.png");
         this.load.image("bullet", "./Sprites/bala.png");
         this.load.spritesheet("placeholder", "./Sprites/SpriteSheet.png", {frameWidth: 172, frameHeight: 269})
     }
 
     create()
     {
+        //NPCs:
         var numberNPC = Math.floor(Math.random() * (60-40+1) + 40); //NPCs son un número aleatorio entre 40 y 60 (de momento)
 	    this.npcs = new Array(numberNPC);
-        this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
         this.InitializeNPCS(); //Se inicializan los NPCs con posiciones aleatorias
+        //Jugadores:
         this.player;
         this.player2;
         this.InitializePlayer(); //El jugador también tendrá una posición aleatoria
         this.InitializePlayer2();
+        //Manejo de input:
         this.player.ManageInput(this); //Se añade la gestión del input al ser pulsada una tecla. Se pasa como parámetro la escena del juego.
         this.player2.ManageBullets(); //Se añade la gestión de las balas. Cada vez que se haga click izquierdo, se pierde una bala
         this.player.StopMovement(this); //Gestión del input: cuando deja de pulsarse la tecla de movimiento el jugador se queda quieto
+        this.input.keyboard.on("keydown", this.PauseGame.bind(this)); //Si se presiona ESC se pausa el juego
+        
+        this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
     }
 
     update(time, deltaTime)
@@ -66,5 +71,14 @@ class Game extends Phaser.Scene
             this.npcs[i].UpdatePosition();
         }
         this.player.UpdatePosition();
+    }
+
+    PauseGame(event)
+    {
+        if(event.key === "Escape")
+        {
+            this.scene.run("PauseMenu");
+            this.scene.pause();
+        }
     }
 }
