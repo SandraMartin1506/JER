@@ -87,9 +87,11 @@ class Game extends Phaser.Scene
 
     CheckGameCondition()
     {
-        this.player2.CheckLose();
-        if(this.player.killed)
+        if(this.player2.bullets == 0 || this.player.killed) 
         {
+            var gameEndedMenu = new GameEndedMenu(this.player, this.player2);
+            this.scene.add("GameEndedMenu",gameEndedMenu);
+            this.scene.run("GameEndedMenu");
             this.scene.pause();
             this.scene.pause("InfoMenu");
         }

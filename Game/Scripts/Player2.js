@@ -42,6 +42,7 @@ class Player2 extends Phaser.GameObjects.Group
     { 
         this.crosshair.x = pointer.x;
         this.crosshair.y = pointer.y;
+        game.canvas.style.cursor = "crosshair"; //A partir de ahora el cursor será una mira (no la nuestra, una por defecto)
     }
 
     ManageBullets() //Función que hace que se elimine una bala cada vez que se pulsa el botón izquierdo del ratón

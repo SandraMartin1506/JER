@@ -12,8 +12,8 @@ class NPC extends Phaser.GameObjects.Group
         this.body.setInteractive();
         this.body.on('pointerdown',function(pointer)
 		{
-            this.destroy();
-        })
+            this.body.setVisible(false);
+        }.bind(this));
     }
 
     CalculateNextPosition() //Calcula la próxima posición del NPC
