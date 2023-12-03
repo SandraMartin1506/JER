@@ -8,8 +8,9 @@ class Game extends Phaser.Scene
     preload()
     {
         this.load.image("Character", "./Sprites/Character.png");
-        this.load.image("bullet", "./Sprites/bala.png");
-        this.load.spritesheet("placeholder", "./Sprites/SpriteSheet.png", {frameWidth: 172, frameHeight: 269})
+        this.load.image("Bullet", "./Sprites/bala.png");
+        this.load.image("Crosshair", "./Sprites/Mira.png");
+        this.load.spritesheet("placeholder", "./Sprites/SpriteSheet.png", {frameWidth: 172, frameHeight: 269});
     }
 
     create()
@@ -28,14 +29,16 @@ class Game extends Phaser.Scene
         this.player2.ManageBullets(); //Se añade la gestión de las balas. Cada vez que se haga click izquierdo, se pierde una bala
         this.player.StopMovement(this); //Gestión del input: cuando deja de pulsarse la tecla de movimiento el jugador se queda quieto
         this.input.keyboard.on("keydown", this.PauseGame.bind(this)); //Si se presiona ESC se pausa el juego
-        
+        //Otros:
         this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
+        game.canvas.style.cursor = "crosshair"; //A partir de ahora el cursor será una mira (no la nuestra, una por defecto)
+        this.scene.run("InfoMenu"); //La información está siempre disponible mientras se juega
     }
 
     update(time, deltaTime)
-    {
+    { 
         this.UpdateCharacters();
-        this.player2.CheckLose();
+        this.CheckGameCondition();
     }
 
     InitializeNPCS() //Inicializa todos los NPCs en posiciones aleatorias
@@ -57,11 +60,10 @@ class Game extends Phaser.Scene
     }
 
     InitializePlayer2() {
-       this.player2 = new Player2(this, "F", "bullet"); // Le paso la escena actual. De momento le paso directamente el arma yo, pero después será una variable que vendrá dada por la escena de personalización
-       console.log(this.player2.weapon)
+       this.player2 = new Player2(this, "F", "Bullet", "Crosshair"); // Le paso la escena actual. De momento le paso directamente el arma yo, pero después será una variable que vendrá dada por la escena de personalización
        this.input.on('pointermove',this.player2.UpdatePositionP2.bind(this.player2), this); //Cada vez que el ratón se mueve le paso la función para cambiar la posición del jugador 2 (que va a ser la del ratón)
        //le paso el contexto con el último this para que lo haga bien
-       this.player2.InitializeBullets();  //Inicializa las balas del jugador según su ar,a
+       this.player2.InitializeBullets();  //Inicializa las balas del jugador según su arma
     }
 
     UpdateCharacters() //Actualiza posiciones de los jugadores y NPCs
@@ -79,6 +81,17 @@ class Game extends Phaser.Scene
         {
             this.scene.run("PauseMenu");
             this.scene.pause();
+            this.scene.pause("InfoMenu");
+        }
+    }
+
+    CheckGameCondition()
+    {
+        this.player2.CheckLose();
+        if(this.player.killed)
+        {
+            this.scene.pause();
+            this.scene.pause("InfoMenu");
         }
     }
 }

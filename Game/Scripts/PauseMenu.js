@@ -43,7 +43,6 @@ class PauseMenu extends Phaser.Scene
 
     update()
     {
-
     }
 
     ContinueGame()

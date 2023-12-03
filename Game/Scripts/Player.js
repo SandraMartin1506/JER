@@ -4,18 +4,20 @@ class Player extends Phaser.GameObjects.Group
     {
         super({key: "Player"});
         this.body = scene.add.sprite(initialX, initialY, img); //Imagen del jugador
-        this.body.setScale(1.5); //De momento está así para diferenciarse del resto
+        this.body.setScale(4); //De momento está así para diferenciarse del resto
         this.CreateAnimations(spriteSheet, scene); //Función que crea las animaciones dado un spriteSheet
         this.direction; //Dirección en la que camina
         this.currentInput; //Input correspondiente a la dirección actual
+        this.killed = false; //Si está vivo o no
         //Gestión de clicks para ser eliminado:
         scene.physics.add.existing(this.body);
         scene.physics.world.enable(this.body);
         this.body.setInteractive();
         this.body.on('pointerdown',function(pointer)
         {
-            this.destroy();
-        })
+            this.killed = true;
+            this.body.setVisible(false);
+        }.bind(this));
     }
 
     ManageInput(scene) //Añade al evento keydown la función de detección de direcciones del jugador

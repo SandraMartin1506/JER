@@ -3,7 +3,7 @@ class NPC extends Phaser.GameObjects.Group
     constructor(initialX,initialY,img, scene)
     {
         super({key: "NPC"});
-		this.body = scene.add.image(initialX, initialY, img); //Imagen del NPC
+		this.body = scene.add.image(initialX, initialY, img).setScale(3); //Imagen del NPC
         this.nextX = this.body.x; //Próxima posición en x
         this.nextY = this.body.y; //Próxima posición en y
         this.calculatingPosition = false; //Indica si el NPC está quieto calculando cuál va a ser su próxima posición
