@@ -8,7 +8,6 @@ class Player2 extends Phaser.GameObjects.Group
         this.crosshair = this.scene.add.image(100, 100, crosshairImg).setScale(0.2);
         this.crosshair.depth = 1000;
         this.bullets;
-        this.winp2 = false;
     }
 
     //Hacer función que gestione que dependiendo del tipo de bala tenga X balas
