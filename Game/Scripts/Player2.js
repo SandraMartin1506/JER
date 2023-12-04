@@ -6,6 +6,7 @@ class Player2 extends Phaser.GameObjects.Group
         this.bulletsImg = bulletsImg;
         this.weapon = weapon;
         this.crosshair = this.scene.add.image(100, 100, crosshairImg).setScale(0.2);
+        this.crosshair.depth = 1000;
         this.bullets;
     }
 
@@ -21,7 +22,6 @@ class Player2 extends Phaser.GameObjects.Group
         { 
             this.bullets = new Array(3);
         }
-        console.log(this.bullets.length)
 
         for(var i = 0; i<this.bullets.length; i++)
         {
@@ -56,7 +56,6 @@ class Player2 extends Phaser.GameObjects.Group
                     const bullet = this.bullets.pop() //Elige la última bala del array 
                     bullet.destroy(); //destruye su sprite
                 }
-                console.log(this.bullets.length)
             }
         }.bind(this));
     }

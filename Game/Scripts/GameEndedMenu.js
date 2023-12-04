@@ -70,10 +70,14 @@ class GameEndedMenu extends Phaser.Scene
     {
         this.scene.run("InfoMenu");
         this.scene.start("Game");
+        this.scene.remove("GameEndedMenu"); //Hay que borrarlo para que se pueda volver a crear en la siguiente partida
     }
 
     ReturnToMenu()
     {
         this.scene.stop("GameEndedMenu");
+        this.scene.stop("InfoMenu");
+        this.scene.stop("Game");
+        this.scene.remove("GameEndedMenu");
     }
 }

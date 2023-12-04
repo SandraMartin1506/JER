@@ -7,23 +7,22 @@ class Game extends Phaser.Scene
 
     preload()
     {
-        this.load.image("Character", "./Sprites/Character.png");
         this.load.image("Bullet", "./Sprites/bala.png");
         this.load.image("Crosshair", "./Sprites/Mira.png");
-        this.load.spritesheet("placeholder", "./Sprites/SpriteSheet.png", {frameWidth: 172, frameHeight: 269});
+        this.load.spritesheet("SpriteSheet", "./Sprites/SpriteSheet.png", {frameWidth: 250, frameHeight: 450});
     }
 
     create()
     {
-        //NPCs:
-        var numberNPC = Math.floor(Math.random() * (60-40+1) + 40); //NPCs son un número aleatorio entre 40 y 60 (de momento)
-	    this.npcs = new Array(numberNPC);
-        this.InitializeNPCS(); //Se inicializan los NPCs con posiciones aleatorias
         //Jugadores:
         this.player;
         this.player2;
         this.InitializePlayer(); //El jugador también tendrá una posición aleatoria
         this.InitializePlayer2();
+        //NPCs:
+        var numberNPC = Math.floor(Math.random() * (15-9+1) + 9); //NPCs son un número aleatorio entre 9 y 15 (de momento)
+	    this.npcs = new Array(numberNPC);
+        this.InitializeNPCS(); //Se inicializan los NPCs con posiciones aleatorias
         //Manejo de input:
         this.player.ManageInput(this); //Se añade la gestión del input al ser pulsada una tecla. Se pasa como parámetro la escena del juego.
         this.player2.ManageBullets(); //Se añade la gestión de las balas. Cada vez que se haga click izquierdo, se pierde una bala
@@ -33,6 +32,7 @@ class Game extends Phaser.Scene
         this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
         game.canvas.style.cursor = "crosshair"; //A partir de ahora el cursor será una mira (no la nuestra, una por defecto)
         this.scene.run("InfoMenu"); //La información está siempre disponible mientras se juega
+        this.gameEndedMenu = new GameEndedMenu(this.player, this.player2);
     }
 
     update(time, deltaTime)
@@ -48,7 +48,7 @@ class Game extends Phaser.Scene
         {
             var randomX = Math.floor(Math.random() * (1550-50+1) + 50);
             var randomY = Math.floor(Math.random() * (850-50+1) + 50);
-            this.npcs[i] = new NPC(randomX, randomY, "Character", this);
+            this.npcs[i] = new NPC(randomX, randomY, this, "SpriteSheet");
         }
     }
 
@@ -56,7 +56,7 @@ class Game extends Phaser.Scene
     {
         var randomX = Math.floor(Math.random() * (1550 - 50 + 1) + 50);
 	    var randomY = Math.floor(Math.random() * (850 - 50 + 1) + 50);
-	    this.player = new Player(randomX, randomY, "Character", this, "placeholder");
+	    this.player = new Player(randomX, randomY, this, "SpriteSheet");
     }
 
     InitializePlayer2() {
@@ -89,8 +89,7 @@ class Game extends Phaser.Scene
     {
         if(this.player2.bullets == 0 || this.player.killed) 
         {
-            var gameEndedMenu = new GameEndedMenu(this.player, this.player2);
-            this.scene.add("GameEndedMenu",gameEndedMenu);
+            this.scene.add("GameEndedMenu",this.gameEndedMenu);
             this.scene.run("GameEndedMenu");
             this.scene.pause();
             this.scene.pause("InfoMenu");
