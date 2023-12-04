@@ -13,9 +13,9 @@ class InfoMenu extends Phaser.Scene
     create()
     {
         this.infoButton = this.add.image(1535, 50, "Info").setScale(0.15).setInteractive(); //Botón de pistas del jugador
-        this.info = this.add.image(1535, 200, "Info").setScale(0.4).setInteractive();
+        this.info = this.add.image(1435, 225, "Info").setScale(0.7);
+        this.info.alpha = 0.5;
         this.info.setVisible(false);
-        this.infoOpened = false;
         this.infoButton.on("pointerdown", this.ToggleInfo.bind(this));
         this.infoButton.on("pointerover", function(pointer)
         {
@@ -25,6 +25,17 @@ class InfoMenu extends Phaser.Scene
         {
             game.canvas.style.cursor = "crosshair";
         });
+        //Texto:
+        var textStyle = 
+        {
+            fontFamily: "Arial",
+            fontStyle: "bold",
+            color: "#000000",
+            wordWrap: {width: 240, height: 50, useAdvancedWrap: true}
+        }
+        this.hint1 = this.add.text(1330, 150, "-> El jugador 1 se encuentra desnudo", textStyle).setVisible(false);
+        this.hint2 = this.add.text(1330, 225, "-> Realmente todos los personajes están desnudos", textStyle).setVisible(false);
+        this.hint3 = this.add.text(1330, 300, "-> PlaceHolder 3 ", textStyle).setVisible(false);
     }
 
     update()
@@ -34,16 +45,9 @@ class InfoMenu extends Phaser.Scene
 
     ToggleInfo()
     {
-        if(this.infoOpened)
-        {
-            this.info.setVisible(false);
-            this.infoOpened = false;
-        }
-        else
-        {
-            this.info.setVisible(true);
-            this.infoOpened = true;
-        }
-        
+        this.info.setVisible(!this.info.visible);
+        this.hint1.setVisible(!this.hint1.visible);
+        this.hint2.setVisible(!this.hint2.visible);
+        this.hint3.setVisible(!this.hint3.visible);
     }
 }
