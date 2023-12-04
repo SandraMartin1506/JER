@@ -7,7 +7,7 @@ class InfoMenu extends Phaser.Scene
 
     preload()
     {
-        this.load.image("Info", "./Sprites/Info.png");
+        this.load.image("Info", "./Sprites/hoja1.png");
     }
 
     create()
