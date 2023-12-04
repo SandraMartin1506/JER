@@ -9,6 +9,7 @@ class Player extends Phaser.GameObjects.Group
         this.currentInput; //Input correspondiente a la dirección actual
         this.killed = false; //Si está vivo o no
         //Gestión de clicks para ser eliminado:
+        this.win = false;
         scene.physics.add.existing(this.body);
         scene.physics.world.enable(this.body);
         this.body.setInteractive();

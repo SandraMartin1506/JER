@@ -8,6 +8,7 @@ class Player2 extends Phaser.GameObjects.Group
         this.crosshair = this.scene.add.image(100, 100, crosshairImg).setScale(0.2);
         this.crosshair.depth = 1000;
         this.bullets;
+        this.winp2 = false;
     }
 
     //Hacer función que gestione que dependiendo del tipo de bala tenga X balas
@@ -28,16 +29,22 @@ class Player2 extends Phaser.GameObjects.Group
             this.bullets[i] = this.scene.add.sprite(1434 + (i*20),50, this.bulletsImg) //Aparecen las imágenes una tras otra siguiendo una distancia x+20
         }
     }
-    //Si tiene 0 balas se duerme la escena. Luego meter condición de que sean 0 balas y que el jugador1 siga vivo
-    CheckLose()
-    {
-        if(this.bullets.length == 0)
-        { 
-            this.scene.scene.pause(); //En pause para que se siga viendo la partida para de fondo
-            this.scene.scene.pause("InfoMenu");
+
+    areaShot(){ //Saber si se va a cambiar la mira al final
+        var distanceP1 = Phaser.Math.Distance.Between(this.crosshair.x,this.crosshair.y, this.scene.player.body.x,this.scene.player.body.y) //Calcula la distancia entre el jugador y la mira
+        this.scene.npcs.forEach((objeto)=>{ //Calcula la distancia por cada npc
+            var distanceNPC = Phaser.Math.Distance.Between(this.crosshair.x,this.crosshair.y, objeto.body.x,objeto.body.y)
+            if(distanceNPC < 100){ //Si es menor que 100, se vuelve invisible (muere)
+                objeto.body.setVisible(false);
+                
+            }
+        })
+        if(distanceP1 < 100){ //Si el jugador está en área, entonces muere y por tanto gana la partida
+            this.scene.player.body.setVisible(false) 
+            this.scene.player.killed = true;
         }
     }
-
+   
     UpdatePositionP2(pointer) //Se le pasa directamente el puntero activo
     { 
         this.crosshair.x = pointer.x;
@@ -55,6 +62,9 @@ class Player2 extends Phaser.GameObjects.Group
                 {
                     const bullet = this.bullets.pop() //Elige la última bala del array 
                     bullet.destroy(); //destruye su sprite
+                    if(this.weapon = "LG"){
+                        this.areaShot();
+                    }
                 }
             }
         }.bind(this));
