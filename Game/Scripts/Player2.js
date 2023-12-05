@@ -15,17 +15,17 @@ class Player2 extends Phaser.GameObjects.Group
     {
         if(this.weapon == "LG")
         {
-            this.bullets = new Array(1);
+            this.bullets = new Array(3);
             
         } 
         else if(this.weapon == "F")
         { 
-            this.bullets = new Array(3);
+            this.bullets = new Array(5);
         }
 
         for(var i = 0; i<this.bullets.length; i++)
         {
-            this.bullets[i] = this.scene.add.sprite(1434 + (i*20),50, this.bulletsImg) //Aparecen las imágenes una tras otra siguiendo una distancia x+20
+            this.bullets[i] = this.scene.add.sprite(1400 + (i*20),50, this.bulletsImg) //Aparecen las imágenes una tras otra siguiendo una distancia x+20
             this.bullets[i].depth = 1000;
         }
     }

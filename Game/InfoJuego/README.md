@@ -87,19 +87,13 @@ Las prendas de ropa que se utilizan son tan solo 3: pantalones, camiseta y gorro
 Hay tres armas seleccionables en el juego y cada una tiene sus propias características:
 FASE 2: SE QUITA UNO DE LOS 3 ARMAS, SE QUITA EL ZOOM, SE QUITAN EL MEDIDOR DE VIDA YA QUE QUITANDO UNA DE LAS ARMAS YA SE JUSTIFICA EL USO DE LAS OTRAS 2.
 ### **Francotirador![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.002.png)**
-El arma tiene una mira mediana. Tiene la posibilidad de disparar 3 balas y es la que más zoom tiene. Elimina al personaje seleccionado.
-
-
-
+El arma tiene una mira mediana. Tiene la posibilidad de disparar 5 balas. Elimina al personaje seleccionado.
 
 
 ### **Lanzagranadas**
-FASE 2: ELIMINAR ZOOM 
-Es el arma con la mira más grande. Tiene la posibilidad de disparar tan solo una bala cuyo impacto afecta en áreas y no individualmente como en el caso de las otras dos. Elimina a los personajes en el área.
+FASE 2: ELIMINAR ZOOM Y MIRA ESPECÍFICA. AUMENTAR NÚMERO DE BALAS 
+Es el arma con la mira más grande. Tiene la posibilidad de disparar 3 balas cuyo impacto afecta en áreas y no individualmente como en el caso de la otra. Elimina a los personajes en el área.
 
-![Imagen que contiene reloj, jugador
-
-Descripción generada automáticamente](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.003.png)
 
 # **ESTÉTICA** 
 

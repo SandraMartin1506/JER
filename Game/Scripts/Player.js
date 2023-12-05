@@ -5,7 +5,7 @@ class Player extends Phaser.GameObjects.Group
         super({key: "Player"});
         this.body = scene.add.sprite(initialX, initialY, spriteSheet).setScale(0.25); //Imagen del jugador
         this.CreateAnimations(spriteSheet, scene); //Función que crea las animaciones dado un spriteSheet
-        this.direction; //Dirección en la que camina
+        this.direction = "Quieto"; //Dirección en la que camina. Se inicializa con Quieto por el contador.
         this.currentInput; //Input correspondiente a la dirección actual
         this.killed = false; //Si está vivo o no
         this.missionAccomplished = false;
