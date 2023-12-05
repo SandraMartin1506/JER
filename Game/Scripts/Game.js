@@ -33,12 +33,19 @@ class Game extends Phaser.Scene
         game.canvas.style.cursor = "crosshair"; //A partir de ahora el cursor será una mira (no la nuestra, una por defecto)
         this.scene.run("InfoMenu"); //La información está siempre disponible mientras se juega
         this.gameEndedMenu = new GameEndedMenu(this.player, this.player2);
+        //Misiones
+        this.mision;
+        //Mision 1 esquinas
+        this.corners = [{name: 'UpLeft', x: 0, y: 0 },{name: 'UpRight', x: this.game.config.width, y: 0 },{ name: 'DownLeft' ,x: 0, y: this.game.config.height },{name: 'DownRight', x: this.game.config.width, y: this.game.config.height }];
+        this.visited = {UpLeft: false, UpRight: false, DownLeft: false, DownRight: false};
+        
     }
 
     update(time, deltaTime)
     { 
         this.UpdateCharacters();
         this.CheckGameCondition();
+        this.checkMision();
     }
 
     InitializeNPCS() //Inicializa todos los NPCs en posiciones aleatorias
@@ -85,6 +92,21 @@ class Game extends Phaser.Scene
         }
     }
 
+    checkMision(){
+        this.mision = 'mision1'
+        switch(this.mision){
+            case 'mision1':
+                this.mision1()
+                break;
+            case 'mision2':
+                break;
+            case 'mision3':
+                break;
+            default:
+
+        }
+    }
+    
     CheckGameCondition()
     {
         if(this.player2.bullets == 0 || this.player.killed) 
@@ -95,4 +117,33 @@ class Game extends Phaser.Scene
             this.scene.pause("InfoMenu");
         }
     }
-}
+
+    mision1(){ //Comprueba si cada esquina ha sido visitada y si es el caso, se guarda que ya lo ha sido
+        var allVisited = true;;
+        this.corners.forEach((corner) => { 
+            if (!this.visited[corner.name] && this.checkCorner(corner)) {
+                this.visited[corner.name] = true;
+            }
+            allVisited = allVisited && this.visited[corner.name]
+        })
+        
+        if(allVisited){
+            console.log('AAAAAAAAAAA') //Funciona
+        }
+
+    }
+
+    checkCorner(corner){
+        var margen = 100; //Margen para dar pie a que las coordenadas sean correctas (Es muy grande)
+        
+        return(
+                this.player.body.x >= corner.x - margen &&
+                this.player.body.x <= corner.x + margen &&
+                this.player.body.y >= corner.y - margen &&
+                this.player.body.y <= corner.y + margen
+            )
+        }
+
+        
+    }
+
