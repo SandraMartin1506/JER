@@ -59,6 +59,10 @@ class GameEndedMenu extends Phaser.Scene
         {
             this.add.text(60, 200, "Balas agotadas. Gana el jugador 1.", {font: "75px Courier", fill: "0#FFFFFF"});
         }
+        else if(this.player1.missionAccomplished)
+        {
+            this.add.text(60, 200, "El jugador 1 ha completado su misión. Gana la partida.", {font: "47px Courier", fill: "0#FFFFFF"});
+        }
     }
 
     update()

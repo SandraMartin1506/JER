@@ -7,13 +7,14 @@ class InfoMenu extends Phaser.Scene
 
     preload()
     {
-        this.load.image("Info", "./Sprites/hoja1.png");
+        this.load.image("Info", "./Sprites/Info.png");
+        this.load.image("Paper", "./Sprites/hoja1.png");
     }
 
     create()
     {
         this.infoButton = this.add.image(1535, 50, "Info").setScale(0.15).setInteractive(); //Botón de pistas del jugador
-        this.info = this.add.image(1435, 225, "Info").setScale(0.7);
+        this.info = this.add.image(1435, 375, "Paper").setScale(0.35);
         this.info.alpha = 0.5;
         this.info.setVisible(false);
         this.infoButton.on("pointerdown", this.ToggleInfo.bind(this));

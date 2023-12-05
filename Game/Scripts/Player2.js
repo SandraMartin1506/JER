@@ -26,6 +26,7 @@ class Player2 extends Phaser.GameObjects.Group
         for(var i = 0; i<this.bullets.length; i++)
         {
             this.bullets[i] = this.scene.add.sprite(1434 + (i*20),50, this.bulletsImg) //Aparecen las imágenes una tras otra siguiendo una distancia x+20
+            this.bullets[i].depth = 1000;
         }
     }
 
@@ -35,7 +36,6 @@ class Player2 extends Phaser.GameObjects.Group
             var distanceNPC = Phaser.Math.Distance.Between(this.crosshair.x,this.crosshair.y, objeto.body.x,objeto.body.y)
             if(distanceNPC < 100){ //Si es menor que 100, se vuelve invisible (muere)
                 objeto.body.setVisible(false);
-                
             }
         })
         if(distanceP1 < 100){ //Si el jugador está en área, entonces muere y por tanto gana la partida

@@ -66,7 +66,8 @@ class Game extends Phaser.Scene
 	    this.player = new Player(randomX, randomY, this, "SpriteSheet");
     }
 
-    InitializePlayer2() {
+    InitializePlayer2() 
+    {
        this.player2 = new Player2(this, "LG", "Bullet", "Crosshair"); // Le paso la escena actual. De momento le paso directamente el arma yo, pero después será una variable que vendrá dada por la escena de personalización
        this.input.on('pointermove',this.player2.UpdatePositionP2.bind(this.player2), this); //Cada vez que el ratón se mueve le paso la función para cambiar la posición del jugador 2 (que va a ser la del ratón)
        //le paso el contexto con el último this para que lo haga bien
@@ -92,7 +93,8 @@ class Game extends Phaser.Scene
         }
     }
 
-    checkMision(){
+    checkMision()
+    {
         this.mision = 'mision1'
         switch(this.mision){
             case 'mision1':
@@ -109,7 +111,7 @@ class Game extends Phaser.Scene
     
     CheckGameCondition()
     {
-        if(this.player2.bullets == 0 || this.player.killed) 
+        if(this.player2.bullets == 0 || this.player.killed || this.player.missionAccomplished) 
         {
             this.scene.add("GameEndedMenu",this.gameEndedMenu);
             this.scene.run("GameEndedMenu");
@@ -119,31 +121,29 @@ class Game extends Phaser.Scene
     }
 
     mision1(){ //Comprueba si cada esquina ha sido visitada y si es el caso, se guarda que ya lo ha sido
-        var allVisited = true;;
-        this.corners.forEach((corner) => { 
-            if (!this.visited[corner.name] && this.checkCorner(corner)) {
-                this.visited[corner.name] = true;
-            }
-            allVisited = allVisited && this.visited[corner.name]
+        var allVisited = true;
+        this.corners.forEach((corner) => 
+        { 
+            this.checkCorner(corner);
+            if(!this.visited[corner.name]) allVisited = false;
         })
         
-        if(allVisited){
-            console.log('AAAAAAAAAAA') //Funciona
+        if(allVisited)
+        {
+            this.player.missionAccomplished = true;
         }
 
     }
 
-    checkCorner(corner){
-        var margen = 100; //Margen para dar pie a que las coordenadas sean correctas (Es muy grande)
-        
-        return(
+    checkCorner(corner)
+    {
+        var margen = 200; //Margen para dar pie a que las coordenadas sean correctas (Es muy grande)
+        if(
                 this.player.body.x >= corner.x - margen &&
                 this.player.body.x <= corner.x + margen &&
                 this.player.body.y >= corner.y - margen &&
                 this.player.body.y <= corner.y + margen
-            )
+            ) this.visited[corner.name] = true;
         }
-
-        
     }
 

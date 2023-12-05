@@ -8,6 +8,7 @@ class Player extends Phaser.GameObjects.Group
         this.direction; //Dirección en la que camina
         this.currentInput; //Input correspondiente a la dirección actual
         this.killed = false; //Si está vivo o no
+        this.missionAccomplished = false;
         //Gestión de clicks para ser eliminado:
         scene.physics.add.existing(this.body);
         scene.physics.world.enable(this.body);
