@@ -7,7 +7,7 @@ class Game extends Phaser.Scene
 
     preload()
     {
-        this.load.image("Bullet", "./Sprites/bala.png");
+        this.load.image("Bullet", "./Sprites/bala1.png");
         this.load.image("Crosshair", "./Sprites/Mira.png");
         this.load.spritesheet("SpriteSheet", "./Sprites/SpriteSheet.png", {frameWidth: 250, frameHeight: 450});
     }

@@ -7,14 +7,14 @@ class InfoMenu extends Phaser.Scene
 
     preload()
     {
-        this.load.image("Info", "./Sprites/Info.png");
+        this.load.image("Info", "./Sprites/diario.png");
         this.load.image("Paper", "./Sprites/hoja1.png");
     }
 
     create()
     {
-        this.infoButton = this.add.image(1535, 50, "Info").setScale(0.15).setInteractive(); //Botón de pistas del jugador
-        this.info = this.add.image(1435, 375, "Paper").setScale(0.35);
+        this.infoButton = this.add.image(1535, 60, "Info").setScale(0.12).setInteractive(); //Botón de pistas del jugador
+        this.info = this.add.image(1370, 370, "Paper").setScale(0.6);
         this.info.alpha = 0.5;
         this.info.setVisible(false);
         this.infoButton.on("pointerdown", this.ToggleInfo.bind(this));
@@ -34,9 +34,9 @@ class InfoMenu extends Phaser.Scene
             color: "#000000",
             wordWrap: {width: 240, height: 50, useAdvancedWrap: true}
         }
-        this.hint1 = this.add.text(1330, 150, "-> El jugador 1 se encuentra desnudo", textStyle).setVisible(false);
-        this.hint2 = this.add.text(1330, 225, "-> Realmente todos los personajes están desnudos", textStyle).setVisible(false);
-        this.hint3 = this.add.text(1330, 300, "-> PlaceHolder 3 ", textStyle).setVisible(false);
+        this.hint1 = this.add.text(1290, 100, "-> El jugador 1 se encuentra desnudo", textStyle).setVisible(false);
+        this.hint2 = this.add.text(1290, 175, "-> Realmente todos los personajes están desnudos", textStyle).setVisible(false);
+        this.hint3 = this.add.text(1290, 250, "-> PlaceHolder 3 ", textStyle).setVisible(false);
     }
 
     update()
