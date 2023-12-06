@@ -33,23 +33,17 @@ class Game extends Phaser.Scene
         game.canvas.style.cursor = "crosshair"; //A partir de ahora el cursor será una mira (no la nuestra, una por defecto)
         this.scene.run("InfoMenu"); //La información está siempre disponible mientras se juega
         this.gameEndedMenu = new GameEndedMenu(this.player, this.player2);
-        //Misiones
-        this.mision;
-        //Mision 1 esquinas
-        this.corners = [{name: 'UpLeft', x: 0, y: 0 },{name: 'UpRight', x: this.game.config.width, y: 0 },{ name: 'DownLeft' ,x: 0, y: this.game.config.height },{name: 'DownRight', x: this.game.config.width, y: this.game.config.height }];
-        this.visited = {UpLeft: false, UpRight: false, DownLeft: false, DownRight: false};
-        //Misión 2 y 3. Contador
-        this.limitTime = 100000; 
-        this.timeLeft = this.limitTime
-        
+        //Misiones:
+        var numMission = Math.floor(Math.random() * (3-1+1) + 1); 
+        this.mission = new Missions(numMission, this.player, this.scene);
+        console.log(numMission);
     }
 
     update(time, deltaTime)
     { 
-        this.checkMision();
+        this.mission.CheckMission();
         this.UpdateCharacters();
         this.CheckGameCondition();
-        
     }
 
     InitializeNPCS() //Inicializa todos los NPCs en posiciones aleatorias
@@ -96,24 +90,6 @@ class Game extends Phaser.Scene
             this.scene.pause("InfoMenu");
         }
     }
-    //Crea cada misión según la variable this.mision (que será aleatoria)
-    checkMision()
-    {
-        this.mision = 'mision3'
-        switch(this.mision){
-            case 'mision1':
-                this.mision1()
-                break;
-            case 'mision2':
-                this.mision2()
-                break;
-            case 'mision3':
-                this.mision3()
-                break;
-            default:
-
-        }
-    }
     
     CheckGameCondition()
     {
@@ -125,78 +101,5 @@ class Game extends Phaser.Scene
             this.scene.pause("InfoMenu");
         }
     }
-
-    mision1(){ //Comprueba si cada esquina ha sido visitada y si es el caso, se guarda que ya lo ha sido
-        var allVisited = true;
-        this.corners.forEach((corner) => 
-        { 
-            this.checkCorner(corner);
-            if(!this.visited[corner.name]) allVisited = false;
-        })
-        
-        if(allVisited)
-        {
-            this.player.missionAccomplished = true;
-        }
-
-    }
-
-    checkCorner(corner)
-    {
-        var margen = 200; //Margen para dar pie a que las coordenadas sean correctas 
-        if(
-                this.player.body.x >= corner.x - margen &&
-                this.player.body.x <= corner.x + margen &&
-                this.player.body.y >= corner.y - margen &&
-                this.player.body.y <= corner.y + margen
-            ) this.visited[corner.name] = true;
-        }
-
-        mision2(){ 
-            if (this.player.direction !== "Quieto") {
-                if (!this.timer || !this.timer.running) {
-                    this.timer = this.time.addEvent({
-                        delay: 1000,
-                        callback: this.updateTimer,
-                        callbackScope: this,
-                        loop: true
-                    });
-                }
-            } else {
-                // Si el jugador está quieto, se para el contador
-                if (this.timer && this.timer.running) {
-                    this.timer.destroy();
-                }
-                this.timeLeft = this.limitTime;
-            }
-            console.log(this.timeLeft);
-        }
-
-        mision3(){ 
-            if (this.player.direction === "Quieto") {
-                if (!this.timer || !this.timer.running) {
-                    this.timer = this.time.addEvent({
-                        delay: 1000,
-                        callback: this.updateTimer,
-                        callbackScope: this,
-                        loop: true
-                    });
-                }
-            } else {
-                // Si el jugador está quieto, se para el contador
-                if (this.timer && this.timer.running) {
-                    this.timer.destroy();
-                }
-                this.timeLeft = this.limitTime;
-            }
-            console.log(this.timeLeft);
-        }
-
-        updateTimer(){
-            this.timeLeft -= this.game.loop.delta //Le paso el deltaTime del juego
-            if(this.timeLeft <= 0){
-                this.player.missionAccomplished = true;
-            }
-        }
-    }
+}
 
