@@ -11,6 +11,8 @@ class Missions extends Phaser.GameObjects.Group
         this.visited = {UpLeft: false, UpRight: false, DownLeft: false, DownRight: false};
         //Misiones 2 y 3: contadores de tiempo
         this.timeLeft = 60000; 
+        //Misión 4: tiempos límite
+        this.timeInCrowd = 0 //Van a ser 30 segundos
     }
 
     CheckMission()
@@ -25,6 +27,9 @@ class Missions extends Phaser.GameObjects.Group
                 break;
             case 3:
                 this.Mission3()
+                break;
+            case 4:
+                this.Mission4()
                 break;
         }
     }
@@ -73,5 +78,22 @@ class Missions extends Phaser.GameObjects.Group
             if(this.timeLeft <= 0) this.player1.missionAccomplished = true;
         }
         console.log(this.timeLeft);
+    }
+
+    Mission4(){
+        let crowd = 0;
+        this.scene.npcs.forEach((objeto)=>{ //Calcula la distancia entre el jugador y cada NPC
+            var distanceNPC = Phaser.Math.Distance.Between(this.player1.body.x,this.player1.body.y, objeto.body.x,objeto.body.y)
+            if(distanceNPC <= 100){  //Si la distancia es menor o igual a 100, se suma 1 a la variable crowd, que representa la aglomeración
+                crowd++
+                console.log(crowd)
+            }
+        })
+            if(crowd >= 2){ //Si el jugador está cerca de 2 o más NPCs, ya se considera aglomeración y comienza la misión (le pongo 2 porque como los movimientos son aleatorios es complicado ya de por sí)
+                this.timeInCrowd += game.loop.delta;
+                console.log(this.timeInCrowd)
+                if(this.timeInCrowd>=30000) this.player1.missionAccomplished = true;
+                
+             } else this.timeInCrowd = 0; 
     }
 }

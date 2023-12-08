@@ -35,7 +35,7 @@ class Game extends Phaser.Scene
         this.gameEndedMenu = new GameEndedMenu(this.player, this.player2);
         //Misiones:
         var numMission = Math.floor(Math.random() * (3-1+1) + 1); 
-        this.mission = new Missions(numMission, this.player, this.scene);
+        this.mission = new Missions(numMission, this.player, this);
         console.log(numMission);
     }
 
