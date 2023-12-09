@@ -12,6 +12,8 @@ class PauseMenu extends Phaser.Scene
 
     create()
     {
+        //Audio de los botones
+        this.clickSound = this.scene.get('Game').clickSound
         //Variables de escalado:
         var scale = 10;
         //Texto del menú de pausa:
@@ -22,7 +24,10 @@ class PauseMenu extends Phaser.Scene
         this.continueButton.setRotation(Phaser.Math.DegToRad(90));
         this.continueButton.setInteractive();
         this.add.text(665, 330, "Continuar", {font: "50px Courier", fill: "0#000000"});
-        this.continueButton.on("pointerdown", this.ContinueGame.bind(this));
+        this.continueButton.on("pointerdown", function(event){
+            this.clickSound.play();
+            this.ContinueGame();
+        }.bind(this));
         this.continueButton.on("pointerover", function(event) 
         {
             this.continueButton.setScale(scale * 1.25);
@@ -39,7 +44,9 @@ class PauseMenu extends Phaser.Scene
         this.exitButton.setRotation(Phaser.Math.DegToRad(90));
         this.exitButton.setInteractive();
         this.add.text(665, 530, "Salir", {font: "50px Courier", fill: "0#000000"});
-        this.exitButton.on("pointerdown", this.ExitGame.bind(this));
+        this.exitButton.on("pointerdown", function(event){
+            this.clickSound.play();
+            this.ExitGame()}.bind(this));
         this.exitButton.on("pointerover", function(event) 
         {
             this.exitButton.setScale(scale * 1.25);

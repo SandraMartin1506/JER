@@ -8,6 +8,8 @@ class Player2 extends Phaser.GameObjects.Group
         this.crosshair = this.scene.add.image(100, 100, crosshairImg).setScale(0.2);
         this.crosshair.depth = 1000;
         this.bullets;
+        this.granadeSound = this.scene.sound.add("Grenade")
+        this.sniperSound = this.scene.sound.add("Sniper")
     }
 
     //Hacer función que gestione que dependiendo del tipo de bala tenga X balas
@@ -62,8 +64,9 @@ class Player2 extends Phaser.GameObjects.Group
                     const bullet = this.bullets.pop() //Elige la última bala del array 
                     bullet.destroy(); //destruye su sprite
                     if(this.weapon === "LG"){
+                        this.granadeSound.play()
                         this.areaShot();
-                    }
+                    } else this.sniperSound.play()
                 }
             }
         }.bind(this));

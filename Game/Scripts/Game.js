@@ -7,13 +7,25 @@ class Game extends Phaser.Scene
 
     preload()
     {
+        //IMÁGENES
         this.load.image("Bullet", "./Sprites/bala1.png");
         this.load.image("Crosshair", "./Sprites/Mira.png");
         this.load.spritesheet("SpriteSheet", "./Sprites/SpriteSheet.png", {frameWidth: 250, frameHeight: 450});
+        //AUDIO
+        this.load.audio("Crowd","./Sounds/crowd.mp3")
+        this.load.audio("Click","./Sounds/click.mp3")
+        this.load.audio("Grenade","./Sounds/grenade.mp3")
+        this.load.audio("Sniper","./Sounds/sniper.mp3")
+        
+
     }
 
     create()
     {
+        //Audio
+          this.clickSound = this.sound.add("Click")
+          this.gameSound = this.sound.add("Crowd")
+          this.gameSound.play({loop: true})
         //Jugadores:
         this.player;
         this.player2;
@@ -85,6 +97,7 @@ class Game extends Phaser.Scene
     {
         if(event.key === "Escape")
         {
+            this.clickSound.play()
             this.scene.run("PauseMenu");
             this.scene.pause();
             this.scene.pause("InfoMenu");
@@ -95,6 +108,7 @@ class Game extends Phaser.Scene
     {
         if(this.player2.bullets == 0 || this.player.killed || this.player.missionAccomplished) 
         {
+            this.gameSound.stop();
             this.scene.add("GameEndedMenu",this.gameEndedMenu);
             this.scene.run("GameEndedMenu");
             this.scene.pause();

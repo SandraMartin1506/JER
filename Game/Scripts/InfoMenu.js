@@ -9,15 +9,21 @@ class InfoMenu extends Phaser.Scene
     {
         this.load.image("Info", "./Sprites/diario.png");
         this.load.image("Paper", "./Sprites/hoja1.png");
+        this.load.audio("Paper","./Sounds/paper.mp3")
     }
 
     create()
     {
+        //Audio
+        this.paperSound = this.sound.add("Paper")
+        //Botones
         this.infoButton = this.add.image(1535, 60, "Info").setScale(0.12).setInteractive(); //Botón de pistas del jugador
         this.info = this.add.image(1435, 375, "Paper").setScale(0.35);
         this.info.alpha = 0.5;
         this.info.setVisible(false);
-        this.infoButton.on("pointerdown", this.ToggleInfo.bind(this));
+        this.infoButton.on("pointerdown", function(event) {
+            this.paperSound.play()
+            this.ToggleInfo()}.bind(this));
         this.infoButton.on("pointerover", function(pointer)
         {
             game.canvas.style.cursor = "pointer";
