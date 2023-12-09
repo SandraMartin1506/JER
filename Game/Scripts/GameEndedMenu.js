@@ -14,6 +14,8 @@ class GameEndedMenu extends Phaser.Scene
 
     create()
     {
+        //Audio
+        this.clickSound = this.scene.get('Game').clickSound
         var scale = 10;
         //Botón de volver a jugar:
         this.playAgainButton = this.add.image(this.game.config.width/2, this.game.config.height/2 - 50, "buttonPlaceholder");
@@ -21,7 +23,9 @@ class GameEndedMenu extends Phaser.Scene
         this.playAgainButton.setRotation(Phaser.Math.DegToRad(90));
         this.playAgainButton.setInteractive();
         this.add.text(665, 380, "Volver a jugar", {font: "35px Courier", fill: "0#000000"});
-        this.playAgainButton.on("pointerdown", this.PlayAgain.bind(this));
+        this.playAgainButton.on("pointerdown", function(event){
+            this.clickSound.play()
+            this.PlayAgain()}.bind(this));
         this.playAgainButton.on("pointerover", function(event) 
         {
             this.playAgainButton.setScale(scale * 1.25);
@@ -38,7 +42,9 @@ class GameEndedMenu extends Phaser.Scene
         this.returnToMenuButton.setRotation(Phaser.Math.DegToRad(90));
         this.returnToMenuButton.setInteractive();
         this.add.text(665, 580, "Salir al menú", {font: "35px Courier", fill: "0#000000"});
-        this.returnToMenuButton.on("pointerdown", this.ReturnToMenu.bind(this));
+        this.returnToMenuButton.on("pointerdown", function(event){
+            this.clickSound.play()
+            this.ReturnToMenu()}.bind(this));
         this.returnToMenuButton.on("pointerover", function(event) 
         {
             this.returnToMenuButton.setScale(scale * 1.25);
