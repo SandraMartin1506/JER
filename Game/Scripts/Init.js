@@ -5,7 +5,7 @@ const config =
     parent: "container",
     type: Phaser.AUTO,
     backgroundColor: '0xFFFF50',
-    scene: [Game, PauseMenu, InfoMenu],
+    scene: [CustomizationP1Menu, PauseMenu, InfoMenu], // cambiar esto LUEGOGIAeDOEDDAMOK
     physics: {
         default: 'arcade',
         arcade: {
