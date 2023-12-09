@@ -25,7 +25,7 @@ class Player2 extends Phaser.GameObjects.Group
 
         for(var i = 0; i<this.bullets.length; i++)
         {
-            this.bullets[i] = this.scene.add.sprite(1400 + (i*30),50, this.bulletsImg).setScale(0.20) //Aparecen las imágenes una tras otra siguiendo una distancia x+20
+            this.bullets[i] = this.scene.add.sprite(1450 - (i*30),50, this.bulletsImg).setScale(0.20) //Aparecen las imágenes una tras otra siguiendo una distancia x+20
             this.bullets[i].depth = 1000;
         }
     }
@@ -61,7 +61,7 @@ class Player2 extends Phaser.GameObjects.Group
                 {
                     const bullet = this.bullets.pop() //Elige la última bala del array 
                     bullet.destroy(); //destruye su sprite
-                    if(this.weapon = "LG"){
+                    if(this.weapon === "LG"){
                         this.areaShot();
                     }
                 }
