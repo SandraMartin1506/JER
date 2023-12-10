@@ -8,8 +8,8 @@ class Player2 extends Phaser.GameObjects.Group
         this.crosshair = this.scene.add.image(100, 100, crosshairImg).setScale(0.2);
         this.crosshair.depth = 1000;
         this.bullets;
-        this.granadeSound = this.scene.sound.add("Grenade")
-        this.sniperSound = this.scene.sound.add("Sniper")
+        this.granadeSound = this.scene.sound.add("Grenade");
+        this.sniperSound = this.scene.sound.add("Sniper");
     }
 
     //Hacer función que gestione que dependiendo del tipo de bala tenga X balas
@@ -32,15 +32,17 @@ class Player2 extends Phaser.GameObjects.Group
         }
     }
 
-    areaShot(){ //Saber si se va a cambiar la mira al final
+    AreaShot(){ //Saber si se va a cambiar la mira al final
         var distanceP1 = Phaser.Math.Distance.Between(this.crosshair.x,this.crosshair.y, this.scene.player.body.x,this.scene.player.body.y) //Calcula la distancia entre el jugador y la mira
         this.scene.npcs.forEach((objeto)=>{ //Calcula la distancia por cada npc
             var distanceNPC = Phaser.Math.Distance.Between(this.crosshair.x,this.crosshair.y, objeto.body.x,objeto.body.y)
-            if(distanceNPC < 100){ //Si es menor que 100, se vuelve invisible (muere)
+            if(distanceNPC < 100)//Si es menor que 100, se vuelve invisible (muere)
+            { 
                 objeto.body.setVisible(false);
             }
         })
-        if(distanceP1 < 100){ //Si el jugador está en área, entonces muere y por tanto gana la partida
+        if(distanceP1 < 100)//Si el jugador está en área, entonces muere y por tanto gana la partida
+        { 
             this.scene.player.body.setVisible(false) 
             this.scene.player.killed = true;
         }
@@ -65,8 +67,9 @@ class Player2 extends Phaser.GameObjects.Group
                     bullet.destroy(); //destruye su sprite
                     if(this.weapon === "LG"){
                         this.granadeSound.play()
-                        this.areaShot();
-                    } else this.sniperSound.play()
+                        this.AreaShot();
+                    } 
+                    else this.sniperSound.play()
                 }
             }
         }.bind(this));

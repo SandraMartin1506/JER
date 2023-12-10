@@ -2,7 +2,7 @@ class Game extends Phaser.Scene
 {
     constructor()
     {
-        super({key: "Game", active: true}); 
+        super({key: "Game"}); 
     }
 
     preload()
@@ -12,20 +12,18 @@ class Game extends Phaser.Scene
         this.load.image("Crosshair", "./Sprites/Mira.png");
         this.load.spritesheet("SpriteSheet", "./Sprites/SpriteSheet.png", {frameWidth: 250, frameHeight: 450});
         //AUDIO
-        this.load.audio("Crowd","./Sounds/crowd.mp3")
-        this.load.audio("Click","./Sounds/click.mp3")
-        this.load.audio("Grenade","./Sounds/grenade.mp3")
-        this.load.audio("Sniper","./Sounds/sniper.mp3")
-        
-
+        this.load.audio("Crowd","./Sounds/crowd.mp3");
+        this.load.audio("Click","./Sounds/click.mp3");
+        this.load.audio("Grenade","./Sounds/grenade.mp3");
+        this.load.audio("Sniper","./Sounds/sniper.mp3");
     }
 
     create()
     {
         //Audio
-          this.clickSound = this.sound.add("Click")
-          this.gameSound = this.sound.add("Crowd")
-          this.gameSound.play({loop: true})
+        this.clickSound = this.sound.add("Click");
+        this.gameSound = this.sound.add("Crowd");
+        this.gameSound.play({loop: true});
         //Jugadores:
         this.player;
         this.player2;
@@ -78,7 +76,7 @@ class Game extends Phaser.Scene
 
     InitializePlayer2() 
     {
-       this.player2 = new Player2(this, "F", "Bullet", "Crosshair"); // Le paso la escena actual. De momento le paso directamente el arma yo, pero después será una variable que vendrá dada por la escena de personalización
+       this.player2 = new Player2(this, "LG", "Bullet", "Crosshair"); // Le paso la escena actual. De momento le paso directamente el arma yo, pero después será una variable que vendrá dada por la escena de personalización
        this.input.on('pointermove',this.player2.UpdatePositionP2.bind(this.player2), this); //Cada vez que el ratón se mueve le paso la función para cambiar la posición del jugador 2 (que va a ser la del ratón)
        //le paso el contexto con el último this para que lo haga bien
        this.player2.InitializeBullets();  //Inicializa las balas del jugador según su arma
@@ -97,7 +95,7 @@ class Game extends Phaser.Scene
     {
         if(event.key === "Escape")
         {
-            this.clickSound.play()
+            this.clickSound.play();
             this.scene.run("PauseMenu");
             this.scene.pause();
             this.scene.pause("InfoMenu");

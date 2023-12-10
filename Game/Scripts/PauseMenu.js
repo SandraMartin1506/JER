@@ -13,21 +13,18 @@ class PauseMenu extends Phaser.Scene
     create()
     {
         //Audio de los botones
-        this.clickSound = this.scene.get('Game').clickSound
+        this.clickSound = this.scene.get('Game').clickSound;
         //Variables de escalado:
         var scale = 10;
         //Texto del menú de pausa:
-        this.add.text(50, 100, "El juego ha sido pausado", {font: "100px Courier", fill: "0#FFFFFF"});
+        this.add.text(200, 100, "Game has been paused", {font: "100px Courier", fill: "0#FFFFFF"});
         //Botón de continuar:
         this.continueButton = this.add.image(this.game.config.width/2, this.game.config.height/2 - 100, "buttonPlaceholder");
         this.continueButton.setScale(scale);
         this.continueButton.setRotation(Phaser.Math.DegToRad(90));
         this.continueButton.setInteractive();
-        this.add.text(665, 330, "Continuar", {font: "50px Courier", fill: "0#000000"});
-        this.continueButton.on("pointerdown", function(event){
-            this.clickSound.play();
-            this.ContinueGame();
-        }.bind(this));
+        this.add.text(665, 330, "Resume", {font: "50px Courier", fill: "0#000000"});
+        this.continueButton.on("pointerdown", this.ContinueGame.bind(this));
         this.continueButton.on("pointerover", function(event) 
         {
             this.continueButton.setScale(scale * 1.25);
@@ -43,10 +40,8 @@ class PauseMenu extends Phaser.Scene
         this.exitButton.setScale(scale);
         this.exitButton.setRotation(Phaser.Math.DegToRad(90));
         this.exitButton.setInteractive();
-        this.add.text(665, 530, "Salir", {font: "50px Courier", fill: "0#000000"});
-        this.exitButton.on("pointerdown", function(event){
-            this.clickSound.play();
-            this.ExitGame()}.bind(this));
+        this.add.text(665, 530, "Main menu", {font: "50px Courier", fill: "0#000000"});
+        this.exitButton.on("pointerdown", this.ExitGame.bind(this));
         this.exitButton.on("pointerover", function(event) 
         {
             this.exitButton.setScale(scale * 1.25);
@@ -70,6 +65,7 @@ class PauseMenu extends Phaser.Scene
 
     ContinueGame()
     {
+        this.clickSound.play();
         this.scene.resume("Game");
         this.scene.resume("InfoMenu");
         this.scene.stop();
@@ -79,6 +75,7 @@ class PauseMenu extends Phaser.Scene
     ExitGame()
     {
         console.log("Saliendo del juego...");
+        this.clickSound.play();
         this.scene.stop("Game");
         this.scene.stop();
         //Todavía no hay menú principal. De momento se paran las escenas.

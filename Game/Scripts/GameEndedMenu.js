@@ -15,17 +15,15 @@ class GameEndedMenu extends Phaser.Scene
     create()
     {
         //Audio
-        this.clickSound = this.scene.get('Game').clickSound
+        this.clickSound = this.scene.get('Game').clickSound;
         var scale = 10;
         //Botón de volver a jugar:
         this.playAgainButton = this.add.image(this.game.config.width/2, this.game.config.height/2 - 50, "buttonPlaceholder");
         this.playAgainButton.setScale(scale);
         this.playAgainButton.setRotation(Phaser.Math.DegToRad(90));
         this.playAgainButton.setInteractive();
-        this.add.text(665, 380, "Volver a jugar", {font: "35px Courier", fill: "0#000000"});
-        this.playAgainButton.on("pointerdown", function(event){
-            this.clickSound.play()
-            this.PlayAgain()}.bind(this));
+        this.add.text(665, 380, "Play again", {font: "35px Courier", fill: "0#000000"});
+        this.playAgainButton.on("pointerdown", this.PlayAgain.bind(this));
         this.playAgainButton.on("pointerover", function(event) 
         {
             this.playAgainButton.setScale(scale * 1.25);
@@ -41,10 +39,8 @@ class GameEndedMenu extends Phaser.Scene
         this.returnToMenuButton.setScale(scale);
         this.returnToMenuButton.setRotation(Phaser.Math.DegToRad(90));
         this.returnToMenuButton.setInteractive();
-        this.add.text(665, 580, "Salir al menú", {font: "35px Courier", fill: "0#000000"});
-        this.returnToMenuButton.on("pointerdown", function(event){
-            this.clickSound.play()
-            this.ReturnToMenu()}.bind(this));
+        this.add.text(665, 580, "Main menu", {font: "35px Courier", fill: "0#000000"});
+        this.returnToMenuButton.on("pointerdown", this.ReturnToMenu.bind(this));
         this.returnToMenuButton.on("pointerover", function(event) 
         {
             this.returnToMenuButton.setScale(scale * 1.25);
@@ -56,18 +52,21 @@ class GameEndedMenu extends Phaser.Scene
             game.canvas.style.cursor = "crosshair";
         }.bind(this));
         //Texto de victoria:
-        this.add.text(425, 50, "FIN DEL JUEGO", {font: "100px Courier", fill: "0#FFFFFF"});
+        var victoryText;
+        if(!this.scene.get("Game").player.killed) victoryText = "Player 1 wins";
+        else victoryText = "Player 2 wins";
+        this.add.text(425, 50, victoryText, {font: "100px Courier", fill: "0#FFFFFF"});
         if(this.player1.killed)
         {
-            this.add.text(80, 200, "Jugador 1 muerto. Gana jugador 2.", {font: "75px Courier", fill: "0#FFFFFF"});
+            this.add.text(220, 200, "Player 1 was brutally shot", {font: "75px Courier", fill: "0#FFFFFF"});
         }
         else if(this.player2.bullets == 0)
         {
-            this.add.text(60, 200, "Balas agotadas. Gana el jugador 1.", {font: "75px Courier", fill: "0#FFFFFF"});
+            this.add.text(210, 200, "Player 2 can't aim properly", {font: "75px Courier", fill: "0#FFFFFF"});
         }
         else if(this.player1.missionAccomplished)
         {
-            this.add.text(60, 200, "El jugador 1 ha completado su misión. Gana la partida.", {font: "47px Courier", fill: "0#FFFFFF"});
+            this.add.text(60, 200, "Player 1 accomplished his mission", {font: "75px Courier", fill: "0#FFFFFF"});
         }
     }
 
@@ -78,6 +77,7 @@ class GameEndedMenu extends Phaser.Scene
 
     PlayAgain()
     {
+        this.clickSound.play();
         this.scene.run("InfoMenu");
         this.scene.start("Game");
         this.scene.remove("GameEndedMenu"); //Hay que borrarlo para que se pueda volver a crear en la siguiente partida
@@ -85,6 +85,7 @@ class GameEndedMenu extends Phaser.Scene
 
     ReturnToMenu()
     {
+        this.clickSound.play();
         this.scene.stop("GameEndedMenu");
         this.scene.stop("InfoMenu");
         this.scene.stop("Game");
