@@ -8,12 +8,14 @@ class PauseMenu extends Phaser.Scene
     preload()
     {
         this.load.image("buttonPlaceholder", "./Sprites/bala.png");
+        this.load.audio("Paper", "./Sounds/paper.mp3");
     }
 
     create()
     {
         //Audio de los botones
         this.clickSound = this.scene.get('Game').clickSound;
+        this.paperSound = this.sound.add("Paper");
         //Variables de escalado:
         var scale = 10;
         //Texto del menú de pausa:
@@ -27,6 +29,7 @@ class PauseMenu extends Phaser.Scene
         this.continueButton.on("pointerdown", this.ContinueGame.bind(this));
         this.continueButton.on("pointerover", function(event) 
         {
+            this.paperSound.play();
             this.continueButton.setScale(scale * 1.25);
             game.canvas.style.cursor = "pointer";
         }.bind(this));
@@ -44,6 +47,7 @@ class PauseMenu extends Phaser.Scene
         this.exitButton.on("pointerdown", this.ExitGame.bind(this));
         this.exitButton.on("pointerover", function(event) 
         {
+            this.paperSound.play();
             this.exitButton.setScale(scale * 1.25);
             game.canvas.style.cursor = "pointer";
         }.bind(this));
@@ -67,9 +71,10 @@ class PauseMenu extends Phaser.Scene
     {
         this.clickSound.play();
         this.scene.resume("Game");
+        this.scene.get("Game").gameSound.resume();
+        game.canvas.style.cursor = "crosshair";
         this.scene.resume("InfoMenu");
         this.scene.stop();
-        game.canvas.style.cursor = "crosshair";
     }
 
     ExitGame()

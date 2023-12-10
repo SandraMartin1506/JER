@@ -10,12 +10,14 @@ class GameEndedMenu extends Phaser.Scene
     preload()
     {
         this.load.image("buttonPlaceholder", "./Sprites/bala.png");
+        this.load.audio("Paper","./Sounds/paper.mp3");
     }
 
     create()
     {
         //Audio
         this.clickSound = this.scene.get('Game').clickSound;
+        this.paperSound = this.sound.add("Paper");
         var scale = 10;
         //Botón de volver a jugar:
         this.playAgainButton = this.add.image(this.game.config.width/2, this.game.config.height/2 - 50, "buttonPlaceholder");
@@ -26,6 +28,7 @@ class GameEndedMenu extends Phaser.Scene
         this.playAgainButton.on("pointerdown", this.PlayAgain.bind(this));
         this.playAgainButton.on("pointerover", function(event) 
         {
+            this.paperSound.play();
             this.playAgainButton.setScale(scale * 1.25);
             game.canvas.style.cursor = "pointer";
         }.bind(this));
@@ -43,6 +46,7 @@ class GameEndedMenu extends Phaser.Scene
         this.returnToMenuButton.on("pointerdown", this.ReturnToMenu.bind(this));
         this.returnToMenuButton.on("pointerover", function(event) 
         {
+            this.paperSound.play();
             this.returnToMenuButton.setScale(scale * 1.25);
             game.canvas.style.cursor = "pointer";
         }.bind(this));

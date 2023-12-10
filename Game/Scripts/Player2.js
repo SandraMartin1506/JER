@@ -1,6 +1,6 @@
 class Player2 extends Phaser.GameObjects.Group
 {
-    constructor(scene, weapon, bulletsImg, crosshairImg){
+    constructor(scene, weapon, bulletsImg, crosshairImg, gameSound){
         super({key: "Player2"});
         this.scene = scene;
         this.bulletsImg = bulletsImg;
@@ -8,8 +8,12 @@ class Player2 extends Phaser.GameObjects.Group
         this.crosshair = this.scene.add.image(100, 100, crosshairImg).setScale(0.2);
         this.crosshair.depth = 1000;
         this.bullets;
+        //Audio:
         this.granadeSound = this.scene.sound.add("Grenade");
         this.sniperSound = this.scene.sound.add("Sniper");
+        this.gameSound = gameSound;
+        this.stopGameSound = false;
+        this.soundTimer = 3000; //Tiempo que se callan los NPCs (3 segundos de momento)
     }
 
     //Hacer función que gestione que dependiendo del tipo de bala tenga X balas
@@ -71,7 +75,23 @@ class Player2 extends Phaser.GameObjects.Group
                     } 
                     else this.sniperSound.play()
                 }
+                this.gameSound.pause();
+                this.stopGameSound = true;
             }
         }.bind(this));
+    }
+
+    StopGameSound()
+    {
+        if(this.stopGameSound)
+        {
+            if(this.soundTimer >= 0) this.soundTimer -= game.loop.delta;
+            else 
+            {
+                this.stopGameSound = false;
+                this.gameSound.resume();
+                this.soundTimer = 3000;
+            }
+        }
     }
 }
