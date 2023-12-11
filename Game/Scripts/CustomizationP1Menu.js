@@ -109,7 +109,8 @@ class CustomizationP1Menu extends Phaser.Scene
         //Asignar y mostrar mision
         this.textMission = this.add.text((this.game.config.width*(1-0.75)/2), (this.game.config.height*(1+0.20))/2, "YOUR MISSION ! ! ", { font: '30px cursive', fill: '#ff0000' }).setAngle(-2);
         this.numMission = Math.floor(Math.random() * (8-1+1) + 1); 
-        const missionDesc = ["Your objective is to visit every corner of the screen.","Shit2.","Shit3.","Shit4.","Shit5.","Shit6.","Shit7.","Shit8.",]
+        const missionDesc = ["Your objective is to visit every corner of the screen.",
+        "Shit2.","Shit3.","Shit4.","Shit5.","Shit6.","Shit7.","Shit8.",];
         this.missionObjective = this.add.text((this.game.config.width*(1-0.85)/2), (this.game.config.height*(1+0.30))/2, missionDesc[this.numMission-1], { font: '32px cursive', fill: '#000000', wordWrap: { width: 500 }  });
         
         //Decorar
@@ -119,8 +120,8 @@ class CustomizationP1Menu extends Phaser.Scene
         hojaIzq.setScale(1.7).setAngle(3);
         hojaDer.setBlendMode(Phaser.BlendModes.MULTIPLY);
         hojaIzq.setBlendMode(Phaser.BlendModes.MULTIPLY);
+        
         //Boton confirmar
-
         const confirm = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(1+0.8))/2, "ConfirmButton").setDepth(53);
         this.InteractButton(confirm)
         confirm.on("pointerdown", function(event) 
@@ -160,7 +161,7 @@ class CustomizationP1Menu extends Phaser.Scene
         title.setScale(1);
 
         //alerta inicial
-        this.alertTime = 200;
+        this.alertTime = 1;
         this.alertBox = this.add.rectangle(0,0, this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(59);
         this.alertText = this.add.text((this.game.config.width*(1)/2), (this.game.config.height*(1))/2, "PLAYER 2 DON'T LOOK", { font: '120px Arial', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
     }
@@ -302,10 +303,9 @@ class CustomizationP1Menu extends Phaser.Scene
 
     GoToCustomP2()
     {
-        this.scene.add("Game", new Game);
-        this.scene.add("Game", new PauseMenu);
-        this.scene.add("Game", new InfoMenu);
+        this.scene.add("CustomizationP2Menu", new CustomizationP2Menu(this.numMission,this.hatNum,this.topNum,this.botNum,this.fakeHint.text));
         this.scene.stop("CustomizationP1Menu");
-        this.scene.start("Game");
+        this.scene.start("CustomizationP2Menu");
+        //this.scene.remove("CustomizationP1Menu");
     }
 }
