@@ -10,7 +10,7 @@ class Game extends Phaser.Scene
         //IMÁGENES
         this.load.image("Bullet", "./Sprites/bala1.png");
         this.load.image("Crosshair", "./Sprites/Mira.png");
-        this.load.spritesheet("SpriteSheet", "./Sprites/SpriteSheet.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("Character", "./Sprites/SpriteSheet.png", {frameWidth: 250, frameHeight: 450});
         //AUDIO
         this.load.audio("Crowd","./Sounds/crowd.mp3");
         this.load.audio("Click","./Sounds/click.mp3");
@@ -24,6 +24,10 @@ class Game extends Phaser.Scene
         this.clickSound = this.sound.add("Click");
         this.gameSound = this.sound.add("Crowd");
         this.gameSound.play({loop: true});
+        //Ropa:
+        this.hats = this.scene.get("CustomizationP1Menu").spritesheetsHat;
+        this.tops = this.scene.get("CustomizationP1Menu").spritesheetsTop;
+        this.bottoms = this.scene.get("CustomizationP1Menu").spritesheetsBot;
         //Jugadores:
         this.player;
         this.player2;
@@ -33,6 +37,8 @@ class Game extends Phaser.Scene
         var numberNPC = Math.floor(Math.random() * (15-9+1) + 9); //NPCs son un número aleatorio entre 9 y 15 (de momento)
 	    this.npcs = new Array(numberNPC);
         this.InitializeNPCS(); //Se inicializan los NPCs con posiciones aleatorias
+        //Animaciones:
+        this.GenerateAnimations();
         //Manejo de input:
         this.player.ManageInput(this); //Se añade la gestión del input al ser pulsada una tecla. Se pasa como parámetro la escena del juego.
         this.player2.ManageBullets(); //Se añade la gestión de las balas. Cada vez que se haga click izquierdo, se pierde una bala
@@ -63,7 +69,7 @@ class Game extends Phaser.Scene
         {
             var randomX = Math.floor(Math.random() * (1550-50+1) + 50);
             var randomY = Math.floor(Math.random() * (850-50+1) + 50);
-            this.npcs[i] = new NPC(randomX, randomY, this, "SpriteSheet");
+            this.npcs[i] = new NPC(randomX, randomY, this, "Character");
         }
     }
 
@@ -71,7 +77,10 @@ class Game extends Phaser.Scene
     {
         var randomX = Math.floor(Math.random() * (1550 - 50 + 1) + 50);
 	    var randomY = Math.floor(Math.random() * (850 - 50 + 1) + 50);
-	    this.player = new Player(randomX, randomY, this, "SpriteSheet");
+        var hatNum = this.scene.get("CustomizationP1Menu").hatNum;
+        var topNum = this.scene.get("CustomizationP1Menu").topNum;
+        var botNum = this.scene.get("CustomizationP1Menu").botNum;
+	    this.player = new Player(randomX, randomY, this, "Character", this.hats[hatNum], this.tops[topNum], this.bottoms[botNum]);
     }
 
     InitializePlayer2() 
@@ -114,6 +123,126 @@ class Game extends Phaser.Scene
             this.scene.run("GameEndedMenu");
             this.scene.pause();
             this.scene.pause("InfoMenu");
+        }
+    }
+
+    GenerateAnimations()
+    {
+        this.GenerateCustomAnimation("Character");
+        this.hats.forEach(hat => 
+            {
+                this.GenerateCustomAnimation(hat);
+            });
+        this.tops.forEach(top => 
+            {
+                this.GenerateCustomAnimation(top);
+            });
+        this.bottoms.forEach(bottom =>
+            {
+                this.GenerateCustomAnimation(bottom);
+            });
+    }
+
+    GenerateCustomAnimation(spriteSheet)
+    {
+        if(spriteSheet !== undefined)
+        {   
+            var newKey = spriteSheet + "_idle_front";
+            this.anims.create(
+                {
+                    key: newKey,
+                    frames: this.anims.generateFrameNumbers(spriteSheet, 
+                        {
+                            frames: [0]
+                        }),
+                    repeat: -1,
+                    frameRate: 1
+                }
+            );
+            newKey = spriteSheet + "_idle_back";
+            this.anims.create(
+                {
+                    key: newKey,
+                    frames: this.anims.generateFrameNumbers(spriteSheet, 
+                        {
+                            frames: [10]
+                        }),
+                    repeat: -1,
+                    frameRate: 1
+                }
+            );
+            newKey = spriteSheet + "_idle_left";
+            this.anims.create(
+                {
+                    key: newKey,
+                    frames: this.anims.generateFrameNumbers(spriteSheet, 
+                        {
+                            frames: [15]
+                        }),
+                    repeat: -1,
+                    frameRate: 1
+                }
+            );
+            newKey = spriteSheet + "_idle_right";
+            this.anims.create(
+                {
+                    key: newKey,
+                    frames: this.anims.generateFrameNumbers(spriteSheet, 
+                        {
+                            frames: [1]
+                        }),
+                    repeat: -1,
+                    frameRate: 1
+                }
+            );
+            newKey = spriteSheet + "_front_walk";
+            this.anims.create(
+                {
+                    key: newKey,
+                    frames: this.anims.generateFrameNumbers(spriteSheet, 
+                        {
+                            frames: [6, 7, 8, 9, 0]
+                        }),
+                    repeat: -1,
+                    frameRate: 6
+                }
+            );
+            newKey = spriteSheet + "_back_walk";
+            this.anims.create(
+                {
+                    key: newKey,
+                    frames: this.anims.generateFrameNumbers(spriteSheet, 
+                        {
+                            frames: [11, 12, 13, 14, 10]
+                        }),
+                    repeat: -1,
+                    frameRate: 6
+                }
+            );
+            newKey = spriteSheet + "_left_walk";
+            this.anims.create(
+                {
+                    key: newKey,
+                    frames: this.anims.generateFrameNumbers(spriteSheet, 
+                        {
+                            frames: [16, 17, 18, 19, 15]
+                        }),
+                    repeat: -1,
+                    frameRate: 6
+                }
+            );
+            newKey = spriteSheet + "_right_walk"
+            this.anims.create(
+                {
+                    key: newKey,
+                    frames: this.anims.generateFrameNumbers(spriteSheet, 
+                        {
+                            frames: [2, 3, 4, 5, 1]
+                        }),
+                    repeat: -1,
+                    frameRate: 6
+                }
+            );
         }
     }
 }

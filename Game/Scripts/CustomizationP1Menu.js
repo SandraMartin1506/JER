@@ -46,9 +46,9 @@ class CustomizationP1Menu extends Phaser.Scene
         this.spriteBot = undefined;
 
         //Arrays con los spritesheets
-        this.spritesheetsHat = ["","GorroLana1"];
-        this.spritesheetsTop = ["","Camisa1"];
-        this.spritesheetsBot = ["","BanadorRojo","BanadorAzul","VaquerosAzul"];
+        this.spritesheetsHat = [undefined,"GorroLana1"];
+        this.spritesheetsTop = [undefined,"Camisa1"];
+        this.spritesheetsBot = [undefined,"BanadorRojo","BanadorAzul","VaquerosAzul"];
 
         //Boton gorro 1
         const changeHat1 = this.add.image(((this.game.config.width*(1+0.3)/2)),(this.game.config.height*(1-0.3))/2, "ArrowButton");
@@ -307,6 +307,5 @@ class CustomizationP1Menu extends Phaser.Scene
         this.scene.add("Game", new InfoMenu);
         this.scene.stop("CustomizationP1Menu");
         this.scene.start("Game");
-        this.scene.remove("CustomizationP1Menu");
     }
 }

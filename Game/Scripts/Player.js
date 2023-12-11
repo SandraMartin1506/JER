@@ -1,10 +1,17 @@
 class Player extends Phaser.GameObjects.Group
 {
-    constructor(initialX, initialY, scene, spriteSheet)
+    constructor(initialX, initialY, scene, spriteSheet, hat, top, bottom)
     {
         super({key: "Player"});
+        //Skin:
         this.body = scene.add.sprite(initialX, initialY, spriteSheet).setScale(0.25); //Imagen del jugador
-        this.CreateAnimations(spriteSheet, scene); //Función que crea las animaciones dado un spriteSheet
+        if(hat !== undefined) this.hat = scene.add.sprite(initialX, initialY, hat).setScale(0.25);
+        else this.hat = undefined;
+        if(top !== undefined) this.top = scene.add.sprite(initialX, initialY, top).setScale(0.25);
+        else this.top = undefined;
+        if(bottom !== undefined) this.bottom = scene.add.sprite(initialX, initialY, bottom).setScale(0.25);
+        else this.bottom = undefined;
+        //Lógica:
         this.direction = "Quieto"; //Dirección en la que camina. Se inicializa con Quieto por el contador.
         this.currentInput; //Input correspondiente a la dirección actual
         this.killed = false; //Si está vivo o no
@@ -17,6 +24,9 @@ class Player extends Phaser.GameObjects.Group
         {
             this.killed = true;
             this.body.setVisible(false);
+            if(this.hat !== undefined) this.hat.setVisible(false);
+            if(this.top !== undefined) this.top.setVisible(false);
+            if(this.bottom !== undefined) this.bottom.setVisible(false);
         }.bind(this));
     }
 
@@ -28,25 +38,37 @@ class Player extends Phaser.GameObjects.Group
             {
                 this.direction = "Arriba";
                 this.currentInput = event.key;
-                this.body.anims.play("back_walk");
+                this.body.anims.play("Character_back_walk");
+                if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_back_walk");
+                if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_back_walk");
+                if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_back_walk");
             }
             else if (event.key === 's' && this.currentInput !== 's')
             {
                 this.direction = "Abajo";
                 this.currentInput = event.key;
-                this.body.anims.play("front_walk");
+                this.body.anims.play("Character_front_walk");
+                if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_front_walk");
+                if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_front_walk");
+                if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_front_walk");
             }
             else if (event.key === 'a' && this.currentInput !== 'a')
             {
                 this.direction = "Izquierda";
                 this.currentInput = event.key;
-                this.body.anims.play("left_walk");
+                this.body.anims.play("Character_left_walk");
+                if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_left_walk");
+                if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_left_walk");
+                if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_left_walk");
             }
             else if (event.key === 'd' && this.currentInput !== 'd')
             {
                 this.direction = "Derecha";
                 this.currentInput = event.key;
-                this.body.anims.play("right_walk");
+                this.body.anims.play("Character_right_walk");
+                if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_right_walk");
+                if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_right_walk");
+                if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_right_walk");
             };
         }.bind(this));
     }
@@ -58,10 +80,34 @@ class Player extends Phaser.GameObjects.Group
             if(this.currentInput === event.key) //Sólo se para si la tecla que ha dejado de pulsarse es la que hacia que se moviese
             {
                 this.direction = "Quieto";
-                if(this.currentInput === 'w') this.body.anims.play("idle_back");
-                else if(this.currentInput === 'a') this.body.anims.play("idle_left");
-                else if(this.currentInput === 's') this.body.anims.play("idle_front");
-                else if(this.currentInput === 'd') this.body.anims.play("idle_right");
+                if(this.currentInput === 'w')
+                {
+                    this.body.anims.play("Character_idle_back");
+                    if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_idle_back");
+                    if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_idle_back");
+                    if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_idle_back");
+                } 
+                else if(this.currentInput === 'a') 
+                {
+                    this.body.anims.play("Character_idle_left");
+                    if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_idle_left");
+                    if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_idle_left");
+                    if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_idle_left");
+                }
+                else if(this.currentInput === 's')
+                { 
+                    this.body.anims.play("Character_idle_front");
+                    if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_idle_front");
+                    if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_idle_front");
+                    if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_idle_front");
+                }
+                else if(this.currentInput === 'd') 
+                {
+                    this.body.anims.play("Character_idle_right");
+                    if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_idle_right");
+                    if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_idle_right");
+                    if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_idle_right");
+                }
                 this.currentInput = "Sin input";
             }
         }.bind(this))
@@ -69,103 +115,37 @@ class Player extends Phaser.GameObjects.Group
 
     UpdatePosition() //Actualiza la posición del jugador
     {
-        if (this.direction === 'Arriba' && this.body.y > 0) this.body.y--;
-		else if (this.direction === "Abajo" && this.body.y < 900) this.body.y++;
-		else if (this.direction === "Izquierda" && this.body.x > 0) this.body.x--;
-		else if (this.direction === "Derecha" && this.body.x < 1600) this.body.x++;
+        if (this.direction === 'Arriba' && this.body.y > 0)
+        {
+            this.body.y--;
+            if(this.hat !== undefined) this.hat.y--;
+            if(this.top !== undefined) this.top.y--;
+            if(this.bottom !== undefined) this.bottom.y--;
+        }
+		else if (this.direction === "Abajo" && this.body.y < 900) 
+        {
+            this.body.y++;
+            if(this.hat !== undefined) this.hat.y++;
+            if(this.top !== undefined) this.top.y++;
+            if(this.bottom !== undefined) this.bottom.y++;
+        }
+		else if (this.direction === "Izquierda" && this.body.x > 0) 
+        {
+            this.body.x--;
+            if(this.hat !== undefined) this.hat.x--;
+            if(this.top !== undefined) this.top.x--;
+            if(this.bottom !== undefined) this.bottom.x--;
+        }
+		else if (this.direction === "Derecha" && this.body.x < 1600)
+        {
+            this.body.x++;
+            if(this.hat !== undefined) this.hat.x++;
+            if(this.top !== undefined) this.top.x++;
+            if(this.bottom !== undefined) this.bottom.x++;
+        }
         this.body.depth = this.body.y; //Cuanto más abajo está mayor nivel de profundidad para que se vea por encima de los que están más arriba
-
-    }
-
-    CreateAnimations(spriteSheet, scene)
-    {
-        scene.anims.create(
-            {
-                key: "idle_front",
-                frames: scene.anims.generateFrameNumbers(spriteSheet, 
-                    {
-                        frames: [0]
-                    }),
-                repeat: -1,
-                frameRate: 1
-            }
-        );
-        scene.anims.create(
-            {
-                key: "idle_back",
-                frames: scene.anims.generateFrameNumbers(spriteSheet, 
-                    {
-                        frames: [10]
-                    }),
-                repeat: -1,
-                frameRate: 1
-            }
-        );
-        scene.anims.create(
-            {
-                key: "idle_left",
-                frames: scene.anims.generateFrameNumbers(spriteSheet, 
-                    {
-                        frames: [15]
-                    }),
-                repeat: -1,
-                frameRate: 1
-            }
-        );
-        scene.anims.create(
-            {
-                key: "idle_right",
-                frames: scene.anims.generateFrameNumbers(spriteSheet, 
-                    {
-                        frames: [1]
-                    }),
-                repeat: -1,
-                frameRate: 1
-            }
-        );
-        scene.anims.create(
-            {
-                key: "front_walk",
-                frames: scene.anims.generateFrameNumbers(spriteSheet, 
-                    {
-                        frames: [6, 7, 8, 9, 0]
-                    }),
-                repeat: -1,
-                frameRate: 6
-            }
-        );
-        scene.anims.create(
-            {
-                key: "back_walk",
-                frames: scene.anims.generateFrameNumbers(spriteSheet, 
-                    {
-                        frames: [11, 12, 13, 14, 10]
-                    }),
-                repeat: -1,
-                frameRate: 6
-            }
-        );
-        scene.anims.create(
-            {
-                key: "left_walk",
-                frames: scene.anims.generateFrameNumbers(spriteSheet, 
-                    {
-                        frames: [16, 17, 18, 19, 15]
-                    }),
-                repeat: -1,
-                frameRate: 6
-            }
-        );
-        scene.anims.create(
-            {
-                key: "right_walk",
-                frames: scene.anims.generateFrameNumbers(spriteSheet, 
-                    {
-                        frames: [2, 3, 4, 5, 1]
-                    }),
-                repeat: -1,
-                frameRate: 6
-            }
-        );
+        if(this.hat !== undefined) this.hat.depth = this.body.depth;
+        if(this.top !== undefined) this.top.depth = this.body.depth;
+        if(this.bottom !== undefined) this.bottom.depth = this.body.depth;
     }
 }

@@ -35,10 +35,10 @@ class NPC extends Phaser.GameObjects.Group
 		else if(this.nextY > 900) {this.nextY = this.body.y - distance; this.direction = 0}
 		this.calculatingPosition = false;
 		//Se anima:
-		if(this.nextY > this.body.y) this.body.anims.play("front_walk");
-		else if(this.nextY < this.body.y) this.body.anims.play("back_walk");
-		else if(this.nextX > this.body.x) this.body.anims.play("right_walk");
-		else if(this.nextX < this.body.x) this.body.anims.play("left_walk");
+		if(this.nextY > this.body.y) this.body.anims.play("Character_front_walk");
+		else if(this.nextY < this.body.y) this.body.anims.play("Character_back_walk");
+		else if(this.nextX > this.body.x) this.body.anims.play("Character_right_walk");
+		else if(this.nextX < this.body.x) this.body.anims.play("Character_left_walk");
     }
 
     UpdatePosition() //Actualiza la posición de los enemigos
@@ -54,10 +54,10 @@ class NPC extends Phaser.GameObjects.Group
 				this.calculatingPosition = true;
 				var randomTime = Math.floor(Math.random() * 1500); //Tiempo entre 0 y 1.5 segundos
 				setTimeout(this.CalculateNextPosition.bind(this), randomTime);
-				if(this.direction === 0) this.body.anims.play("idle_back");
-				else if(this.direction === 1) this.body.anims.play("idle_right");
-				else if(this.direction === 2) this.body.anims.play("idle_front");
-				else if(this.direction === 3) this.body.anims.play("idle_left");
+				if(this.direction === 0) this.body.anims.play("Character_idle_back");
+				else if(this.direction === 1) this.body.anims.play("Character_idle_right");
+				else if(this.direction === 2) this.body.anims.play("Character_idle_front");
+				else if(this.direction === 3) this.body.anims.play("Character_idle_left");
 			}
 		}	
 		this.body.depth = this.body.y;	
