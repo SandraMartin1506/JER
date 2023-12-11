@@ -163,6 +163,7 @@ class CustomizationP1Menu extends Phaser.Scene
         this.alertTime = 200;
         this.alertBox = this.add.rectangle(0,0, this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(59);
         this.alertText = this.add.text((this.game.config.width*(1)/2), (this.game.config.height*(1))/2, "PLAYER 2 DON'T LOOK", { font: '120px Arial', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
+        this.proTip = this.add.text((this.game.config.width*(1)/2) - 148, (this.game.config.height*(1))/2 + 200, "Pro tip: close your eyes", { font: '40px Arial', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
     }
 
     update()
@@ -171,6 +172,7 @@ class CustomizationP1Menu extends Phaser.Scene
         if (this.alertTime<=0){
             if (this.alertBox.alpha>0){this.alertBox.alpha-=0.01}
             if (this.alertText.alpha>0){this.alertText.alpha-=0.05}
+            if (this.proTip.alpha>0){this.proTip.alpha-=0.05}
         }
     }
 
