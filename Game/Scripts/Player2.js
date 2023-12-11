@@ -43,11 +43,17 @@ class Player2 extends Phaser.GameObjects.Group
             if(distanceNPC < 100)//Si es menor que 100, se vuelve invisible (muere)
             { 
                 objeto.body.setVisible(false);
+                if(objeto.hat !== undefined) objeto.hat.setVisible(false);
+                if(objeto.top !== undefined) objeto.top.setVisible(false);
+                if(objeto.bottom !== undefined) objeto.bottom.setVisible(false);
             }
         })
         if(distanceP1 < 100)//Si el jugador está en área, entonces muere y por tanto gana la partida
         { 
-            this.scene.player.body.setVisible(false) 
+            this.scene.player.body.setVisible(false);
+            if(this.scene.player.hat !== undefined) this.scene.player.hat.setVisible(false);
+            if(this.scene.player.top !== undefined) this.scene.player.top.setVisible(false);
+            if(this.scene.player.bottom !== undefined) this.scene.player.bottom.setVisible(false); 
             this.scene.player.killed = true;
         }
     }
@@ -75,7 +81,7 @@ class Player2 extends Phaser.GameObjects.Group
                     } 
                     else this.sniperSound.play()
                 }
-                this.gameSound.pause();
+                this.gameSound.stop();
                 this.stopGameSound = true;
             }
         }.bind(this));
@@ -89,7 +95,7 @@ class Player2 extends Phaser.GameObjects.Group
             else 
             {
                 this.stopGameSound = false;
-                this.gameSound.resume();
+                this.gameSound.play();
                 this.soundTimer = 3000;
             }
         }

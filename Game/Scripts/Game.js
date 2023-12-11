@@ -64,12 +64,15 @@ class Game extends Phaser.Scene
 
     InitializeNPCS() //Inicializa todos los NPCs en posiciones aleatorias
     {
-       
+        
         for(var i = 0; i < this.npcs.length; i++)
         {
             var randomX = Math.floor(Math.random() * (1550-50+1) + 50);
             var randomY = Math.floor(Math.random() * (850-50+1) + 50);
-            this.npcs[i] = new NPC(randomX, randomY, this, "Character");
+            var randomHat = Math.floor(Math.random() * this.hats.length);
+            var randomTop = Math.floor(Math.random() * this.tops.length);
+            var randomBotton = Math.floor(Math.random() * this.bottoms.length);
+            this.npcs[i] = new NPC(randomX, randomY, this, "Character", this.hats[randomHat], this.tops[randomTop], this.bottoms[randomBotton]);
         }
     }
 

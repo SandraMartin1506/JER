@@ -1,9 +1,17 @@
 class NPC extends Phaser.GameObjects.Group
 {
-    constructor(initialX, initialY, scene, spriteSheet)
+    constructor(initialX, initialY, scene, character, hat, top, bottom)
     {
         super({key: "NPC"});
-		this.body = scene.add.sprite(initialX, initialY, spriteSheet).setScale(0.25); //Imagen del NPC
+		//Skin:
+		this.body = scene.add.sprite(initialX, initialY, character).setScale(0.25); //Imagen del NPC
+		if(hat !== undefined) this.hat = scene.add.sprite(initialX, initialY, hat).setScale(0.25);
+        else this.hat = undefined;
+        if(top !== undefined) this.top = scene.add.sprite(initialX, initialY, top).setScale(0.25);
+        else this.top = undefined;
+        if(bottom !== undefined) this.bottom = scene.add.sprite(initialX, initialY, bottom).setScale(0.25);
+        else this.bottom = undefined;
+		//Lógica:
         this.nextX = this.body.x; //Próxima posición en x
         this.nextY = this.body.y; //Próxima posición en y
         this.calculatingPosition = false; //Indica si el NPC está quieto calculando cuál va a ser su próxima posición
@@ -13,6 +21,9 @@ class NPC extends Phaser.GameObjects.Group
         this.body.on('pointerdown',function(pointer)
 		{
             this.body.setVisible(false);
+			if(this.hat !== undefined) this.hat.setVisible(false);
+            if(this.top !== undefined) this.top.setVisible(false);
+            if(this.bottom !== undefined) this.bottom.setVisible(false);
         }.bind(this));
     }
 
@@ -35,18 +46,66 @@ class NPC extends Phaser.GameObjects.Group
 		else if(this.nextY > 900) {this.nextY = this.body.y - distance; this.direction = 0}
 		this.calculatingPosition = false;
 		//Se anima:
-		if(this.nextY > this.body.y) this.body.anims.play("Character_front_walk");
-		else if(this.nextY < this.body.y) this.body.anims.play("Character_back_walk");
-		else if(this.nextX > this.body.x) this.body.anims.play("Character_right_walk");
-		else if(this.nextX < this.body.x) this.body.anims.play("Character_left_walk");
+		if(this.nextY > this.body.y) 
+		{
+			this.body.anims.play("Character_front_walk");
+			if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_front_walk");
+            if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_front_walk");
+            if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_front_walk");
+		}
+		else if(this.nextY < this.body.y) 
+		{
+			this.body.anims.play("Character_back_walk");
+			if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_back_walk");
+            if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_back_walk");
+            if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_back_walk");
+		}
+		else if(this.nextX > this.body.x) 
+		{
+			this.body.anims.play("Character_right_walk");
+			if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_right_walk");
+            if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_right_walk");
+            if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_right_walk");
+		}
+		else if(this.nextX < this.body.x) 
+		{
+			this.body.anims.play("Character_left_walk");
+			if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_left_walk");
+            if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_left_walk");
+            if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_left_walk");
+		}
     }
 
     UpdatePosition() //Actualiza la posición de los enemigos
     {
-        if(this.body.x < this.nextX) this.body.x++;
-		else if(this.body.x > this.nextX) this.body.x--;
-		else if(this.body.y < this.nextY) this.body.y++;
-		else if(this.body.y > this.nextY) this.body.y--;
+        if(this.body.x < this.nextX)
+		{
+			this.body.x++;
+			if(this.hat !== undefined) this.hat.x++;
+            if(this.top !== undefined) this.top.x++;
+            if(this.bottom !== undefined) this.bottom.x++;
+		}
+		else if(this.body.x > this.nextX) 
+		{
+			this.body.x--;
+			if(this.hat !== undefined) this.hat.x--;
+            if(this.top !== undefined) this.top.x--;
+            if(this.bottom !== undefined) this.bottom.x--;
+		}
+		else if(this.body.y < this.nextY) 
+		{
+			this.body.y++;
+			if(this.hat !== undefined) this.hat.y++;
+            if(this.top !== undefined) this.top.y++;
+            if(this.bottom !== undefined) this.bottom.y++;
+		}
+		else if(this.body.y > this.nextY) 
+		{
+			this.body.y--;
+			if(this.hat !== undefined) this.hat.y--;
+            if(this.top !== undefined) this.top.y--;
+            if(this.bottom !== undefined) this.bottom.y--;
+		}
 		else //Si el NPC ya ha llegado a su destino se esperará un intervalo aleatorio de tiempo (corto) antes de elegir su nueva ruta
 		{
 			if(!this.calculatingPosition)
@@ -54,12 +113,39 @@ class NPC extends Phaser.GameObjects.Group
 				this.calculatingPosition = true;
 				var randomTime = Math.floor(Math.random() * 1500); //Tiempo entre 0 y 1.5 segundos
 				setTimeout(this.CalculateNextPosition.bind(this), randomTime);
-				if(this.direction === 0) this.body.anims.play("Character_idle_back");
-				else if(this.direction === 1) this.body.anims.play("Character_idle_right");
-				else if(this.direction === 2) this.body.anims.play("Character_idle_front");
-				else if(this.direction === 3) this.body.anims.play("Character_idle_left");
+				if(this.direction === 0)
+				{
+					this.body.anims.play("Character_idle_back");
+					if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_idle_back");
+                    if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_idle_back");
+                    if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_idle_back");
+				}
+				else if(this.direction === 1) 
+				{
+					this.body.anims.play("Character_idle_right");
+					if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_idle_right");
+                    if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_idle_right");
+                    if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_idle_right");
+				}
+				else if(this.direction === 2) 
+				{
+					this.body.anims.play("Character_idle_front");
+					if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_idle_front");
+                    if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_idle_front");
+                    if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_idle_front");
+				}
+				else if(this.direction === 3) 
+				{
+					this.body.anims.play("Character_idle_left");
+					if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_idle_left");
+                    if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_idle_left");
+                    if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_idle_left");
+				}
 			}
 		}	
-		this.body.depth = this.body.y;	
+		this.body.depth = this.body.y;
+		if(this.hat !== undefined) this.hat.depth = this.body.depth;
+        if(this.top !== undefined) this.top.depth = this.body.depth;
+        if(this.bottom !== undefined) this.bottom.depth = this.body.depth;	
     }
 }
