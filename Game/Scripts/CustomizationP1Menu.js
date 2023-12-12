@@ -305,9 +305,7 @@ class CustomizationP1Menu extends Phaser.Scene
 
     GoToCustomP2()
     {
-        this.scene.add("CustomizationP2Menu", new CustomizationP2Menu(this.numMission,this.hatNum,this.topNum,this.botNum,this.fakeHint.text));
         this.scene.stop("CustomizationP1Menu");
         this.scene.start("CustomizationP2Menu");
-        //this.scene.remove("CustomizationP1Menu");
     }
 }

@@ -44,7 +44,7 @@ class PauseMenu extends Phaser.Scene
         this.exitButton.setRotation(Phaser.Math.DegToRad(90));
         this.exitButton.setInteractive();
         this.add.text(665, 530, "Main menu", {font: "50px Courier", fill: "0#000000"});
-        this.exitButton.on("pointerdown", this.ExitGame.bind(this));
+        this.exitButton.on("pointerdown", this.GoToMainMenu.bind(this));
         this.exitButton.on("pointerover", function(event) 
         {
             this.paperSound.play();
@@ -77,7 +77,7 @@ class PauseMenu extends Phaser.Scene
         this.scene.stop();
     }
 
-    ExitGame()
+    GoToMainMenu()
     {
         console.log("Saliendo del juego...");
         this.clickSound.play();

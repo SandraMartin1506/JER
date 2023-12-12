@@ -50,7 +50,7 @@ class Game extends Phaser.Scene
         this.scene.run("InfoMenu"); //La información está siempre disponible mientras se juega
         this.gameEndedMenu = new GameEndedMenu(this.player, this.player2);
         //Misiones:
-        var numMission = Math.floor(Math.random() * (8-1+1) + 1); 
+        var numMission = this.scene.get("CustomizationP1Menu").numMission; 
         this.mission = new Missions(numMission, this.player, this);
         console.log(numMission);
     }
@@ -122,7 +122,6 @@ class Game extends Phaser.Scene
         if(this.player2.bullets == 0 || this.player.killed || this.player.missionAccomplished) 
         {
             this.gameSound.stop();
-            this.scene.add("GameEndedMenu",this.gameEndedMenu);
             this.scene.run("GameEndedMenu");
             this.scene.pause();
             this.scene.pause("InfoMenu");

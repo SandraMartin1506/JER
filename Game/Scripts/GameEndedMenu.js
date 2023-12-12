@@ -1,10 +1,8 @@
 class GameEndedMenu extends Phaser.Scene
 {
-    constructor(player1, player2)
+    constructor()
     {
         super({key: "GameEndedMenu"});
-        this.player1 = player1;
-        this.player2 = player2;
     }
 
     preload()
@@ -15,6 +13,8 @@ class GameEndedMenu extends Phaser.Scene
 
     create()
     {
+        this.player1 = this.scene.get("Game").player;
+        this.player2 = this.scene.get("Game").player2;
         //Audio
         this.clickSound = this.scene.get('Game').clickSound;
         this.paperSound = this.sound.add("Paper");
@@ -82,9 +82,10 @@ class GameEndedMenu extends Phaser.Scene
     PlayAgain()
     {
         this.clickSound.play();
-        this.scene.run("InfoMenu");
-        this.scene.start("Game");
-        this.scene.remove("GameEndedMenu"); //Hay que borrarlo para que se pueda volver a crear en la siguiente partida
+        this.scene.stop("GameEndedMenu");
+        this.scene.stop("Game");
+        this.scene.stop("InfoMenu");
+        this.scene.start("CustomizationP1Menu");
     }
 
     ReturnToMenu()
@@ -93,6 +94,6 @@ class GameEndedMenu extends Phaser.Scene
         this.scene.stop("GameEndedMenu");
         this.scene.stop("InfoMenu");
         this.scene.stop("Game");
-        this.scene.remove("GameEndedMenu");
+        //this.scene.start("MainMenu"); FALTA EL MAIN MENU
     }
 }
