@@ -4,7 +4,7 @@ const config =
     height: 900,
     parent: "container",
     type: Phaser.AUTO,
-    backgroundColor: '0xFFFF50',
+    backgroundColor: '0x000000',
     scene: [MainMenu],
     physics: {
         default: 'arcade',

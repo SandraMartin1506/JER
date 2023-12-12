@@ -8,12 +8,18 @@ class MainMenu extends Phaser.Scene
     preload()
     {
         this.load.image("buttonPlaceholder", "./Sprites/bala.png");
+        this.load.image("Background", "./Sprites/fondohacker.png");
+        this.load.image("BackgroundBlack", "./Sprites/fondohackernegro.png");
         this.load.audio("Paper", "./Sounds/paper.mp3");
         this.load.audio("Click", "./Sounds/click.mp3");
     }
 
     create()
     {
+
+        this.backgroundImage1 = this.add.image(0,0,"Background").setOrigin(0,0);
+        this.backgroundImage2 = this.add.image(this.game.config.width,0,"Background").setOrigin(0,0);
+        this.backgroundBlack = this.add.image(0,0,"BackgroundBlack").setOrigin(0,0);
         //Audio de los botones
         this.clickSound = this.sound.add("Click");
         this.paperSound = this.sound.add("Paper");
@@ -54,10 +60,20 @@ class MainMenu extends Phaser.Scene
             this.creditsButton.setScale(scale);
             game.canvas.style.cursor = "crosshair";
         }.bind(this));
+
+
     }
 
-    update()
+    update(time, deltaTime)
     {
+        this.backgroundImage1.setPosition(this.backgroundImage1.x-0.05*deltaTime,0)
+        this.backgroundImage2.setPosition(this.backgroundImage2.x-0.05*deltaTime,0)
+        if (this.backgroundImage1.x<-this.game.config.width){
+            this.backgroundImage1.setPosition(this.backgroundImage2.x+this.game.config.width,0)
+        }
+        if (this.backgroundImage2.x<-this.game.config.width){
+            this.backgroundImage2.setPosition(this.backgroundImage1.x+this.game.config.width,0)
+        }
     }
 
     StartGame()

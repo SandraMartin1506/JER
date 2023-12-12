@@ -23,6 +23,7 @@ class Game extends Phaser.Scene
 
     create()
     {
+        this.cameras.main.setBackgroundColor('0xFFFF50');
         //Panel de fade in:
         this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(1000);
         //Audio
