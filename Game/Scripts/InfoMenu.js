@@ -18,7 +18,7 @@ class InfoMenu extends Phaser.Scene
         this.paperSound = this.sound.add("Paper");
         //Botones
         this.infoButton = this.add.image(1535, 60, "Info").setScale(0.12).setInteractive(); //Botón de pistas del jugador
-        this.info = this.add.image(1435, 175, "Paper").setScale(0.35);
+        this.info = this.add.image(1445, 175, "Paper").setScale(0.35);
         this.info.alpha = 0.5;
         this.info.setVisible(false);
         this.infoButton.on("pointerdown", this.ToggleInfo.bind(this));
