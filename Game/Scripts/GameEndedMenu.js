@@ -13,8 +13,16 @@ class GameEndedMenu extends Phaser.Scene
 
     create()
     {
+        //Jugadores:
         this.player1 = this.scene.get("Game").player;
         this.player2 = this.scene.get("Game").player2;
+        //Panel de transición y panel de background:
+        this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(100);
+        this.panel.alpha = 0;
+        this.background = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(-1);
+        this.background.alpha = 0.25;
+        this.mainMenuPressed = false;
+        this.playAgainPressed = false;
         //Audio
         this.clickSound = this.scene.get('Game').clickSound;
         this.paperSound = this.sound.add("Paper");
@@ -25,7 +33,12 @@ class GameEndedMenu extends Phaser.Scene
         this.playAgainButton.setRotation(Phaser.Math.DegToRad(90));
         this.playAgainButton.setInteractive();
         this.add.text(665, 380, "Play again", {font: "35px Courier", fill: "0#000000"});
-        this.playAgainButton.on("pointerdown", this.PlayAgain.bind(this));
+        this.playAgainButton.on("pointerdown", function()
+        {
+            this.playAgainPressed = true;
+            this.clickSound.play();
+            this.panel.alpha = 0.01;
+        }.bind(this));
         this.playAgainButton.on("pointerover", function(event) 
         {
             this.paperSound.play();
@@ -43,7 +56,12 @@ class GameEndedMenu extends Phaser.Scene
         this.returnToMenuButton.setRotation(Phaser.Math.DegToRad(90));
         this.returnToMenuButton.setInteractive();
         this.add.text(665, 580, "Main menu", {font: "35px Courier", fill: "0#000000"});
-        this.returnToMenuButton.on("pointerdown", this.ReturnToMenu.bind(this));
+        this.returnToMenuButton.on("pointerdown", function()
+        {
+            this.mainMenuPressed = true;
+            this.clickSound.play();
+            this.panel.alpha = 0.01;
+        }.bind(this));
         this.returnToMenuButton.on("pointerover", function(event) 
         {
             this.paperSound.play();
@@ -76,12 +94,14 @@ class GameEndedMenu extends Phaser.Scene
 
     update()
     {
-
+        if(this.panel.alpha >= 0.01) this.panel.alpha += 0.01;
+        
+        if(this.panel.alpha >= 1 && this.playAgainPressed) this.PlayAgain();
+        else if(this.panel.alpha >= 1 && this.mainMenuPressed) this.ReturnToMenu();
     }
 
     PlayAgain()
     {
-        this.clickSound.play();
         this.scene.run("InfoMenu");
         this.scene.remove("Game");
         this.scene.remove("InfoMenu");
@@ -93,7 +113,6 @@ class GameEndedMenu extends Phaser.Scene
 
     ReturnToMenu()
     {
-        this.clickSound.play();
         this.scene.start("MainMenu");
         this.scene.remove("Game");
         this.scene.remove("CustomizationP1Menu");

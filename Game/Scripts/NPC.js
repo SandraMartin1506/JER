@@ -41,9 +41,9 @@ class NPC extends Phaser.GameObjects.Group
 		//Los enemigos ahora han podido salirse de la pantalla si han calculado una posición fuera del canvas.
 		//Se invierte su movimiento (si por ejemplo querían salirse hacia arriba caminando 30 pasos ahora caminan 30 pasos hacia abajo)
 		if(this.nextX < 0) {this.nextX = this.body.x + distance; this.direction = 1;}
-		else if(this.nextX > 1600) {this.nextX = this.body.x - distance; this.direction = 3}
+		else if(this.nextX > game.config.width) {this.nextX = this.body.x - distance; this.direction = 3}
 		else if(this.nextY < 0) {this.nextY = this.body.y + distance; this.direction = 2}
-		else if(this.nextY > 900) {this.nextY = this.body.y - distance; this.direction = 0}
+		else if(this.nextY > game.config.height) {this.nextY = this.body.y - distance; this.direction = 0}
 		this.calculatingPosition = false;
 		//Se anima:
 		if(this.nextY > this.body.y) 

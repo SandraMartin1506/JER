@@ -13,6 +13,11 @@ class PauseMenu extends Phaser.Scene
 
     create()
     {
+        //Panel de transición y panel de background:
+        this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(100);
+        this.panel.alpha = 0;
+        this.background = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(-1);
+        this.background.alpha = 0.25;
         //Audio de los botones
         this.clickSound = this.scene.get('Game').clickSound;
         this.paperSound = this.sound.add("Paper");
@@ -44,7 +49,7 @@ class PauseMenu extends Phaser.Scene
         this.exitButton.setRotation(Phaser.Math.DegToRad(90));
         this.exitButton.setInteractive();
         this.add.text(665, 530, "Main menu", {font: "50px Courier", fill: "0#000000"});
-        this.exitButton.on("pointerdown", this.GoToMainMenu.bind(this));
+        this.exitButton.on("pointerdown", function(){this.panel.alpha = 0.01;this.clickSound.play();}.bind(this));
         this.exitButton.on("pointerover", function(event) 
         {
             this.paperSound.play();
@@ -65,6 +70,11 @@ class PauseMenu extends Phaser.Scene
 
     update()
     {
+        if(this.panel.alpha >= 0.01) 
+        {
+            this.panel.alpha += 0.01;
+            if(this.panel.alpha >= 1) this.GoToMainMenu();
+        }
     }
 
     ContinueGame()
@@ -79,8 +89,6 @@ class PauseMenu extends Phaser.Scene
 
     GoToMainMenu()
     {
-        console.log("Saliendo del juego...");
-        this.clickSound.play();
         this.scene.start("MainMenu");
         this.scene.remove("Game");
         this.scene.remove("CustomizationP1Menu");

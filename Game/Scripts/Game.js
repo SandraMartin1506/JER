@@ -20,6 +20,8 @@ class Game extends Phaser.Scene
 
     create()
     {
+        //Panel de fade in:
+        this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(1000);
         //Audio
         this.clickSound = this.sound.add("Click");
         this.gameSound = this.sound.add("Crowd");
@@ -57,6 +59,7 @@ class Game extends Phaser.Scene
 
     update(time, deltaTime)
     { 
+        if(this.panel.alpha > 0) this.panel.alpha -= 0.01;
         this.mission.CheckMission();
         this.UpdateCharacters();
         this.CheckGameCondition();
