@@ -181,7 +181,7 @@ class CustomizationP1Menu extends Phaser.Scene
             }
             else if (event.keyCode === 32 || (event.keyCode >= 188 && event.keyCode <= 192) || (event.keyCode >= 48 && event.keyCode <= 90))
             {
-            if (this.fakeHint.width < 372){
+            if (this.fakeHint.width < 380){
                 this.fakeHint.text += event.key;
                 this.writeHint.setAlpha(0);
             }
@@ -192,7 +192,7 @@ class CustomizationP1Menu extends Phaser.Scene
         title.setScale(1);
 
         //alerta inicial
-        this.alertTime = 1;
+        this.alertTime = 150;
         this.alertBox = this.add.rectangle(0,0, this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(59);
         this.alertText = this.add.text((this.game.config.width*(1)/2), (this.game.config.height*(1))/2, "PLAYER 2 DON'T LOOK", { font: '120px Arial', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
         this.proTip = this.add.text((this.game.config.width*(1)/2) - 148, (this.game.config.height*(1))/2 + 200, "Pro tip: close your eyes", { font: '40px Arial', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);

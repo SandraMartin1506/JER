@@ -16,6 +16,8 @@ class CustomizationP2Menu extends Phaser.Scene
         this.load.image("Player2Customizes", "./Sprites/player2customizes.png");
         this.load.image("HojaCuaderno", "./Sprites/hojacuaderno.png");
         this.load.image("RandomButton", "./Sprites/dado.png");
+        this.load.image("SniperRifle", "./Sprites/rifle_de_francotirador.png");
+        this.load.image("GrenadeLauncher", "./Sprites/lanzagranadas.png");
     }
 
     create()
@@ -50,8 +52,8 @@ class CustomizationP2Menu extends Phaser.Scene
         const weaponText = this.add.text(((this.game.config.width*(1-0.4)/2)),(this.game.config.height*(1-0.8+0.3))/2, "CHOOSE YOUR WEAPON", { font: '36px cursive', fill: '#ff0000' }).setOrigin(0.5,0.5).setAngle(-4);
         const weapon1box = this.add.rectangle(((this.game.config.width*(1-0.22-0.4)/2)),(this.game.config.height*(1-0.15+0.25))/2,((this.game.config.width*(0.85)/4)),(this.game.config.height*(0.9))/2,0x000000,1).setAlpha(0.001);
         const weapon2box = this.add.rectangle(((this.game.config.width*(1+0.22-0.4)/2)),(this.game.config.height*(1-0.15+0.25))/2,((this.game.config.width*(0.85)/4)),(this.game.config.height*(0.9))/2,0x000000,1).setAlpha(0.001);
-        const weapon1img = this.add.image(((this.game.config.width*(1-0.22-0.4)/2)),(this.game.config.height*(1-0.4+0.25))/2, "RandomButton").setOrigin(0.5,0.5);
-        const weapon2img = this.add.image(((this.game.config.width*(1+0.22-0.4)/2)),(this.game.config.height*(1-0.4+0.25))/2, "RandomButton").setOrigin(0.5,0.5);
+        const weapon1img = this.add.image(((this.game.config.width*(1-0.22-0.4)/2)),(this.game.config.height*(1-0.4+0.25))/2, "SniperRifle").setOrigin(0.5,0.5).setScale(0.5);
+        const weapon2img = this.add.image(((this.game.config.width*(1+0.22-0.4)/2)),(this.game.config.height*(1-0.4+0.25))/2, "GrenadeLauncher").setOrigin(0.5,0.5).setScale(0.5);
         const weapon1name = this.add.text(((this.game.config.width*(1-0.22-0.4)/2)),(this.game.config.height*(1-0.2+0.3))/2, "SNIPER RIFLE", { font: '30px cursive', fill: '#000000' }).setOrigin(0.5,0.5);
         const weapon2name = this.add.text(((this.game.config.width*(1+0.22-0.4)/2)),(this.game.config.height*(1-0.2+0.3))/2, "GRENADE LAUNCHER", { font: '30px cursive', fill: '#000000' }).setOrigin(0.5,0.5);
         const weapon1desc = this.add.text(((this.game.config.width*(1-0.22-0.4)/2)),(this.game.config.height*(1-0.15+0.3))/2, "This weapon has a five-round magazine. Each shot will kill the character you are aiming at.", { font: '26px cursive', fill: '#000000',wordWrap: { width: 340 },align: 'justify' }).setOrigin(0.5,0);
@@ -119,7 +121,7 @@ class CustomizationP2Menu extends Phaser.Scene
         this.hint3 = this.add.text(((this.game.config.width*(1.7-0.22)/2)),(this.game.config.height*(0.8+0.03))/2, this.hints[2], { font: '21px cursive', fill: '#000000', wordWrap: { width: 500 }  })//*setScale(1.8/2);
 
         //alerta inicial
-        this.alertTime = 1;
+        this.alertTime = 150;
         this.alertBox = this.add.rectangle(0,0, this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(59);
         this.alertText = this.add.text((this.game.config.width*(1)/2), (this.game.config.height*(1))/2, "PLAYER 1 DON'T LOOK", { font: '120px Arial', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
 
@@ -235,7 +237,7 @@ class CustomizationP2Menu extends Phaser.Scene
 
     GoToGame()
     {
-        this.scene.add("Game", new Game(this.Hint1,this.Hint2,this.Hint3));
+        this.scene.add("Game", new Game(this.hint1,this.hint2,this.hint3));
         this.scene.add("Info", new InfoMenu);
         this.scene.add("Pause", new PauseMenu);
         this.scene.stop("CustomizationP2Menu");
