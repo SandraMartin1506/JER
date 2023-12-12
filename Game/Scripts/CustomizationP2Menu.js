@@ -20,6 +20,7 @@ class CustomizationP2Menu extends Phaser.Scene
 
     create()
     {
+
         this.cameras.main.setBackgroundColor('#FFFFFF')
         const hoja = this.add.image(((this.game.config.width*(0.2)/2)),(this.game.config.height*(0.7))/2, "HojaCuaderno").setOrigin(0.5,0.5);
         hoja.setScale(1.7).setAngle(30);
@@ -232,9 +233,9 @@ class CustomizationP2Menu extends Phaser.Scene
 
     GoToGame()
     {
-        this.scene.add("Game", new Game);
-        this.scene.add("Pause", new PauseMenu);
+        this.scene.add("Game", new Game(this.Hint1,this.Hint2,this.Hint3));
         this.scene.add("Info", new InfoMenu);
+        this.scene.add("Pause", new PauseMenu);
         this.scene.stop("CustomizationP2Menu");
         this.scene.start("Game");
         this.scene.remove("CustomizationP2Menu");

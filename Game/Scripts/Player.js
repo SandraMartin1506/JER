@@ -122,7 +122,7 @@ class Player extends Phaser.GameObjects.Group
             if(this.top !== undefined) this.top.y--;
             if(this.bottom !== undefined) this.bottom.y--;
         }
-		else if (this.direction === "Abajo" && this.body.y < 900) 
+		else if (this.direction === "Abajo" && this.body.y < game.config.height) 
         {
             this.body.y++;
             if(this.hat !== undefined) this.hat.y++;
@@ -136,7 +136,7 @@ class Player extends Phaser.GameObjects.Group
             if(this.top !== undefined) this.top.x--;
             if(this.bottom !== undefined) this.bottom.x--;
         }
-		else if (this.direction === "Derecha" && this.body.x < 1600)
+		else if (this.direction === "Derecha" && this.body.x < game.config.width)
         {
             this.body.x++;
             if(this.hat !== undefined) this.hat.x++;

@@ -1,8 +1,11 @@
 class Game extends Phaser.Scene
 {
-    constructor()
+    constructor(hint1,hint2,hint3)
     {
         super({key: "Game"}); 
+        this.hint1 = hint1;
+        this.hint2 = hint2;
+        this.hint3 = hint3;
     }
 
     preload()
@@ -20,6 +23,8 @@ class Game extends Phaser.Scene
 
     create()
     {
+        //Panel de fade in:
+        this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(1000);
         //Audio
         this.clickSound = this.sound.add("Click");
         this.gameSound = this.sound.add("Crowd");
@@ -50,13 +55,14 @@ class Game extends Phaser.Scene
         this.scene.run("InfoMenu"); //La información está siempre disponible mientras se juega
         this.gameEndedMenu = new GameEndedMenu(this.player, this.player2);
         //Misiones:
-        var numMission = Math.floor(Math.random() * (8-1+1) + 1); 
+        var numMission = this.scene.get("CustomizationP1Menu").numMission; 
         this.mission = new Missions(numMission, this.player, this);
         console.log(numMission);
     }
 
     update(time, deltaTime)
     { 
+        if(this.panel.alpha > 0) this.panel.alpha -= 0.01;
         this.mission.CheckMission();
         this.UpdateCharacters();
         this.CheckGameCondition();
