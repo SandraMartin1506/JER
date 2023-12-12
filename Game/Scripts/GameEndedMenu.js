@@ -82,18 +82,24 @@ class GameEndedMenu extends Phaser.Scene
     PlayAgain()
     {
         this.clickSound.play();
-        this.scene.stop("GameEndedMenu");
-        this.scene.stop("Game");
-        this.scene.stop("InfoMenu");
+        this.scene.run("InfoMenu");
+        this.scene.remove("Game");
+        this.scene.remove("InfoMenu");
+        this.scene.remove("PauseMenu");
         this.scene.start("CustomizationP1Menu");
+        this.scene.remove("CustomizationP2Menu");
+        this.scene.remove("GameEndedMenu");
     }
 
     ReturnToMenu()
     {
         this.clickSound.play();
-        this.scene.stop("GameEndedMenu");
-        this.scene.stop("InfoMenu");
-        this.scene.stop("Game");
-        //this.scene.start("MainMenu"); FALTA EL MAIN MENU
+        this.scene.start("MainMenu");
+        this.scene.remove("Game");
+        this.scene.remove("CustomizationP1Menu");
+        this.scene.remove("CustomizationP2Menu");
+        this.scene.remove("InfoMenu");
+        this.scene.remove("PauseMenu")
+        this.scene.remove();
     }
 }

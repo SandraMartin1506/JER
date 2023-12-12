@@ -122,6 +122,7 @@ class Game extends Phaser.Scene
         if(this.player2.bullets == 0 || this.player.killed || this.player.missionAccomplished) 
         {
             this.gameSound.stop();
+            this.scene.add("GameEndedMenu",this.gameEndedMenu);
             this.scene.run("GameEndedMenu");
             this.scene.pause();
             this.scene.pause("InfoMenu");

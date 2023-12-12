@@ -81,8 +81,12 @@ class PauseMenu extends Phaser.Scene
     {
         console.log("Saliendo del juego...");
         this.clickSound.play();
-        this.scene.stop("Game");
-        this.scene.stop();
-        //Todavía no hay menú principal. De momento se paran las escenas.
+        this.scene.start("MainMenu");
+        this.scene.remove("Game");
+        this.scene.remove("CustomizationP1Menu");
+        this.scene.remove("CustomizationP2Menu");
+        this.scene.remove("InfoMenu");
+        this.scene.remove("PauseMenu")
+        this.scene.remove();
     }
 }

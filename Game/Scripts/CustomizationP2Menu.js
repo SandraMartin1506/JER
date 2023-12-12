@@ -1,8 +1,13 @@
 class CustomizationP2Menu extends Phaser.Scene
 {
-    constructor()
+    constructor(numMission,numHat,numTop,numBot,fakeHint)
     {
         super({key: "CustomizationP2Menu"});
+        this.numMission = numMission;
+        this.numHat = numHat;
+        this.numTop = numTop;
+        this.numBot = numBot;
+        this.fakeHint = fakeHint;
     }
 
     preload()
@@ -14,11 +19,6 @@ class CustomizationP2Menu extends Phaser.Scene
 
     create()
     {
-        var customizationP1 = this.scene.get("CustomizationP1Menu");
-        this.numHat = customizationP1.numHat;
-        this.numTop = customizationP1.numTop;
-        this.numBot = customizationP1.numBot;
-        this.fakeHint = customizationP1.fakeHint;
 
         this.cameras.main.setBackgroundColor('#FFFFFF')
         const hoja = this.add.image(((this.game.config.width*(0.2)/2)),(this.game.config.height*(0.3))/2, "HojaCuaderno").setOrigin(0.5,0.5);
@@ -88,9 +88,12 @@ class CustomizationP2Menu extends Phaser.Scene
 
     GoToGame()
     {
+        this.scene.add("Game", new Game);
+        this.scene.add("Pause", new PauseMenu);
+        this.scene.add("Info", new InfoMenu);
         this.scene.stop("CustomizationP2Menu");
         this.scene.start("Game");
-        this.scene.run("InfoMenu");
+        this.scene.remove("CustomizationP2Menu");
     }
 
 }

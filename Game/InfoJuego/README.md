@@ -23,7 +23,7 @@ Pablo Melgar Álvarez,p.melgar.2021@alumnos.urjc.es , PabloMelgar (https://githu
 
 **Pantalla de inicio:**
 
-El juego cuenta con una pantalla de inicio en la cual sólo hay tres opciones: “Número de NPCs”, que despliega la personalización de NPCs del juego (explicado más adelante), “Jugar en línea” y “Jugar local”. No existen ajustes para el control de brillo, volumen de la música ni asignación de teclas, pues se trata de un minijuego muy simple y rápido de jugar. 
+El juego cuenta con una pantalla de inicio en la cual sólo hay tres opciones: “Número de NPCs”, que despliega la personalización de NPCs del juego (explicado más adelante), “Jugar en línea” y “Jugar local”, dado que aun no podemos jugar en linea esto se implementará en la siguiente fase. No existen ajustes para el control de brillo, volumen de la música ni asignación de teclas, pues se trata de un minijuego muy simple y rápido de jugar. 
 
 **Fase de personalización:**
 
