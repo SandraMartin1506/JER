@@ -140,7 +140,7 @@ class CustomizationP1Menu extends Phaser.Scene
         "Your objective is to stay still during thirty seconds.",
         "Your objective is to keep moving during thirty seconds.",
         "Your objective is to be close to two or more NPC during thirty seconds.",
-        "Your objective is to stay away from all NPC during thirty seconds",
+        "Your objective is to stay away from all NPC during thirty seconds.",
         "Your objective is to follow a NPC during thirty seconds. You can choose which one.",];
         this.missionObjective = this.add.text((this.game.config.width*(1-0.85)/2), (this.game.config.height*(1+0.30))/2, missionDesc[this.numMission-1], { font: '32px cursive', fill: '#000000', wordWrap: { width: 500 }  });
         

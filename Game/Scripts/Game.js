@@ -94,7 +94,8 @@ class Game extends Phaser.Scene
 
     InitializePlayer2() 
     {
-       this.player2 = new Player2(this, "LG", "Bullet", "Crosshair", this.gameSound); // Le paso la escena actual. De momento le paso directamente el arma yo, pero después será una variable que vendrá dada por la escena de personalización
+       var weaponT = this.scene.get("CustomizationP2Menu").weaponSelected;
+       this.player2 = new Player2(this, weaponT, "Bullet", "Crosshair", this.gameSound); // Le paso la escena actual. De momento le paso directamente el arma yo, pero después será una variable que vendrá dada por la escena de personalización
        this.input.on('pointermove',this.player2.UpdatePositionP2.bind(this.player2), this); //Cada vez que el ratón se mueve le paso la función para cambiar la posición del jugador 2 (que va a ser la del ratón)
        //le paso el contexto con el último this para que lo haga bien
        this.player2.InitializeBullets();  //Inicializa las balas del jugador según su arma

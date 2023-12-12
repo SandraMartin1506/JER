@@ -38,7 +38,9 @@ class CustomizationP2Menu extends Phaser.Scene
         this.InteractButton(confirm)
         confirm.on("pointerdown", function(event) 
         {
+            if ( this.weaponSelected!=undefined){
             this.GoToGame();
+            }
         }.bind(this));
 
         //Armas
@@ -52,8 +54,8 @@ class CustomizationP2Menu extends Phaser.Scene
         const weapon2img = this.add.image(((this.game.config.width*(1+0.22-0.4)/2)),(this.game.config.height*(1-0.4+0.25))/2, "RandomButton").setOrigin(0.5,0.5);
         const weapon1name = this.add.text(((this.game.config.width*(1-0.22-0.4)/2)),(this.game.config.height*(1-0.2+0.3))/2, "SNIPER RIFLE", { font: '30px cursive', fill: '#000000' }).setOrigin(0.5,0.5);
         const weapon2name = this.add.text(((this.game.config.width*(1+0.22-0.4)/2)),(this.game.config.height*(1-0.2+0.3))/2, "GRENADE LAUNCHER", { font: '30px cursive', fill: '#000000' }).setOrigin(0.5,0.5);
-        const weapon1desc = this.add.text(((this.game.config.width*(1-0.22-0.4)/2)),(this.game.config.height*(1-0.15+0.3))/2, "sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo", { font: '30px cursive', fill: '#000000',wordWrap: { width: 350 } }).setOrigin(0.5,0);
-        const weapon2desc = this.add.text(((this.game.config.width*(1+0.22-0.4)/2)),(this.game.config.height*(1-0.15+0.3))/2, "sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo", { font: '30px cursive', fill: '#000000',wordWrap: { width: 350 } }).setOrigin(0.5,0);
+        const weapon1desc = this.add.text(((this.game.config.width*(1-0.22-0.4)/2)),(this.game.config.height*(1-0.15+0.3))/2, "This weapon has a five-round magazine. Each shot will kill the character you are aiming at.", { font: '26px cursive', fill: '#000000',wordWrap: { width: 340 },align: 'justify' }).setOrigin(0.5,0);
+        const weapon2desc = this.add.text(((this.game.config.width*(1+0.22-0.4)/2)),(this.game.config.height*(1-0.15+0.3))/2, "It has three bullets. A single shot can kill every character in the impact area.", { font: '26px cursive', fill: '#000000',wordWrap: { width: 340 },align: 'justify' }).setOrigin(0.5,0);
 
         this.InteractButton2(weapon1box)
         weapon1box.on("pointerdown", function(event) 
@@ -238,7 +240,7 @@ class CustomizationP2Menu extends Phaser.Scene
         this.scene.add("Pause", new PauseMenu);
         this.scene.stop("CustomizationP2Menu");
         this.scene.start("Game");
-        this.scene.remove("CustomizationP2Menu");
+        //this.scene.remove("CustomizationP2Menu");
     }
 
 }
