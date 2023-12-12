@@ -12,33 +12,94 @@ class CustomizationP2Menu extends Phaser.Scene
 
     preload()
     {
-        this.load.image("ConfirmButton", "./Sprites/confirm.png");
-        this.load.image("Player1Customizes", "./Sprites/player1customizes.png");
+        this.load.image("StartButton", "./Sprites/startgame.png");
+        this.load.image("Player2Customizes", "./Sprites/player2customizes.png");
         this.load.image("HojaCuaderno", "./Sprites/hojacuaderno.png");
+        this.load.image("RandomButton", "./Sprites/dado.png");
     }
 
     create()
     {
         this.cameras.main.setBackgroundColor('#FFFFFF')
-        const hoja = this.add.image(((this.game.config.width*(0.2)/2)),(this.game.config.height*(0.3))/2, "HojaCuaderno").setOrigin(0.5,0.5);
+        const hoja = this.add.image(((this.game.config.width*(0.2)/2)),(this.game.config.height*(0.7))/2, "HojaCuaderno").setOrigin(0.5,0.5);
         hoja.setScale(1.7).setAngle(30);
-        const hoja2 = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(1))/2, "HojaCuaderno").setOrigin(0.5,0.5);
-        hoja2.setScale(2).setAngle(-3);
-        const title = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(0.17))/2, "Player1Customizes").setOrigin(0.5,0.5);
-        title.setScale(1);
-        const hoja3 = this.add.image(((this.game.config.width*(0.2)/2)),(this.game.config.height*(2.4))/2, "HojaCuaderno").setOrigin(0.5,0.5);
-        hoja3.setScale(1.7).setAngle(-60);
+        const hoja2 = this.add.image(((this.game.config.width*(1.3)/2)),(this.game.config.height*(1.35))/2, "HojaCuaderno").setOrigin(0.5,0.5);
+        hoja2.setScale(1.75,1.75).setAngle(-60);
+        const hoja4 = this.add.image(((this.game.config.width*(1.35)/2)),(this.game.config.height*(0.35))/2, "HojaCuaderno").setOrigin(0.5,0.5);
+        hoja4.setScale(1.75,1.75).setAngle(68);
+        //const hoja3 = this.add.image(((this.game.config.width*(0.2)/2)),(this.game.config.height*(2.4))/2, "HojaCuaderno").setOrigin(0.5,0.5);
+        //hoja3.setScale(1.7).setAngle(-60);
+        const hoja3 = this.add.image(((this.game.config.width*(0.6)/2)),(this.game.config.height*(1))/2, "HojaCuaderno").setOrigin(0.5,0.5);
+        hoja3.setScale(-1.75,1.75).setAngle(-6);
 
         //Boton confirmar
-        const confirm = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(1+0.8))/2, "ConfirmButton").setDepth(53);
+        const confirm = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(1+0.8))/2, "StartButton").setDepth(53);
         this.InteractButton(confirm)
         confirm.on("pointerdown", function(event) 
         {
             this.GoToGame();
         }.bind(this));
 
-        const firstHint = "He looks old";
-        const secondHint = "He looks weird";
+        //Armas
+
+        this.weaponSelected;
+
+        const weaponText = this.add.text(((this.game.config.width*(1-0.4)/2)),(this.game.config.height*(1-0.8+0.3))/2, "CHOOSE YOUR WEAPON", { font: '36px cursive', fill: '#ff0000' }).setOrigin(0.5,0.5).setAngle(-4);
+        const weapon1box = this.add.rectangle(((this.game.config.width*(1-0.22-0.4)/2)),(this.game.config.height*(1-0.15+0.25))/2,((this.game.config.width*(0.85)/4)),(this.game.config.height*(0.9))/2,0x000000,1).setAlpha(0.001);
+        const weapon2box = this.add.rectangle(((this.game.config.width*(1+0.22-0.4)/2)),(this.game.config.height*(1-0.15+0.25))/2,((this.game.config.width*(0.85)/4)),(this.game.config.height*(0.9))/2,0x000000,1).setAlpha(0.001);
+        const weapon1img = this.add.image(((this.game.config.width*(1-0.22-0.4)/2)),(this.game.config.height*(1-0.4+0.25))/2, "RandomButton").setOrigin(0.5,0.5);
+        const weapon2img = this.add.image(((this.game.config.width*(1+0.22-0.4)/2)),(this.game.config.height*(1-0.4+0.25))/2, "RandomButton").setOrigin(0.5,0.5);
+        const weapon1name = this.add.text(((this.game.config.width*(1-0.22-0.4)/2)),(this.game.config.height*(1-0.2+0.3))/2, "SNIPER RIFLE", { font: '30px cursive', fill: '#000000' }).setOrigin(0.5,0.5);
+        const weapon2name = this.add.text(((this.game.config.width*(1+0.22-0.4)/2)),(this.game.config.height*(1-0.2+0.3))/2, "GRENADE LAUNCHER", { font: '30px cursive', fill: '#000000' }).setOrigin(0.5,0.5);
+        const weapon1desc = this.add.text(((this.game.config.width*(1-0.22-0.4)/2)),(this.game.config.height*(1-0.15+0.3))/2, "sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo", { font: '30px cursive', fill: '#000000',wordWrap: { width: 350 } }).setOrigin(0.5,0);
+        const weapon2desc = this.add.text(((this.game.config.width*(1+0.22-0.4)/2)),(this.game.config.height*(1-0.15+0.3))/2, "sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo sexo", { font: '30px cursive', fill: '#000000',wordWrap: { width: 350 } }).setOrigin(0.5,0);
+
+        this.InteractButton2(weapon1box)
+        weapon1box.on("pointerdown", function(event) 
+        {
+            weapon1box.setFillStyle(0x66cc4d);
+            weapon1box.setAlpha(1);
+            weapon2box.setFillStyle(0x000000);
+            weapon2box.setAlpha(0.001);
+            this.weaponSelected="F";
+        }.bind(this));
+
+        this.InteractButton2(weapon2box)
+        weapon2box.on("pointerdown", function(event) 
+        {
+            weapon2box.setFillStyle(0x66cc4d);
+            weapon2box.setAlpha(1);
+            weapon1box.setFillStyle(0x000000);
+            weapon1box.setAlpha(0.001);
+            this.weaponSelected="LG";
+        }.bind(this));
+
+        const hojaIzq = this.add.image(((this.game.config.width*(0.6)/2)),(this.game.config.height*(1))/2, "HojaCuaderno").setOrigin(0.5,0.5);
+        hojaIzq.setScale(-1.75,1.75).setAngle(-6);
+        //hojaDer.setBlendMode(Phaser.BlendModes.MULTIPLY);
+        hojaIzq.setBlendMode(Phaser.BlendModes.MULTIPLY);
+
+
+        //Generar pistas
+        var hintType = [1,2,3];
+        hintType.splice(Math.floor(Math.random()*3),1);
+
+
+
+        //Pistas
+
+        const hintText = this.add.text(((this.game.config.width*(1.4)/2)),(this.game.config.height*(1-0.8+0.25))/2, "INFO ABOUT YOUR OBJECTIVE", { font: '36px cursive', fill: '#ff0000', wordWrap: { width: 400 } }).setOrigin(0.5,0.5).setAngle(3);
+
+        const postit3 = this.add.image(((this.game.config.width*(1.7)/2)),(this.game.config.height*(1.6))/2, "PostIt").setOrigin(0.5,0.5);
+        postit3.setScale(1.8).setAngle(0);
+        const postit2 = this.add.image(((this.game.config.width*(1.45)/2)),(this.game.config.height*(1.2))/2, "PostIt").setOrigin(0.5,0.5);
+        postit2.setScale(1.8).setAngle(0);
+        const postit1 = this.add.image(((this.game.config.width*(1.7)/2)),(this.game.config.height*(0.8))/2, "PostIt").setOrigin(0.5,0.5);
+        postit1.setScale(1.8).setAngle(0);
+
+
+        const firstHint = this.GenerateHint(hintType[0]);
+        const secondHint = this.GenerateHint(hintType[1]);
         const falseHint = this.fakeHint;
 
         this.hints = [firstHint, secondHint, falseHint]
@@ -50,14 +111,18 @@ class CustomizationP2Menu extends Phaser.Scene
             this.hints[i]= this.hints[otheri]
             this.hints[otheri] = rep;
         }
-        this.Hint1 = this.add.text((this.game.config.width*(1-0.85)/2), (this.game.config.height*(1+0.30))/2, this.hints[0], { font: '32px cursive', fill: '#000000', wordWrap: { width: 500 }  });
-        this.Hint2 = this.add.text((this.game.config.width*(1-0.85)/2), (this.game.config.height*(1+0.40))/2, this.hints[1], { font: '32px cursive', fill: '#000000', wordWrap: { width: 500 }  });
-        this.Hint3 = this.add.text((this.game.config.width*(1-0.85)/2), (this.game.config.height*(1+0.50))/2, this.hints[2], { font: '32px cursive', fill: '#000000', wordWrap: { width: 500 }  });
+        this.hint1 = this.add.text(((this.game.config.width*(1.7-0.22)/2)),(this.game.config.height*(1.6+0.03))/2, this.hints[0], { font: '21px cursive', fill: '#000000', wordWrap: { width: 500 }  })//*setScale(1.8/2);
+        this.hint2 = this.add.text(((this.game.config.width*(1.45-0.22)/2)),(this.game.config.height*(1.2+0.03))/2, this.hints[1], { font: '21px cursive', fill: '#000000', wordWrap: { width: 500 }  })//*setScale(1.8/2);
+        this.hint3 = this.add.text(((this.game.config.width*(1.7-0.22)/2)),(this.game.config.height*(0.8+0.03))/2, this.hints[2], { font: '21px cursive', fill: '#000000', wordWrap: { width: 500 }  })//*setScale(1.8/2);
 
         //alerta inicial
         this.alertTime = 1;
         this.alertBox = this.add.rectangle(0,0, this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(59);
         this.alertText = this.add.text((this.game.config.width*(1)/2), (this.game.config.height*(1))/2, "PLAYER 1 DON'T LOOK", { font: '120px Arial', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
+
+   
+        const title = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(0.17))/2, "Player2Customizes").setOrigin(0.5,0.5);
+        title.setScale(1);
     }
 
     update()
@@ -72,7 +137,6 @@ class CustomizationP2Menu extends Phaser.Scene
     InteractButton(button){
 
         button.setInteractive();
-
         button.on("pointerover", function(event) 
         {
             button.setTint(0xffff1c00);
@@ -83,6 +147,87 @@ class CustomizationP2Menu extends Phaser.Scene
             button.clearTint();
             game.canvas.style.cursor = "default";
         }.bind(this));
+    }
+
+    InteractButton2(button){
+
+        button.setInteractive();
+        button.input.alwaysEnabled = true;
+        button.on("pointerover", function(event) 
+        {
+            if(button.fillColor!=0x66cc4d){
+                button.setAlpha(0.3);
+            }
+        }.bind(this));
+        button.on("pointerout", function(event) 
+        {
+            if(button.fillColor!=0x66cc4d){
+                button.setAlpha(0.001);
+            }
+        }.bind(this));
+    }
+
+    GenerateHint(hintType){
+
+        const hintHat1 = ["no hat","a wool hat","a cap","a hat"];
+        const hintTop1 = ["no shirt","a shirt","a t-shirt","a tank top"];
+        const hintBot1 = ["no pants","swim trunks","jeans","a skirt"];
+        const hintHat2 = ["no hat","a blue wool hat","a red wool hat","a yellow wool hat","a red cap","a green cap","a blue cap","a brown hat","a black hat","a blue hat"];
+        const hintTop2 = ["no shirt","a blue shirt","a white shirt","a red shirt","a green t-shirt","a pink t-shirt","a yellow t-shirt","a red tank top","a blue tank top","a yellow tank top"];
+        const hintBot2 = ["no pants","red swim trunks","blue swim trunks","yellow swim trunks","blue jeans","black jeans","red jeans","a red skirt","a green skirt","an orange skirt"];
+        
+        
+        const hintQuality = Math.round(Math.random()); //0 no detail 1 every detail
+
+        var genHint = "somethin"+hintQuality+"__"+hintType;
+        if (hintQuality==1){
+            switch(hintType){
+                case 1:
+                    genHint = hintHat2[this.numHat];
+                break;
+                case 2:
+                    genHint = hintTop2[this.numTop];
+                break;
+                case 3:
+                    genHint = hintBot2[this.numBot];
+                break;
+            }
+        }else{
+            switch(hintType){
+                case 1:
+                    genHint = hintHat1[Math.ceil(this.numHat/3.1)];
+                break;
+                case 2:
+                    genHint = hintTop1[Math.ceil(this.numTop/3.1)];
+                break;
+                case 3:
+                    genHint = hintBot1[Math.ceil(this.numBot/3.1)];
+                break;
+            }
+        }
+        
+        var finalHint;
+
+        switch(Math.floor(Math.random()*4)){
+            case 0:
+                const firstLetterHint = genHint.charAt(0)
+                const firstLetterCap = firstLetterHint.toUpperCase()
+                const remainingHint = genHint.slice(1)
+                finalHint = firstLetterCap + remainingHint + ", kill them." ;
+            break;
+            case 1:
+                finalHint = "The enemy wears " + genHint + "." ;
+            break;
+            case 2:
+                finalHint = "Your objective has " + genHint + "." ;
+            break;
+            case 3:
+                finalHint = "Look for " + genHint + "." ;
+            break;
+        }
+
+        return finalHint;
+
     }
 
     GoToGame()

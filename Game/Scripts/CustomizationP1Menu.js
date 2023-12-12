@@ -11,14 +11,39 @@ class CustomizationP1Menu extends Phaser.Scene
         this.load.image("ArrowButton", "./Sprites/flechas.png");
         this.load.image("ConfirmButton", "./Sprites/confirm.png");
         this.load.image("RandomButton", "./Sprites/dado.png");
-        this.load.image("PostIt", "./Sprites/postit.png");
+        this.load.image("PostIt", "./Sprites/postit1.png");
         this.load.image("HojaCuaderno", "./Sprites/hojacuaderno.png");
         this.load.spritesheet("SpriteSheet", "./Sprites/SpriteSheet.png", {frameWidth: 250, frameHeight: 450});
-        this.load.spritesheet("BanadorRojo", "./Sprites/banador_rojo.png", {frameWidth: 250, frameHeight: 450});
-        this.load.spritesheet("BanadorAzul", "./Sprites/banador_azul.png", {frameWidth: 250, frameHeight: 450});
-        this.load.spritesheet("VaquerosAzul", "./Sprites/vaqueros.png", {frameWidth: 250, frameHeight: 450});
-        this.load.spritesheet("GorroLana1", "./Sprites/gorro_lana_1.png", {frameWidth: 250, frameHeight: 450});
-        this.load.spritesheet("Camisa1", "./Sprites/camisa_1.png", {frameWidth: 250, frameHeight: 450});
+        //Ropa
+        this.load.spritesheet("BanadorRojo", "./Sprites/Clothing/banador_rojo.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("BanadorAzul", "./Sprites/Clothing/banador_azul.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("BanadorAmarillo", "./Sprites/Clothing/banador_amarillo.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("VaquerosAzul", "./Sprites/Clothing/vaqueros_azul.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("VaquerosNegros", "./Sprites/Clothing/vaqueros_negros.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("VaquerosRojos", "./Sprites/Clothing/vaqueros_rojos.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("FaldaRoja", "./Sprites/Clothing/falda_roja.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("FaldaNaranja", "./Sprites/Clothing/falda_naranja.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("FaldaVerde", "./Sprites/Clothing/falda_verde.png", {frameWidth: 250, frameHeight: 450});
+
+        this.load.spritesheet("GorrolanaAzul", "./Sprites/Clothing/gorrolana_azul.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("GorrolanaRojo", "./Sprites/Clothing/gorrolana_rojo.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("GorrolanaAmarillo", "./Sprites/Clothing/gorrolana_amarillo.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("GorraAzul", "./Sprites/Clothing/gorra_azul.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("GorraRoja", "./Sprites/Clothing/gorra_roja.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("GorraVerde", "./Sprites/Clothing/gorra_verde.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("SombreroMarron", "./Sprites/Clothing/sombrero_marron.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("SombreroAzul", "./Sprites/Clothing/sombrero_azul.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("SombreroNegro", "./Sprites/Clothing/sombrero_negro.png", {frameWidth: 250, frameHeight: 450});
+
+        this.load.spritesheet("CamisaAzul", "./Sprites/Clothing/camisa_azul.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("CamisaBlanca", "./Sprites/Clothing/camisa_blanca.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("CamisaRoja", "./Sprites/Clothing/camisa_roja.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("CamisetaRosa", "./Sprites/Clothing/camiseta_rosa.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("CamisetaVerde", "./Sprites/Clothing/camiseta_verde.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("CamisetaAmarilla", "./Sprites/Clothing/camiseta_amarilla.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("TanktopAmarillo", "./Sprites/Clothing/tanktop_amarillo.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("TanktopAzul", "./Sprites/Clothing/tanktop_azul.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("TanktopRojo", "./Sprites/Clothing/tanktop_rojo.png", {frameWidth: 250, frameHeight: 450});
     }
 
     create()
@@ -46,9 +71,9 @@ class CustomizationP1Menu extends Phaser.Scene
         this.spriteBot = undefined;
 
         //Arrays con los spritesheets
-        this.spritesheetsHat = [undefined,"GorroLana1"];
-        this.spritesheetsTop = [undefined,"Camisa1"];
-        this.spritesheetsBot = [undefined,"BanadorRojo","BanadorAzul","VaquerosAzul"];
+        this.spritesheetsHat = [undefined,"GorrolanaAzul","GorrolanaRojo","GorrolanaAmarillo","GorraRoja","GorraVerde","GorraAzul","SombreroMarron","SombreroNegro","SombreroAzul"];
+        this.spritesheetsTop = [undefined,"CamisaAzul","CamisaBlanca","CamisaRoja","CamisetaVerde","CamisetaRosa","CamisetaAmarilla","TanktopRojo","TanktopAzul","TanktopAmarillo"];
+        this.spritesheetsBot = [undefined,"BanadorRojo","BanadorAzul","BanadorAmarillo","VaquerosAzul","VaquerosNegros","VaquerosRojos","FaldaRoja","FaldaVerde","FaldaNaranja"];
 
         //Boton gorro 1
         const changeHat1 = this.add.image(((this.game.config.width*(1+0.3)/2)),(this.game.config.height*(1-0.3))/2, "ArrowButton");
@@ -126,19 +151,19 @@ class CustomizationP1Menu extends Phaser.Scene
         this.InteractButton(confirm)
         confirm.on("pointerdown", function(event) 
         {
-            if (this.alertText.alpha==0){
+            if (this.alertText.alpha<1){
             this.GoToCustomP2();
             }
         }.bind(this));
 
         const postit = this.add.image(((this.game.config.width*(0.43)/2)),(this.game.config.height*(0.70))/2, "PostIt").setOrigin(0.5,0.5);
-        postit.setScale(2.5,2).setAngle(0);
+        postit.setScale(2,2).setAngle(0);
 
         // Introducir pista falsa
         this.textHint = this.add.text((this.game.config.width*(1-0.75)/2), (this.game.config.height*(1-0.45))/2, "LIE ABOUT YOURSELF :", { font: '24px cursive', fill: '#ff0000' });
         this.textHint.setAngle(2)
-        this.writeHint = this.add.text((this.game.config.width*(1-0.80)/2), (this.game.config.height*(1-0.3))/2, "Write a fake hint here...", { font: '30px cursive', fill: '#000000', wordWrap: { width: 400 } }).setAlpha(0.4);
-        this.fakeHint = this.add.text((this.game.config.width*(1-0.80)/2), (this.game.config.height*(1-0.3))/2, "", { font: '30px cursive', fill: '#000000', wordWrap: { width: 400 } });
+        this.writeHint = this.add.text((this.game.config.width*(1-0.81)/2), (this.game.config.height*(1-0.27))/2, "Write a fake hint here...", { font: '24px cursive', fill: '#000000', wordWrap: { width: 400 } }).setAlpha(0.4);
+        this.fakeHint = this.add.text((this.game.config.width*(1-0.81)/2), (this.game.config.height*(1-0.27))/2, "", { font: '24px cursive', fill: '#000000', wordWrap: { width: 400 } });
         this.input.keyboard.on('keydown', event =>
         {
             if (event.keyCode === 8 && this.fakeHint.text.length > 0)
@@ -148,9 +173,9 @@ class CustomizationP1Menu extends Phaser.Scene
                     this.writeHint.setAlpha(0.4);
                 }
             }
-            else if (event.keyCode === 32 || (event.keyCode >= 190 && event.keyCode <= 192) || (event.keyCode >= 48 && event.keyCode <= 90))
+            else if (event.keyCode === 32 || (event.keyCode >= 188 && event.keyCode <= 192) || (event.keyCode >= 48 && event.keyCode <= 90))
             {
-            if (this.fakeHint.width < 370){
+            if (this.fakeHint.width < 372){
                 this.fakeHint.text += event.key;
                 this.writeHint.setAlpha(0);
             }
