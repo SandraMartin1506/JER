@@ -38,9 +38,12 @@ class InfoMenu extends Phaser.Scene
             color: "#000000",
             wordWrap: {width: 240, height: 50, useAdvancedWrap: true}
         }
-        this.hint1 = this.add.text(1330, 150, "-> El jugador 1 se encuentra desnudo", textStyle).setVisible(false);
-        this.hint2 = this.add.text(1330, 225, "-> Realmente todos los personajes están desnudos", textStyle).setVisible(false);
-        this.hint3 = this.add.text(1330, 300, "-> PlaceHolder 3 ", textStyle).setVisible(false);
+        var hint1Text = this.scene.get('Game').hint1.text;
+        this.hint1 = this.add.text(1350,200, hint1Text, textStyle).setVisible(false)
+        var hint2Text = this.scene.get('Game').hint2.text;
+        this.hint2 = this.add.text(1350,250, hint2Text, textStyle).setVisible(false);
+        var hint3Text = this.scene.get('Game').hint3.text;
+        this.hint3 = this.add.text(1350,300, hint3Text, textStyle).setVisible(false);
     }
 
     update()
@@ -55,5 +58,6 @@ class InfoMenu extends Phaser.Scene
         this.hint1.setVisible(!this.hint1.visible);
         this.hint2.setVisible(!this.hint2.visible);
         this.hint3.setVisible(!this.hint3.visible);
+        
     }
 }

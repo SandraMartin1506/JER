@@ -88,7 +88,7 @@ class CustomizationP2Menu extends Phaser.Scene
 
     GoToGame()
     {
-        this.scene.add("Game", new Game);
+        this.scene.add("Game", new Game(this.Hint1,this.Hint2,this.Hint3));
         this.scene.add("Info", new InfoMenu);
         this.scene.add("Pause", new PauseMenu);
         this.scene.stop("CustomizationP2Menu");

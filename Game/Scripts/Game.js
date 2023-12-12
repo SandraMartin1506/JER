@@ -1,8 +1,11 @@
 class Game extends Phaser.Scene
 {
-    constructor()
+    constructor(hint1,hint2,hint3)
     {
         super({key: "Game"}); 
+        this.hint1 = hint1;
+        this.hint2 = hint2;
+        this.hint3 = hint3;
     }
 
     preload()

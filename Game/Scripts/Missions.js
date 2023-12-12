@@ -85,7 +85,7 @@ class Missions extends Phaser.GameObjects.Group
             this.timeLeft -= game.loop.delta;
             if(this.timeLeft <= 0) this.player1.missionAccomplished = true;
         } 
-        console.log(this.timeLeft);
+        //console.log(this.timeLeft);
     }
 
     Mission3() //Si el jugador 1 está quieto durante un total de un minuto gana
@@ -95,7 +95,7 @@ class Missions extends Phaser.GameObjects.Group
             this.timeLeft -= game.loop.delta;
             if(this.timeLeft <= 0) this.player1.missionAccomplished = true;
         }
-        console.log(this.timeLeft);
+        //console.log(this.timeLeft);
     }
 
     Mission4() //Si el jugador se queda quieto durante 30 segundos de seguido sin parar gana
@@ -106,7 +106,7 @@ class Missions extends Phaser.GameObjects.Group
             if(this.timePerforming <= 0) this.player1.missionAccomplished = true;
         } 
         else this.timePerforming = 30000;
-        console.log(this.timePerforming);
+        //console.log(this.timePerforming);
     }
 
     Mission5() //Si el jugador se mueve durante 30 segundos de seguido sin parar gana
@@ -117,7 +117,7 @@ class Missions extends Phaser.GameObjects.Group
             if(this.timePerforming <= 0) this.player1.missionAccomplished = true;
         } 
         else this.timePerforming = 30000;
-        console.log(this.timePerforming);
+        //console.log(this.timePerforming);
     }
 
     Mission6() //Si el jugador permanece en una multitud durante 30 segundos de seguido gana
@@ -132,12 +132,11 @@ class Missions extends Phaser.GameObjects.Group
             }
         })
         if(crowd >= this.crowdMin)
-        { //Si el jugador está cerca de 2 o más NPCs, ya se considera aglomeración y comienza la misión (le pongo 2 porque como los movimientos son aleatorios es complicado ya de por sí)
-            this.timeInCrowd -= game.loop.delta;
+        { //Si el jugador está cerca de 2 o más NPCs, ya se considera aglomeración y comienza la misión
             if(this.timeInCrowd<=0) this.player1.missionAccomplished = true;    
         } 
         else this.timeInCrowd = 30000; 
-        console.log(this.timeInCrowd);
+        //console.log(this.timeInCrowd);
     }
 
     Mission7() //Si el jugador se mantiene alejado de cualquier multitud durante 30 segundos de seguido gana
@@ -157,7 +156,7 @@ class Missions extends Phaser.GameObjects.Group
             if(this.timeInCrowd<=0) this.player1.missionAccomplished = true;    
         } 
         else this.timeInCrowd = 30000; 
-        console.log(this.timeInCrowd);
+        //console.log(this.timeInCrowd);
     }
 
     Mission8() //Si el jugador 1 sigue muy de cerca a un NPC al azar durante más de 30 segundos gana
@@ -172,7 +171,7 @@ class Missions extends Phaser.GameObjects.Group
             this.timeStalked -= game.loop.delta;
             if(this.timeStalked <= 0) this.player1.missionAccomplished = true;
         }
-        console.log(this.timeStalked);
+        //console.log(this.timeStalked);
     }
 
     SetCurrentTarget()
