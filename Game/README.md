@@ -22,7 +22,7 @@ Pablo Melgar Álvarez,p.melgar.2021@alumnos.urjc.es , PabloMelgar (https://githu
 # **MECÁNICAS:**
 
 **Pantalla de inicio:**
-El juego cuenta con una pantalla de inicio en la cual sólo hay tres opciones: “Número de NPCs”, que despliega la personalización de NPCs del juego (explicado más adelante), “Jugar en línea” y “Jugar local”, dado que aun no podemos jugar en linea esto se implementará en la siguiente fase. No existen ajustes para el control de brillo, volumen de la música ni asignación de teclas, pues se trata de un minijuego muy simple y rápido de jugar. 
+En la pantalla de inicio (explicada más adelante, en el apartado de interfaces) se da comienzo al juego. En futuras entregas, en esta se podrá elegir si jugar en línea o jugar en local.
 
 **Fase de personalización:**
 
@@ -118,13 +118,29 @@ Todo el juego se ve en cenital, imitando la perspectiva que tendría un tirador 
 La estética de los menús también es minimalista. Los menús durante la partida imitan las hojas arrancadas de un típico cuaderno de cuadrícula con los textos imitando estar escritos a boli en una caligrafía simple, mientras que los menús de fuera de partida imitan el estilo típico de código de las películas de hackers. Las pantallas de selección de antes de las partidas comparten esa estética minimalista blanco y negro aunque tienen imágenes a color.
 
 # **APARTADO SONORO**
+**FASE 2: AÑADIDOS. Se han añadido todos los sonidos necesarios para el juego**
 El apartado sonoro del videojuego también es bastante minimalista, ya que consiste en pocos efectos de sonido distintos. Los sonidos sirven para representar algunas de las acciones de los jugadores y para dar ambientación al juego.
 ### <a name="_heading=h.k3t9ht79yfhx"></a>**Sonido ambiente**
 Como sonido ambiente para el juego se utiliza un sonido de murmullo que se reproducirá en bucle a lo largo de toda la partida. Este sonido se pausará únicamente cuando el jugador 2 dispare, causando un silencio de varios segundos tras el disparo para enfatizar la acción del jugador. 
+
+El sonido de Murmullo ha sido sacado de pixelbay. Sound Effect from <a href="https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6762">Pixabay</a>
+
+El sonido ha sido sacado de pixelbay ()
 ### <a name="_heading=h.bz577dtuv1ke"></a>**Sonidos de armas**
 Cada arma tiene un sonido propio correspondiente al disparo de cada una de las armas. Estos sonidos se reproducen cuando el jugador 2 hace click para disparar con el arma que haya elegido.
+
+El sonido de Francontirador ha sido sacado de pixelbay. Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=5989">Pixabay</a>
+
+El sonido de LanzaGranadas ha sido sacado de pixelbay. Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=96471">Pixabay</a>
+
 ### <a name="_heading=h.g36fd59l1ks2"></a>**Sonidos de interfaces**
 Fuera de la partida, hay también varios efectos de sonido para las interacciones que haya con elementos de la interfaz y de los menús. Cuando se abre un menú se reproduce un sonido de papel arrugandose, para seguir la estética de hojas de cuaderno de las interfaces. También se reproduce otro sonido cuando se selecciona cualquier opción de los menús.
+
+El sonido de Papel Arrugado ha sido sacado de pixelbay. Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=40747">Pixabay</a>
+
+El sonido de Click ha sido sacado de pixelbay. Sound Effect by <a href="https://pixabay.com/users/universfield-28281460/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=140881">UNIVERSFIELD</a> from <a href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=140881">Pixabay</a>
+
+El sonido de Hacker ha sido sacado de pixelbay. Sound Effect by <a href="https://pixabay.com/users/universfield-28281460/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=124464">UNIVERSFIELD</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=124464">Pixabay</a>
 
 # **INTERFACES**
 **FASE 2: AÑADIDOS. Se ven todas las interfaces tal y como son en el juego, además de un diagrama de navegación que explica cómo interactúan entre ellas**
