@@ -9,7 +9,9 @@ class CustomizationP1Menu extends Phaser.Scene
     {
         //Audios:
         this.load.audio("Click", "./Sounds/click.mp3");
+        this.load.audio("Paper","./Sounds/paper.mp3");
         //UI:
+        this.load.image("TrozoPapel", "./Sprites/trozopapel.png");
         this.load.image("Player1Customizes", "./Sprites/player1customizes.png");
         this.load.image("ArrowButton", "./Sprites/flechas.png");
         this.load.image("ConfirmButton", "./Sprites/confirm.png");
@@ -53,6 +55,7 @@ class CustomizationP1Menu extends Phaser.Scene
     {
         //Audios:
         this.clickSound = this.sound.add("Click");
+        this.paperSound = this.sound.add("Paper");
         //Decoración fondo
         this.cameras.main.setBackgroundColor('#FFFFFF')
         const hoja2 = this.add.image(((this.game.config.width*(0.2)/2)),(this.game.config.height*(0.3))/2, "HojaCuaderno").setOrigin(0.5,0.5);
@@ -166,6 +169,32 @@ class CustomizationP1Menu extends Phaser.Scene
         hojaIzq.setBlendMode(Phaser.BlendModes.MULTIPLY);
         
         //Boton confirmar
+        this.goToCustomP2 = false;
+        const confirmButton = this.add.image(this.game.config.width/2, this.game.config.height*1.75/2, "TrozoPapel").setOrigin(0.5,0.5).setDepth(53).setScale(0.8);
+        confirmButton.setInteractive();
+        const confirmText = this.add.text(this.game.config.width/2, this.game.config.height*1.78/2, "CONFIRM", {font: "bold 55px cursive", fill: "0#000000"}).setOrigin(0.5,0.5).setDepth(54).setScale(0.8);
+        confirmButton.on("pointerdown", function()
+        {
+            this.clickSound.play();
+            if (this.alertText.alpha<1){
+            this.goToCustomP2 = true;
+            }
+        }.bind(this));
+        confirmButton.on("pointerover", function(event) 
+        {
+            this.paperSound.play();
+            confirmButton.setScale(1);
+            confirmText.setScale(1);
+            game.canvas.style.cursor = "pointer";
+        }.bind(this));
+        confirmButton.on("pointerout", function(event) 
+        {
+            confirmButton.setScale(0.8);
+            confirmText.setScale(0.8);
+            game.canvas.style.cursor = "crosshair";
+        }.bind(this));
+
+        /*
         const confirm = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(1+0.8))/2, "ConfirmButton").setDepth(53);
         this.InteractButton(confirm)
         this.goToCustomP2 = false;
@@ -176,7 +205,7 @@ class CustomizationP1Menu extends Phaser.Scene
             this.goToCustomP2 = true;
             }
         }.bind(this));
-
+        */
         const postit = this.add.image(((this.game.config.width*(0.43)/2)),(this.game.config.height*(0.70))/2, "PostIt").setOrigin(0.5,0.5);
         postit.setScale(2,2).setAngle(0);
 

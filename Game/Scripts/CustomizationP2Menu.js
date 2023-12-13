@@ -14,9 +14,11 @@ class CustomizationP2Menu extends Phaser.Scene
     {
         //Audio:
         this.load.audio("Click", "./Sounds/click.mp3");
-        this.load.audio("Error","./Sounds/error.mp3")
+        this.load.audio("Error","./Sounds/error.mp3");
+        this.load.audio("Paper","./Sounds/paper.mp3");
         //Imágenes:
         this.load.image("StartButton", "./Sprites/startgame.png");
+        this.load.image("TrozoPapel", "./Sprites/trozopapel.png");
         this.load.image("Player2Customizes", "./Sprites/player2customizes.png");
         this.load.image("HojaCuaderno", "./Sprites/hojacuaderno.png");
         this.load.image("RandomButton", "./Sprites/dado.png");
@@ -27,7 +29,8 @@ class CustomizationP2Menu extends Phaser.Scene
     create()
     {
         this.clickSound = this.sound.add("Click");
-        this.errorSound = this.sound.add("Error")
+        this.paperSound = this.sound.add("Paper");
+        this.errorSound = this.sound.add("Error");
         this.cameras.main.setBackgroundColor('#FFFFFF')
         const hoja = this.add.image(((this.game.config.width*(0.2)/2)),(this.game.config.height*(0.7))/2, "HojaCuaderno").setOrigin(0.5,0.5);
         hoja.setScale(1.7).setAngle(30);
@@ -41,6 +44,34 @@ class CustomizationP2Menu extends Phaser.Scene
         hoja3.setScale(-1.75,1.75).setAngle(-6);
 
         //Boton confirmar
+        this.goToGame = false;
+        const confirmButton = this.add.image(this.game.config.width/2, this.game.config.height*1.75/2, "TrozoPapel").setOrigin(0.5,0.5).setDepth(53).setScale(0.8);
+        confirmButton.setInteractive();
+        const confirmText = this.add.text(this.game.config.width/2, this.game.config.height*1.78/2, "START GAME", {font: "bold 55px cursive", fill: "0#000000"}).setOrigin(0.5,0.5).setDepth(54).setScale(0.8);
+        confirmButton.on("pointerdown", function()
+        {
+            this.clickSound.play();
+            if ( this.weaponSelected!=undefined){
+                this.clickSound.play();
+                this.goToGame = true;
+                } else{
+                    this.errorSound.play();
+                }
+        }.bind(this));
+        confirmButton.on("pointerover", function(event) 
+        {
+            this.paperSound.play();
+            confirmButton.setScale(1);
+            confirmText.setScale(1);
+            game.canvas.style.cursor = "pointer";
+        }.bind(this));
+        confirmButton.on("pointerout", function(event) 
+        {
+            confirmButton.setScale(0.8);
+            confirmText.setScale(0.8);
+            game.canvas.style.cursor = "crosshair";
+        }.bind(this));
+        /*
         const confirm = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(1+0.8))/2, "StartButton").setDepth(53);
         this.InteractButton(confirm)
         this.goToGame = false;
@@ -53,7 +84,7 @@ class CustomizationP2Menu extends Phaser.Scene
                 this.errorSound.play();
             }
         }.bind(this));
-
+        */
         //Armas
 
         this.weaponSelected;
