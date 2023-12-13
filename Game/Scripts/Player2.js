@@ -5,7 +5,7 @@ class Player2 extends Phaser.GameObjects.Group
         this.scene = scene;
         this.bulletsImg = bulletsImg;
         this.weapon = weapon;
-        this.crosshair = this.scene.add.image(100, 100, crosshairImg).setScale(0.2);
+        this.crosshair = this.scene.add.image(100, 100, crosshairImg).setScale(0.25);
         this.crosshair.depth = 1000;
         this.bullets;
         //Audio:
