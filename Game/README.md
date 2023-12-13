@@ -186,6 +186,7 @@ Entre cada pantalla de customización, aparece una imagen en pantalla que indica
 ## **Interfaces de partida**
 
 Durante la partida hay una interfaz visible en todo momento. En la esquina superior derecha de la pantalla aparece un botón en forma de cuaderno en el que pone diario. Al hacerle click izquierdo el jugador 2 se despliega hacia abajo una hoja de cuaderno con las pistas escritas. Al volver a seleccionar el botón en forma de cuaderno esta se cierra. Al lado izquierdo del cuaderno además se pueden consultar las balas del jugador 2, para saber cuántas le quedan.
+
 ![Pantalla de fin de juego](ReadmeImages/InfoMenu.png)
 
 ### <a name="_heading=h.oxkqnhw80ffp"></a>**Pantalla de pausa**
