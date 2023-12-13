@@ -19,7 +19,7 @@ class InfoMenu extends Phaser.Scene
         //Botones
         this.infoButton = this.add.image(1535, 60, "Info").setScale(0.12).setInteractive(); //Botón de pistas del jugador
         this.info = this.add.image(1445, 175, "Paper").setScale(0.35);
-        this.info.alpha = 0.5;
+        this.info.alpha = 0.7;
         this.info.setVisible(false);
         this.infoButton.on("pointerdown", this.ToggleInfo.bind(this));
         this.infoButton.on("pointerover", function(pointer)
@@ -33,10 +33,9 @@ class InfoMenu extends Phaser.Scene
         //Texto:
         var textStyle = 
         {
-            fontFamily: "Arial",
-            fontStyle: "bold",
+            fontFamily: "cursive",
             color: "#000000",
-            wordWrap: {width: 240, height: 50, useAdvancedWrap: true}
+            wordWrap: {width: 220, height: 50, useAdvancedWrap: true}
         }
         var hint1Text = this.scene.get('Game').hint1.text;
         this.hint1 = this.add.text(1350,200, hint1Text, textStyle).setVisible(false)

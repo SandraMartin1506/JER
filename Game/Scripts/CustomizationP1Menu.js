@@ -135,7 +135,7 @@ class CustomizationP1Menu extends Phaser.Scene
         this.textMission = this.add.text((this.game.config.width*(1-0.75)/2), (this.game.config.height*(1+0.20))/2, "YOUR MISSION ! ! ", { font: '30px cursive', fill: '#ff0000' }).setAngle(-2);
         this.numMission = Math.floor(Math.random() * (8-1+1) + 1); 
         const missionDesc = ["Your objective is to visit every corner of the screen.",
-        "Your objecitve is to keep moving during an entire minute.",
+        "Your objective is to keep moving during an entire minute.",
         "Your objective is to stay still during an entire minute.",
         "Your objective is to stay still during thirty seconds.",
         "Your objective is to keep moving during thirty seconds.",
