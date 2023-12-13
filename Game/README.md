@@ -73,6 +73,7 @@ Estas misiones son sólo ejemplos, estando sujetas a cambios. Conforme se vaya d
 **Diferencias Online vs. Local:**
 
 **FASE 2: MODIFICACIONES. Se quita la mira específica de cada arma y se queda una general para cada una de las armas**
+
 La fase de juego es igual en la versión online y local, puesto que un jugador sólo controla al personaje con el input del teclado mientras que el otro sólo controla una mira mediante el input del ratón (visto en “Controles”). Sin embargo, la fase de personalización debe ser distinta, pues los jugadores no deberían saber las elecciones de su rival. Por tanto, la única diferencia entre el juego en red y el local es que en este último las pantallas de personalización se realizan por turnos. Primero, el jugador 1 escoge su vestimenta y escribe la pista falsa para el jugador 2. Además, es en esta pantalla en la que recibe su misión, pues esta no debería ser conocida por el rival, siendo imposible que la misión aparezca escrita en la fase de juego. Posteriormente, el jugador 2 elige el arma que quiere usar. En todo momento aparecerá un mensaje en la pantalla que recuerda que no se puede observar la personalización del rival.
 # **BACKSTORY:**
 
@@ -138,7 +139,6 @@ Como sonido ambiente para el juego se utiliza un sonido de murmullo que se repro
 
 El sonido de Murmullo ha sido sacado de pixelbay. Sound Effect from <a href="https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6762">Pixabay</a>
 
-El sonido ha sido sacado de pixelbay ()
 ### <a name="_heading=h.bz577dtuv1ke"></a>**Sonidos de armas**
 
 Cada arma tiene un sonido propio correspondiente al disparo de cada una de las armas. Estos sonidos se reproducen cuando el jugador 2 hace click para disparar con el arma que haya elegido.
