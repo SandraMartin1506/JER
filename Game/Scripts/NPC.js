@@ -12,6 +12,7 @@ class NPC extends Phaser.GameObjects.Group
         if(bottom !== undefined) this.bottom = scene.add.sprite(initialX, initialY, bottom).setScale(0.25);
         else this.bottom = undefined;
 		//Lógica:
+		this.speed = 45;
         this.nextX = this.body.x; //Próxima posición en x
         this.nextY = this.body.y; //Próxima posición en y
         this.calculatingPosition = false; //Indica si el NPC está quieto calculando cuál va a ser su próxima posición
@@ -46,28 +47,28 @@ class NPC extends Phaser.GameObjects.Group
 		else if(this.nextY > game.config.height) {this.nextY = this.body.y - distance; this.direction = 0}
 		this.calculatingPosition = false;
 		//Se anima:
-		if(this.nextY > this.body.y) 
+		if(this.nextY > this.body.y && this.direction === 2) 
 		{
 			this.body.anims.play("Character_front_walk");
 			if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_front_walk");
             if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_front_walk");
             if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_front_walk");
 		}
-		else if(this.nextY < this.body.y) 
+		else if(this.nextY < this.body.y && this.direction === 0) 
 		{
 			this.body.anims.play("Character_back_walk");
 			if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_back_walk");
             if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_back_walk");
             if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_back_walk");
 		}
-		else if(this.nextX > this.body.x) 
+		else if(this.nextX > this.body.x && this.direction === 1) 
 		{
 			this.body.anims.play("Character_right_walk");
 			if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_right_walk");
             if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_right_walk");
             if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_right_walk");
 		}
-		else if(this.nextX < this.body.x) 
+		else if(this.nextX < this.body.x && this.direction === 3) 
 		{
 			this.body.anims.play("Character_left_walk");
 			if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_left_walk");
@@ -76,35 +77,35 @@ class NPC extends Phaser.GameObjects.Group
 		}
     }
 
-    UpdatePosition() //Actualiza la posición de los enemigos
+    UpdatePosition(deltaTime) //Actualiza la posición de los enemigos
     {
-        if(this.body.x < this.nextX)
+        if(this.body.x < this.nextX && this.direction === 1)
 		{
-			this.body.x++;
-			if(this.hat !== undefined) this.hat.x++;
-            if(this.top !== undefined) this.top.x++;
-            if(this.bottom !== undefined) this.bottom.x++;
+			this.body.x += this.speed * deltaTime/1000;
+			if(this.hat !== undefined) this.hat.x+= this.speed * deltaTime/1000;
+            if(this.top !== undefined) this.top.x+= this.speed * deltaTime/1000;
+            if(this.bottom !== undefined) this.bottom.x+= this.speed * deltaTime/1000;
 		}
-		else if(this.body.x > this.nextX) 
+		else if(this.body.x > this.nextX && this.direction === 3) 
 		{
-			this.body.x--;
-			if(this.hat !== undefined) this.hat.x--;
-            if(this.top !== undefined) this.top.x--;
-            if(this.bottom !== undefined) this.bottom.x--;
+			this.body.x -= this.speed * deltaTime/1000;
+			if(this.hat !== undefined) this.hat.x-= this.speed * deltaTime/1000;
+            if(this.top !== undefined) this.top.x-= this.speed * deltaTime/1000;
+            if(this.bottom !== undefined) this.bottom.x-= this.speed * deltaTime/1000;
 		}
-		else if(this.body.y < this.nextY) 
+		else if(this.body.y < this.nextY && this.direction === 2) 
 		{
-			this.body.y++;
-			if(this.hat !== undefined) this.hat.y++;
-            if(this.top !== undefined) this.top.y++;
-            if(this.bottom !== undefined) this.bottom.y++;
+			this.body.y+= this.speed * deltaTime/1000;
+			if(this.hat !== undefined) this.hat.y+= this.speed * deltaTime/1000;
+            if(this.top !== undefined) this.top.y+= this.speed * deltaTime/1000;
+            if(this.bottom !== undefined) this.bottom.y+= this.speed * deltaTime/1000;
 		}
-		else if(this.body.y > this.nextY) 
+		else if(this.body.y > this.nextY && this.direction === 0) 
 		{
-			this.body.y--;
-			if(this.hat !== undefined) this.hat.y--;
-            if(this.top !== undefined) this.top.y--;
-            if(this.bottom !== undefined) this.bottom.y--;
+			this.body.y-= this.speed * deltaTime/1000;
+			if(this.hat !== undefined) this.hat.y-= this.speed * deltaTime/1000;
+            if(this.top !== undefined) this.top.y-= this.speed * deltaTime/1000;
+            if(this.bottom !== undefined) this.bottom.y-= this.speed * deltaTime/1000;
 		}
 		else //Si el NPC ya ha llegado a su destino se esperará un intervalo aleatorio de tiempo (corto) antes de elegir su nueva ruta
 		{

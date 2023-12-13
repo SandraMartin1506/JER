@@ -38,10 +38,11 @@ class CustomizationP2Menu extends Phaser.Scene
         //Boton confirmar
         const confirm = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(1+0.8))/2, "StartButton").setDepth(53);
         this.InteractButton(confirm)
+        this.goToGame = false;
         confirm.on("pointerdown", function(event) 
         {
             if ( this.weaponSelected!=undefined){
-            this.GoToGame();
+            this.goToGame = true;
             }
         }.bind(this));
 
@@ -121,10 +122,10 @@ class CustomizationP2Menu extends Phaser.Scene
         this.hint3 = this.add.text(((this.game.config.width*(1.7-0.22)/2)),(this.game.config.height*(0.8+0.03))/2, this.hints[2], { font: '21px cursive', fill: '#000000', wordWrap: { width: 500 }  })//*setScale(1.8/2);
 
         //alerta inicial
-        this.alertTime = 150;
+        this.alertTime = 1500;
         this.alertBox = this.add.rectangle(0,0, this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(59);
         this.alertText = this.add.text((this.game.config.width*(1)/2), (this.game.config.height*(1))/2, "PLAYER 1 DON'T LOOK", { font: '120px Arial', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
-
+        this.proTip = this.add.text((this.game.config.width*(1)/2 + 20), (this.game.config.height*(1))/2 + 200, "Pro tip: close only one eye so you can see player 2 election", { font: '40px Arial', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
    
         const title = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(0.17))/2, "Player2Customizes").setOrigin(0.5,0.5);
         title.setScale(1);
@@ -132,10 +133,16 @@ class CustomizationP2Menu extends Phaser.Scene
 
     update()
     {
-        if (this.alertTime>0) {this.alertTime-=1}
+        if (this.alertTime>0) {this.alertTime-=game.loop.delta}
         if (this.alertTime<=0){
-            if (this.alertBox.alpha>0){this.alertBox.alpha-=0.01}
-            if (this.alertText.alpha>0){this.alertText.alpha-=0.05}
+            if (this.alertBox.alpha>0){this.alertBox.alpha-=game.loop.delta/1500}
+            if (this.alertText.alpha>0){this.alertText.alpha-=game.loop.delta/1000}
+            if (this.proTip.alpha > 0){this.proTip.alpha -= game.loop.delta/1000}
+        }
+        if(this.goToGame)
+        {
+            this.alertBox.alpha += game.loop.delta/500;
+            if(this.alertBox.alpha >= 1) this.GoToGame();
         }
     }
 

@@ -64,9 +64,9 @@ class Game extends Phaser.Scene
 
     update(time, deltaTime)
     { 
-        if(this.panel.alpha > 0) this.panel.alpha -= 0.01;
+        if(this.panel.alpha > 0) this.panel.alpha -= deltaTime/500;
         this.mission.CheckMission();
-        this.UpdateCharacters();
+        this.UpdateCharacters(deltaTime);
         this.CheckGameCondition();
     }
 
@@ -103,13 +103,13 @@ class Game extends Phaser.Scene
        this.player2.InitializeBullets();  //Inicializa las balas del jugador según su arma
     }
 
-    UpdateCharacters() //Actualiza posiciones de los jugadores y NPCs
+    UpdateCharacters(deltaTime) //Actualiza posiciones de los jugadores y NPCs
     {
         for(var i = 0; i < this.npcs.length; i++)
         {
-            this.npcs[i].UpdatePosition();
+            this.npcs[i].UpdatePosition(deltaTime);
         }
-        this.player.UpdatePosition();
+        this.player.UpdatePosition(deltaTime);
         //Si el jugador 2 ha disparado se para momentáneamente el sonido del juego con esta función
         this.player2.StopGameSound();
     }

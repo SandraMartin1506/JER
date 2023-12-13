@@ -94,7 +94,7 @@ class GameEndedMenu extends Phaser.Scene
 
     update()
     {
-        if(this.panel.alpha >= 0.01) this.panel.alpha += 0.01;
+        if(this.panel.alpha >= 0.01) this.panel.alpha += game.loop.delta/500;
         
         if(this.panel.alpha >= 1 && this.playAgainPressed) this.PlayAgain();
         else if(this.panel.alpha >= 1 && this.mainMenuPressed) this.ReturnToMenu();

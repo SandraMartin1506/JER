@@ -12,6 +12,7 @@ class Player extends Phaser.GameObjects.Group
         if(bottom !== undefined) this.bottom = scene.add.sprite(initialX, initialY, bottom).setScale(0.25);
         else this.bottom = undefined;
         //Lógica:
+        this.speed = 45;
         this.direction = "Quieto"; //Dirección en la que camina. Se inicializa con Quieto por el contador.
         this.currentInput; //Input correspondiente a la dirección actual
         this.killed = false; //Si está vivo o no
@@ -113,35 +114,35 @@ class Player extends Phaser.GameObjects.Group
         }.bind(this))
     }
 
-    UpdatePosition() //Actualiza la posición del jugador
+    UpdatePosition(deltaTime) //Actualiza la posición del jugador
     {
         if (this.direction === 'Arriba' && this.body.y > 0)
         {
-            this.body.y--;
-            if(this.hat !== undefined) this.hat.y--;
-            if(this.top !== undefined) this.top.y--;
-            if(this.bottom !== undefined) this.bottom.y--;
+            this.body.y-= this.speed * deltaTime/1000;
+            if(this.hat !== undefined) this.hat.y-= this.speed * deltaTime/1000;
+            if(this.top !== undefined) this.top.y-= this.speed * deltaTime/1000;
+            if(this.bottom !== undefined) this.bottom.y-= this.speed * deltaTime/1000;
         }
 		else if (this.direction === "Abajo" && this.body.y < game.config.height) 
         {
-            this.body.y++;
-            if(this.hat !== undefined) this.hat.y++;
-            if(this.top !== undefined) this.top.y++;
-            if(this.bottom !== undefined) this.bottom.y++;
+            this.body.y+= this.speed * deltaTime/1000;
+            if(this.hat !== undefined) this.hat.y+= this.speed * deltaTime/1000;
+            if(this.top !== undefined) this.top.y+= this.speed * deltaTime/1000;
+            if(this.bottom !== undefined) this.bottom.y+= this.speed * deltaTime/1000;
         }
 		else if (this.direction === "Izquierda" && this.body.x > 0) 
         {
-            this.body.x--;
-            if(this.hat !== undefined) this.hat.x--;
-            if(this.top !== undefined) this.top.x--;
-            if(this.bottom !== undefined) this.bottom.x--;
+            this.body.x-= this.speed * deltaTime/1000;
+            if(this.hat !== undefined) this.hat.x-= this.speed * deltaTime/1000;
+            if(this.top !== undefined) this.top.x-= this.speed * deltaTime/1000;
+            if(this.bottom !== undefined) this.bottom.x-= this.speed * deltaTime/1000;
         }
 		else if (this.direction === "Derecha" && this.body.x < game.config.width)
         {
-            this.body.x++;
-            if(this.hat !== undefined) this.hat.x++;
-            if(this.top !== undefined) this.top.x++;
-            if(this.bottom !== undefined) this.bottom.x++;
+            this.body.x+= this.speed * deltaTime/1000;
+            if(this.hat !== undefined) this.hat.x+= this.speed * deltaTime/1000;
+            if(this.top !== undefined) this.top.x+= this.speed * deltaTime/1000;
+            if(this.bottom !== undefined) this.bottom.x+= this.speed * deltaTime/1000;
         }
         this.body.depth = this.body.y; //Cuanto más abajo está mayor nivel de profundidad para que se vea por encima de los que están más arriba
         if(this.hat !== undefined) this.hat.depth = this.body.depth;

@@ -132,17 +132,25 @@ class CustomizationP1Menu extends Phaser.Scene
 
         
         //Asignar y mostrar mision
-        this.textMission = this.add.text((this.game.config.width*(1-0.75)/2), (this.game.config.height*(1+0.20))/2, "YOUR MISSION ! ! ", { font: '30px cursive', fill: '#ff0000' }).setAngle(-2);
-        this.numMission = Math.floor(Math.random() * (8-1+1) + 1); 
-        const missionDesc = ["Your objective is to visit every corner of the screen.",
-        "Your objecitve is to keep moving during an entire minute.",
-        "Your objective is to stay still during an entire minute.",
-        "Your objective is to stay still during thirty seconds.",
-        "Your objective is to keep moving during thirty seconds.",
-        "Your objective is to be close to two or more NPC during thirty seconds.",
-        "Your objective is to stay away from all NPC during thirty seconds.",
-        "Your objective is to follow a NPC during thirty seconds. You can choose which one.",];
-        this.missionObjective = this.add.text((this.game.config.width*(1-0.85)/2), (this.game.config.height*(1+0.30))/2, missionDesc[this.numMission-1], { font: '32px cursive', fill: '#000000', wordWrap: { width: 500 }  });
+        this.numMission = Math.floor(Math.random() * (8-1+1) + 1);
+        const missionName = ["Voyager",
+        "Hyperactivity",
+        "Lazy ass b****",
+        "Siesta andaluza",
+        "Too much Redbull",
+        "Explosion lover",
+        "Explosion hater",
+        "Stalker"]
+        this.textMission = this.add.text((this.game.config.width*(1-0.85)/2), (this.game.config.height*(1+0.20))/2, "YOUR MISSION: " + missionName[this.numMission-1], { font: '30px cursive', fill: '#ff0000' }).setAngle(-2); 
+        const missionDesc = ["Visit every corner of the map.",
+        "Keep moving during an entire minute in total.",
+        "Stay still during an entire minute in total.",
+        "Stay still during thirty seconds straight.",
+        "Keep moving during thirty seconds straight.",
+        "Be close to a multitude during thirty seconds straight.",
+        "Stay away from any multitude during thirty seconds straight.",
+        "Choose any NPC and follow it from a extremely close distance during thirty seconds straight."];
+        this.missionObjective = this.add.text((this.game.config.width*(1-0.85)/2), (this.game.config.height*(1+0.30))/2, missionDesc[this.numMission-1], { font: '32px cursive', fill: '#000000', wordWrap: { width: 500 }}).setAngle(-2);
         
         //Decorar
         const hojaDer = this.add.image(((this.game.config.width*(1.6)/2)),(this.game.config.height*(1.5))/2, "HojaCuaderno").setOrigin(0.5,0.5);
@@ -155,10 +163,11 @@ class CustomizationP1Menu extends Phaser.Scene
         //Boton confirmar
         const confirm = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(1+0.8))/2, "ConfirmButton").setDepth(53);
         this.InteractButton(confirm)
+        this.goToCustomP2 = false;
         confirm.on("pointerdown", function(event) 
         {
             if (this.alertText.alpha<1){
-            this.GoToCustomP2();
+            this.goToCustomP2 = true;
             }
         }.bind(this));
 
@@ -192,7 +201,7 @@ class CustomizationP1Menu extends Phaser.Scene
         title.setScale(1);
 
         //alerta inicial
-        this.alertTime = 150;
+        this.alertTime = 1500;
         this.alertBox = this.add.rectangle(0,0, this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(59);
         this.alertText = this.add.text((this.game.config.width*(1)/2), (this.game.config.height*(1))/2, "PLAYER 2 DON'T LOOK", { font: '120px Arial', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
         this.proTip = this.add.text((this.game.config.width*(1)/2) - 148, (this.game.config.height*(1))/2 + 200, "Pro tip: close your eyes", { font: '40px Arial', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
@@ -200,11 +209,16 @@ class CustomizationP1Menu extends Phaser.Scene
 
     update()
     {
-        if (this.alertTime>0) {this.alertTime-=1}
+        if (this.alertTime>0) {this.alertTime-=game.loop.delta}
         if (this.alertTime<=0){
-            if (this.alertBox.alpha>0){this.alertBox.alpha-=0.01}
-            if (this.alertText.alpha>0){this.alertText.alpha-=0.05}
-            if (this.proTip.alpha>0){this.proTip.alpha-=0.05}
+            if (this.alertBox.alpha>0){this.alertBox.alpha-= game.loop.delta/1500}
+            if (this.alertText.alpha>0){this.alertText.alpha-= game.loop.delta/1000}
+            if (this.proTip.alpha>0){this.proTip.alpha-= game.loop.delta/1000}
+        }
+        if(this.goToCustomP2)
+        {
+            this.alertBox.alpha += game.loop.delta/500;
+            if(this.alertBox.alpha >= 1) this.GoToCustomP2();
         }
     }
 
