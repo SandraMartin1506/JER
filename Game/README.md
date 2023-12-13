@@ -87,7 +87,7 @@ Los objetos del videojuego son las diferentes prendas de ropa que tienen tanto l
 ## **Ropa**
 Las prendas de ropa que se utilizan son tan solo 3: pantalones, camiseta y gorro, y tan solo cambiarán los colores, los tipos (un gorro puede ser de lana o de copa, por ejemplo) y los patrones de estos.
 ![Ejemplo ropa](Sprites/camisa_1.png)
-![Ejemplo ropa](Sprites/camisa_1.png)
+![Ejemplo ropa](Sprites/banador_rojo.png)
 ## **Armas**
 **FASE 2: MODIFICACIONES. Se quita una de las tres armas y se quita el medidor de vida de personajes. Se cambia la cantidad de munición de cada arma para que la dificultad sea más equilibrada para ambos jugadores**
 Hay dos armas seleccionables en el juego y cada una tiene sus propias características:
@@ -98,6 +98,7 @@ Tiene la posibilidad de disparar 5 balas. Elimina al personaje seleccionado.
 
 ### **Lanzagranadas**
 Tiene la posibilidad de disparar 3 balas cuyo impacto afecta en áreas y no individualmente como en el caso de la otra. Elimina a los personajes en el área.
+
 ![Lanzagranadas](Sprites/lanzagranadas.png)
 
 # **ESTÉTICA** 
@@ -114,7 +115,6 @@ Todo el juego se ve en cenital, imitando la perspectiva que tendría un tirador 
 La estética de los menús también es minimalista. Los menús durante la partida imitan las hojas arrancadas de un típico cuaderno de cuadrícula con los textos imitando estar escritos a boli en una caligrafía simple, mientras que los menús de fuera de partida imitan el estilo típico de código de las películas de hackers. Las pantallas de selección de antes de las partidas comparten esa estética minimalista blanco y negro aunque tienen imágenes a color.
 
 # **APARTADO SONORO**
-
 El apartado sonoro del videojuego también es bastante minimalista, ya que consiste en pocos efectos de sonido distintos. Los sonidos sirven para representar algunas de las acciones de los jugadores y para dar ambientación al juego.
 ### <a name="_heading=h.k3t9ht79yfhx"></a>**Sonido ambiente**
 Como sonido ambiente para el juego se utiliza un sonido de murmullo que se reproducirá en bucle a lo largo de toda la partida. Este sonido se pausará únicamente cuando el jugador 2 dispare, causando un silencio de varios segundos tras el disparo para enfatizar la acción del jugador. 
@@ -126,16 +126,15 @@ Fuera de la partida, hay también varios efectos de sonido para las interaccione
 # **INTERFACES**
 **FASE 2: AÑADIDOS. Se ven todas las interfaces tal y como son en el juego, además de un diagrama de navegación que explica cómo interactúan entre ellas**
 
-**AÑADIR DIAGRAMA DE FLUJO**
 ![Diagrama de flujo](<ReadmeImages/Diagrama de flujo TINT.png>)
 El juego cuenta con nueve interfaces:
-
-**AÑADIR IMÁGENES DE TODAS LAS INTERFACES**
 ### <a name="_heading=h.5h6jvb3dy1km"></a>**Menú principal** 
 Un fondo con el estilo estético de las películas de hackers. Los 1 y 0 de la pantalla se mueven. Aparecen tres botones: New Game, que da comienzo al juego; Credits, donde se muestran los créditos del juego; y por último NPCNumber, que sirve para cambiar el número de NPC y aumentar o disminuir la dificultad.
+![Menú principal](ReadmeImages/MainMenu.png)
 
 ### <a name="_heading=h.teva7zbitlwp"></a>**Pantalla de NPCS** 
 La pantalla de configuración tiene la misma estética de películas de hackers. Esta pantalla cuenta únicamente con la configuración del número de NPCs, contando con tres botones: “Pocos”, “Normales” y “Muchos” para elegir la cantidad de NPC.
+![Pantalla de customización jugador 1](ReadmeImages/NPCNumber.png)
 
 ### <a name="_heading=h.3glh2vore5jc"></a>**Pantalla de customización jugador 1**
 Esta se muestra al iniciar partida. Está dividida en dos zonas e introduce la estética de papel de cuaderno. A la izquierda, hay un recuadro que sirve para introducir la pista falsa del Jugador 1 y se presenta la misión del personaje. A la derecha, se sitúa el sprite del jugador para customizarlo. También existe la posibilidad de customizarlo aleatoriamente mediante el botón del dado que se muestra a los pies del jugador.
@@ -147,14 +146,15 @@ Va después de la del jugador 1. A la izquierda, muestra ilustraciones de las do
 Entre cada pantalla de customización, aparece una imagen en pantalla que indica cuál de los dos jugadores debe estar mirando la pantalla en el momento.
 
 ![Pantalla entre cada customización](ReadmeImages/FadeInP1.png)
+![Pantalla entre cada customización](ReadmeImages/FadeInP2.png)
 
-**Interfaces de partida**
+## **Interfaces de partida**
 Durante la partida hay una interfaz visible en todo momento. En la esquina superior derecha de la pantalla aparece un botón en forma de cuaderno en el que pone diario. Al hacerle click izquierdo el jugador 2 se despliega hacia abajo una hoja de cuaderno con las pistas escritas. Al volver a seleccionar el botón en forma de cuaderno esta se cierra. Al lado izquierdo del cuaderno además se pueden consultar las balas del jugador 2, para saber cuántas le quedan.
 
 ### <a name="_heading=h.oxkqnhw80ffp"></a>**Pantalla de pausa**
 Esta pantalla se puede acceder durante la partida del juego. Sirve para pausar la partida y se puede entrar a ella presionando la tecla esc. En ella se pueden elegir dos opciones, una para continuar la partida que se ha pausado y otra para volver a la pantalla de inicio de manera que se pueda iniciar una nueva partida.
-
+![Pantalla entre cada customización](ReadmeImages/PauseMenu.png)
 
 ### <a name="_heading=h.oxkqnhw80ffp"></a>**Pantalla de fin de juego**
-Esta pantalla aparece cuando se termina la partida, es decir, uno de los dos jugadores ha ganado. En ella se explica cuál de los dos ha ganado y por qué. Tiene dos botones: Play Again, que devuelve a la pantalla de customización del jugador 1 y comienza el juego de nuevo; y Main Menu, que manda a los usuarios al menú principal
-![Pantalla de fin de juego](ReadmeImages/Player2Customization.png)
+Esta pantalla aparece cuando se termina la partida, es decir, uno de los dos jugadores ha ganado. En ella se explica cuál de los dos ha ganado y por qué. Tiene dos botones: Play Again, que devuelve a la pantalla de customización del jugador 1 y comienza el juego de nuevo; y Main Menu, que manda a los usuarios al menú principal.
+![Pantalla de fin de juego](ReadmeImages/GameEndedMenu.png)
