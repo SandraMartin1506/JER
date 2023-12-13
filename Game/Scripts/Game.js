@@ -25,7 +25,9 @@ class Game extends Phaser.Scene
     create()
     {
         this.cameras.main.setBackgroundColor('#181818')
-        this.backgroundImage1 = this.add.image(0,0,"BackgroundP").setOrigin(0,0).setAlpha(0.4);
+        this.backgroundImage1 = this.add.image(0,0,"BackgroundP").setOrigin(0,0).setAlpha(0.4);;
+        this.backgroundImage1.depth = -1;
+
         //Panel de fade in:
         this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(1000);
         //Audio
@@ -42,7 +44,9 @@ class Game extends Phaser.Scene
         this.InitializePlayer(); //El jugador también tendrá una posición aleatoria
         this.InitializePlayer2();
         //NPCs:
-        var numberNPC = Math.floor(Math.random() * (15-9+1) + 9); //NPCs son un número aleatorio entre 9 y 15 (de momento)
+        var minNPC = this.scene.get("NPCNumber").minNPC;
+        var maxNPC = this.scene.get("NPCNumber").maxNPC;
+        var numberNPC = Math.floor(Math.random() * (maxNPC-minNPC+1) + minNPC); //NPCs son un número aleatorio entre 9 y 15 (de momento)
 	    this.npcs = new Array(numberNPC);
         this.InitializeNPCS(); //Se inicializan los NPCs con posiciones aleatorias
         //Animaciones:
@@ -60,7 +64,6 @@ class Game extends Phaser.Scene
         //Misiones:
         var numMission = this.scene.get("CustomizationP1Menu").numMission; 
         this.mission = new Missions(numMission, this.player, this);
-        console.log(numMission);
     }
 
     update(time, deltaTime)
@@ -73,7 +76,6 @@ class Game extends Phaser.Scene
 
     InitializeNPCS() //Inicializa todos los NPCs en posiciones aleatorias
     {
-        
         for(var i = 0; i < this.npcs.length; i++)
         {
             var randomX = Math.floor(Math.random() * (1550-50+1) + 50);
