@@ -19,7 +19,7 @@ class InfoMenu extends Phaser.Scene
         //Botones
         this.infoButton = this.add.image(1535, 60, "Info").setScale(0.12).setInteractive(); //Botón de pistas del jugador
         this.info = this.add.image(1445, 175, "Paper").setScale(0.35);
-        this.info.alpha = 0.7;
+        this.info.alpha = 0.85;
         this.info.setVisible(false);
         this.infoButton.on("pointerdown", this.ToggleInfo.bind(this));
         this.infoButton.on("pointerover", function(pointer)
@@ -37,12 +37,12 @@ class InfoMenu extends Phaser.Scene
             color: "#000000",
             wordWrap: {width: 220, height: 50, useAdvancedWrap: true}
         }
-        var hint1Text = this.scene.get('Game').hint1.text;
-        this.hint1 = this.add.text(1350,200, hint1Text, textStyle).setVisible(false)
-        var hint2Text = this.scene.get('Game').hint2.text;
-        this.hint2 = this.add.text(1350,250, hint2Text, textStyle).setVisible(false);
-        var hint3Text = this.scene.get('Game').hint3.text;
-        this.hint3 = this.add.text(1350,300, hint3Text, textStyle).setVisible(false);
+        var hint1Text = "-> " + this.scene.get('Game').hint1.text;
+        this.hint1 = this.add.text(1335,175, hint1Text, textStyle).setVisible(false);
+        var hint2Text = "-> " + this.scene.get('Game').hint2.text;
+        this.hint2 = this.add.text(1335,250, hint2Text, textStyle).setVisible(false);
+        var hint3Text = "-> " + this.scene.get('Game').hint3.text;
+        this.hint3 = this.add.text(1335,325, hint3Text, textStyle).setVisible(false);
     }
 
     update()

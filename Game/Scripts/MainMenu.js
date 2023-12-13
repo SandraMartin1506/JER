@@ -47,7 +47,8 @@ class MainMenu extends Phaser.Scene
 
     create()
     {
-
+        //Background y panel de transición:
+        this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(100);
         this.backgroundImage1 = this.add.image(0,0,"Background").setOrigin(0,0);
         this.backgroundImage2 = this.add.image(this.game.config.width,0,"Background").setOrigin(0,0);
         this.backgroundBlack = this.add.image(0,0,"BackgroundBlack").setOrigin(0,0);
@@ -61,7 +62,8 @@ class MainMenu extends Phaser.Scene
         this.StartButton.setRotation(Phaser.Math.DegToRad(90));
         this.StartButton.setInteractive();
         this.add.text(665, 330, "New Game", {font: "50px Courier", fill: "0#000000"});
-        this.StartButton.on("pointerdown", this.StartGame.bind(this));
+        this.startGame = false;
+        this.StartButton.on("pointerdown", function(){this.startGame = true;this.clickSound.play();}.bind(this));
         this.StartButton.on("pointerover", function(event) 
         {
             this.paperSound.play();
@@ -79,7 +81,8 @@ class MainMenu extends Phaser.Scene
         this.creditsButton.setRotation(Phaser.Math.DegToRad(90));
         this.creditsButton.setInteractive();
         this.add.text(665, 530, "Credits", {font: "50px Courier", fill: "0#000000"});
-        this.creditsButton.on("pointerdown", this.PlayCredits.bind(this));
+        this.goToCredits = false;
+        this.creditsButton.on("pointerdown", function(){this.goToCredits = true; this.clickSound.play();}.bind(this));
         this.creditsButton.on("pointerover", function(event) 
         {
             this.paperSound.play();
@@ -91,8 +94,6 @@ class MainMenu extends Phaser.Scene
             this.creditsButton.setScale(scale);
             game.canvas.style.cursor = "crosshair";
         }.bind(this));
-
-
     }
 
     update(time, deltaTime)
@@ -105,11 +106,17 @@ class MainMenu extends Phaser.Scene
         if (this.backgroundImage2.x<-this.game.config.width){
             this.backgroundImage2.setPosition(this.backgroundImage1.x+this.game.config.width,0)
         }
+        if(!this.startGame && !this.goToCredits) this.panel.alpha -= deltaTime/500;
+        else 
+        {
+            this.panel.alpha += deltaTime/500;
+            if(this.panel.alpha >= 1 && this.startGame) this.StartGame();
+            else if(this.panel.apha >= 1 && this.goToCredits) this.PlayCredits();
+        }
     }
 
     StartGame()
     {
-        this.clickSound.play();
         this.scene.add("CustomizationP1Menu",new CustomizationP1Menu);
         this.scene.stop("MainMenu");
         this.scene.start("CustomizationP1Menu");
@@ -117,6 +124,5 @@ class MainMenu extends Phaser.Scene
 
     PlayCredits()
     {
-        this.clickSound.play();
     }
 }

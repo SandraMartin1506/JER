@@ -77,7 +77,7 @@ class PauseMenu extends Phaser.Scene
     {
         if(this.panel.alpha >= 0.01) 
         {
-            this.panel.alpha += 0.01;
+            this.panel.alpha += game.loop.delta/500;
             if(this.panel.alpha >= 1) this.GoToMainMenu();
         }
     }
