@@ -55,6 +55,7 @@ class MainMenu extends Phaser.Scene
         this.backgroundImage2 = this.add.image(this.game.config.width,0,"Background").setOrigin(0,0);
         this.backgroundBlack = this.add.image(0,0,"BackgroundBlack").setOrigin(0,0);
         this.title = this.add.image(this.game.config.width/2 - 800 , this.game.config.height/2 - 450,"Titulo").setOrigin(0,0)
+        //this.title.setTint(0x9DFF61);
         //Audio de los botones
         this.clickSound = this.sound.add("Click");
         this.hackerSound = this.sound.add("Hacker");
@@ -136,8 +137,8 @@ class MainMenu extends Phaser.Scene
 
     StartGame()
     {
-        //this.scene.get("NPCNumber").ToggleVisibility(false);
-        //this.scene.pause("NPCNumber");
+        this.scene.get("NPCNumber").ToggleVisibility(false);
+        this.scene.pause("NPCNumber");
         this.scene.add("CustomizationP1Menu",new CustomizationP1Menu);
         this.scene.start("CustomizationP1Menu");
     }
@@ -153,6 +154,6 @@ class MainMenu extends Phaser.Scene
     {
         this.scene.stop();
         this.scene.get("NPCNumber").ToggleVisibility(true);
-        this.scene.start("NPCNumber");
+        this.scene.resume("NPCNumber");
     }
 }

@@ -1,6 +1,6 @@
 class Player extends Phaser.GameObjects.Group
 {
-    constructor(initialX, initialY, scene, spriteSheet, hat, top, bottom)
+    constructor(initialX, initialY, scene, spriteSheet, hat, top, bottom, deadSprite)
     {
         super({key: "Player"});
         //Skin:
@@ -12,22 +12,20 @@ class Player extends Phaser.GameObjects.Group
         if(bottom !== undefined) this.bottom = scene.add.sprite(initialX, initialY, bottom).setScale(0.25);
         else this.bottom = undefined;
         //Lógica:
+        this.scene = scene;
         this.speed = 45;
         this.direction = "Quieto"; //Dirección en la que camina. Se inicializa con Quieto por el contador.
         this.currentInput; //Input correspondiente a la dirección actual
         this.killed = false; //Si está vivo o no
         this.missionAccomplished = false;
         //Gestión de clicks para ser eliminado:
+        this.deadSprite = deadSprite;
         scene.physics.add.existing(this.body);
         scene.physics.world.enable(this.body);
         this.body.setInteractive();
         this.body.on('pointerdown',function(pointer)
         {
-            this.killed = true;
-            this.body.setVisible(false);
-            if(this.hat !== undefined) this.hat.setVisible(false);
-            if(this.top !== undefined) this.top.setVisible(false);
-            if(this.bottom !== undefined) this.bottom.setVisible(false);
+            this.KillCharacter();
         }.bind(this));
     }
 
@@ -148,5 +146,15 @@ class Player extends Phaser.GameObjects.Group
         if(this.hat !== undefined) this.hat.depth = this.body.depth;
         if(this.top !== undefined) this.top.depth = this.body.depth;
         if(this.bottom !== undefined) this.bottom.depth = this.body.depth;
+    }
+
+    KillCharacter()
+    {
+        this.scene.add.sprite(this.body.x, this.body.y, this.deadSprite).setScale(0.25);
+        this.killed = true;
+        this.body.setVisible(false);
+        if(this.hat !== undefined) this.hat.setVisible(false);
+        if(this.top !== undefined) this.top.setVisible(false);
+        if(this.bottom !== undefined) this.bottom.setVisible(false);
     }
 }

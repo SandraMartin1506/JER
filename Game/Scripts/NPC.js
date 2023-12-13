@@ -1,6 +1,6 @@
 class NPC extends Phaser.GameObjects.Group
 {
-    constructor(initialX, initialY, scene, character, hat, top, bottom)
+    constructor(initialX, initialY, scene, character, hat, top, bottom, deadSprite)
     {
         super({key: "NPC"});
 		//Skin:
@@ -12,19 +12,18 @@ class NPC extends Phaser.GameObjects.Group
         if(bottom !== undefined) this.bottom = scene.add.sprite(initialX, initialY, bottom).setScale(0.25);
         else this.bottom = undefined;
 		//Lógica:
+		this.scene = scene;
 		this.speed = 45;
         this.nextX = this.body.x; //Próxima posición en x
         this.nextY = this.body.y; //Próxima posición en y
         this.calculatingPosition = false; //Indica si el NPC está quieto calculando cuál va a ser su próxima posición
 		//Gestión de clicks para ser eliminados:
+		this.deadSprite = deadSprite;
 		scene.physics.add.existing(this.body);
         this.body.setInteractive();
         this.body.on('pointerdown',function(pointer)
 		{
-            this.body.setVisible(false);
-			if(this.hat !== undefined) this.hat.setVisible(false);
-            if(this.top !== undefined) this.top.setVisible(false);
-            if(this.bottom !== undefined) this.bottom.setVisible(false);
+            this.KillCharacter();
         }.bind(this));
     }
 
@@ -149,4 +148,13 @@ class NPC extends Phaser.GameObjects.Group
         if(this.top !== undefined) this.top.depth = this.body.depth;
         if(this.bottom !== undefined) this.bottom.depth = this.body.depth;	
     }
+
+	KillCharacter()
+	{
+		this.scene.add.sprite(this.body.x, this.body.y, this.deadSprite).setScale(0.25);
+		this.body.setVisible(false);
+		if(this.hat !== undefined) this.hat.setVisible(false);
+        if(this.top !== undefined) this.top.setVisible(false);
+        if(this.bottom !== undefined) this.bottom.setVisible(false);
+	}
 }

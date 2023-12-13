@@ -14,7 +14,9 @@ class Game extends Phaser.Scene
         this.load.image("BackgroundP", "./Sprites/fondo.png")
         this.load.image("Bullet", "./Sprites/bala1.png");
         this.load.image("Crosshair", "./Sprites/Mira.png");
+        this.load.image("DeadBody", "./Sprites/Sprite_morto.png");
         this.load.spritesheet("Character", "./Sprites/SpriteSheet.png", {frameWidth: 250, frameHeight: 450});
+        this.load.spritesheet("Explosion", "./Sprites/explosionspritesheet.png", {frameWidth: 400, frameHeight: 550});
         //AUDIO
         this.load.audio("Crowd","./Sounds/crowd.mp3");
         this.load.audio("Click","./Sounds/click.mp3");
@@ -83,7 +85,7 @@ class Game extends Phaser.Scene
             var randomHat = Math.floor(Math.random() * this.hats.length);
             var randomTop = Math.floor(Math.random() * this.tops.length);
             var randomBotton = Math.floor(Math.random() * this.bottoms.length);
-            this.npcs[i] = new NPC(randomX, randomY, this, "Character", this.hats[randomHat], this.tops[randomTop], this.bottoms[randomBotton]);
+            this.npcs[i] = new NPC(randomX, randomY, this, "Character", this.hats[randomHat], this.tops[randomTop], this.bottoms[randomBotton], "DeadBody");
         }
     }
 
@@ -94,13 +96,13 @@ class Game extends Phaser.Scene
         var hatNum = this.scene.get("CustomizationP1Menu").hatNum;
         var topNum = this.scene.get("CustomizationP1Menu").topNum;
         var botNum = this.scene.get("CustomizationP1Menu").botNum;
-	    this.player = new Player(randomX, randomY, this, "Character", this.hats[hatNum], this.tops[topNum], this.bottoms[botNum]);
+	    this.player = new Player(randomX, randomY, this, "Character", this.hats[hatNum], this.tops[topNum], this.bottoms[botNum], "DeadBody");
     }
 
     InitializePlayer2() 
     {
        var weaponT = this.scene.get("CustomizationP2Menu").weaponSelected;
-       this.player2 = new Player2(this, weaponT, "Bullet", "Crosshair", this.gameSound); // Le paso la escena actual. De momento le paso directamente el arma yo, pero después será una variable que vendrá dada por la escena de personalización
+       this.player2 = new Player2(this, weaponT, "Bullet", "Crosshair", this.gameSound, "Explosion"); // Le paso la escena actual. De momento le paso directamente el arma yo, pero después será una variable que vendrá dada por la escena de personalización
        this.input.on('pointermove',this.player2.UpdatePositionP2.bind(this.player2), this); //Cada vez que el ratón se mueve le paso la función para cambiar la posición del jugador 2 (que va a ser la del ratón)
        //le paso el contexto con el último this para que lo haga bien
        this.player2.InitializeBullets();  //Inicializa las balas del jugador según su arma

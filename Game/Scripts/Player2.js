@@ -1,6 +1,6 @@
 class Player2 extends Phaser.GameObjects.Group
 {
-    constructor(scene, weapon, bulletsImg, crosshairImg, gameSound){
+    constructor(scene, weapon, bulletsImg, crosshairImg, gameSound, explosion){
         super({key: "Player2"});
         this.scene = scene;
         this.bulletsImg = bulletsImg;
@@ -8,6 +8,8 @@ class Player2 extends Phaser.GameObjects.Group
         this.crosshair = this.scene.add.image(100, 100, crosshairImg).setScale(0.25);
         this.crosshair.depth = 1000;
         this.bullets;
+        this.explosion = explosion;
+        this.CreateExplosionAnimation();
         //Audio:
         this.granadeSound = this.scene.sound.add("Grenade");
         this.sniperSound = this.scene.sound.add("Sniper");
@@ -39,23 +41,23 @@ class Player2 extends Phaser.GameObjects.Group
     AreaShot(){ //Saber si se va a cambiar la mira al final
         var distanceP1 = Phaser.Math.Distance.Between(this.crosshair.x,this.crosshair.y, this.scene.player.body.x,this.scene.player.body.y) //Calcula la distancia entre el jugador y la mira
         this.scene.npcs.forEach((objeto)=>{ //Calcula la distancia por cada npc
-            var distanceNPC = Phaser.Math.Distance.Between(this.crosshair.x,this.crosshair.y, objeto.body.x,objeto.body.y)
-            if(distanceNPC < 100)//Si es menor que 100, se vuelve invisible (muere)
-            { 
-                objeto.body.setVisible(false);
-                if(objeto.hat !== undefined) objeto.hat.setVisible(false);
-                if(objeto.top !== undefined) objeto.top.setVisible(false);
-                if(objeto.bottom !== undefined) objeto.bottom.setVisible(false);
-            }
+        var distanceNPC = Phaser.Math.Distance.Between(this.crosshair.x,this.crosshair.y, objeto.body.x,objeto.body.y)
+        if(distanceNPC < 100)//Si es menor que 100, se vuelve invisible (muere)
+        { 
+            objeto.KillCharacter();
+        }
         })
         if(distanceP1 < 100)//Si el jugador está en área, entonces muere y por tanto gana la partida
         { 
-            this.scene.player.body.setVisible(false);
-            if(this.scene.player.hat !== undefined) this.scene.player.hat.setVisible(false);
-            if(this.scene.player.top !== undefined) this.scene.player.top.setVisible(false);
-            if(this.scene.player.bottom !== undefined) this.scene.player.bottom.setVisible(false); 
-            this.scene.player.killed = true;
+            this.scene.player.KillCharacter();
         }
+        var newExplosion = this.scene.add.sprite(this.crosshair.x, this.crosshair.y-69, this.explosion).setOrigin(0.5,0.5).setScale(0.4);
+        newExplosion.depth = 1000;
+        newExplosion.anims.play("explosion");
+        newExplosion.on("animationcomplete", function(animation, frame)
+        {
+            newExplosion.destroy();
+        }.bind(this));
     }
    
     UpdatePositionP2(pointer) //Se le pasa directamente el puntero activo
@@ -99,5 +101,20 @@ class Player2 extends Phaser.GameObjects.Group
                 this.soundTimer = 3000;
             }
         }
+    }
+
+    CreateExplosionAnimation()
+    {
+        this.scene.anims.create(
+            {
+                key: "explosion",
+                frames: this.scene.anims.generateFrameNumbers(this.explosion, 
+                    {
+                        frames: [0, 1, 2, 3, 4, 5, 6, 7]
+                    }),
+                repeat: 0,
+                frameRate: 10
+            }
+        );
     }
 }

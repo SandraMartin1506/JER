@@ -2,7 +2,7 @@ class NPCNumber extends Phaser.Scene
 {
     constructor()
     {
-        super({key:"NPCNumber"});
+        super({key:"NPCNumber", active: true});
     }
 
     preload()
@@ -16,9 +16,9 @@ class NPCNumber extends Phaser.Scene
 
     create()
     {
-        //this.scene.pause()
+        this.scene.pause()
         //Panel y fondo:
-        //this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, "0x000000").setDepth(100);
+        this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, "0x000000").setDepth(100);
         this.backgroundImage1 = this.add.image(0,0,"Background").setOrigin(0,0);
         this.backgroundImage2 = this.add.image(this.game.config.width,0,"Background").setOrigin(0,0);
         this.backgroundBlack = this.add.image(0,0,"BackgroundBlack").setOrigin(0,0);
@@ -35,7 +35,7 @@ class NPCNumber extends Phaser.Scene
         this.buttonLow = this.add.image(this.game.config.width/2, this.game.config.height/2 - 200, "buttonPlaceholder").setScale(scale).setInteractive();
         this.buttonNormal = this.add.image((this.game.config.width)/2, this.game.config.height/2, "buttonPlaceholder").setScale(scale).setInteractive();
         this.buttonHigh = this.add.image((this.game.config.width)/2, this.game.config.height/2 + 200, "buttonPlaceholder").setScale(scale).setInteractive();
-        this.buttonNormal.setTint(0x00ffff);
+        this.buttonNormal.setTint(0xff0000);
         //Texto:
         this.add.text(770, 230, "Low", {font: "50px Courier", fill: "#ffffff"});
         this.add.text(700, 430, "Normal", {font: "50px Courier", fill: "#ffffff"});
@@ -83,7 +83,7 @@ class NPCNumber extends Phaser.Scene
         this.clickSound.play();
         this.minNPC = 20;
         this.maxNPC = 30;
-        this.buttonLow.setTint(0x00ffff);
+        this.buttonLow.setTint(0xff0000);
         this.buttonNormal.clearTint();
         this.buttonHigh.clearTint();
     }
@@ -93,7 +93,7 @@ class NPCNumber extends Phaser.Scene
         this.clickSound.play();
         this.minNPC = 30;
         this.maxNPC = 40;
-        this.buttonNormal.setTint(0x00ffff);
+        this.buttonNormal.setTint(0xff0000);
         this.buttonLow.clearTint();
         this.buttonHigh.clearTint();
     }
@@ -103,7 +103,7 @@ class NPCNumber extends Phaser.Scene
         this.clickSound.play();
         this.minNPC = 40;
         this.maxNPC = 50;
-        this.buttonHigh.setTint(0x00ffff);
+        this.buttonHigh.setTint(0xff0000);
         this.buttonNormal.clearTint();
         this.buttonLow.clearTint();
     }
@@ -111,13 +111,12 @@ class NPCNumber extends Phaser.Scene
     ReturnToMenu()
     {
         this.clickSound.play();
-        this.scene.stop();
+        this.scene.pause();
         this.scene.run("MainMenu");
     }
 
     ToggleVisibility(sceneVisibility) //Si no se pone el panel en activo se puede ver esta escena en las pantallas de carga
     {
-        /*
         this.panel.visible = !sceneVisibility;
         //Esta función se llama cada vez que se accede a este menú, por lo que sincronizamos los backgrounds:
         if(sceneVisibility)
@@ -125,6 +124,5 @@ class NPCNumber extends Phaser.Scene
             this.backgroundImage1.x = this.scene.get("MainMenu").backgroundImage1.x;
             this.backgroundImage2.x = this.scene.get("MainMenu").backgroundImage2.x;
         }
-        */
     }
 }

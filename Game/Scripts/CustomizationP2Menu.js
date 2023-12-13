@@ -69,7 +69,7 @@ class CustomizationP2Menu extends Phaser.Scene
         {
             confirmButton.setScale(0.8);
             confirmText.setScale(0.8);
-            game.canvas.style.cursor = "crosshair";
+            game.canvas.style.cursor = "auto";
         }.bind(this));
         /*
         const confirm = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(1+0.8))/2, "StartButton").setDepth(53);

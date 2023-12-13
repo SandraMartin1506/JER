@@ -191,7 +191,7 @@ class CustomizationP1Menu extends Phaser.Scene
         {
             confirmButton.setScale(0.8);
             confirmText.setScale(0.8);
-            game.canvas.style.cursor = "crosshair";
+            game.canvas.style.cursor = "auto";
         }.bind(this));
 
         /*
