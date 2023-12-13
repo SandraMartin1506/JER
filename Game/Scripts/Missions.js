@@ -13,7 +13,7 @@ class Missions extends Phaser.GameObjects.Group
         this.timeLeft = 60000;
         this.timePerforming = 30000; 
         //Misiones 6 y 7: zonas pobladas
-        this.crowdMin = 2; //Mínimo de NPCs para considerar que el jugador está en una multitud
+        this.crowdMin = this.scene.scene.get("NPCNumber").minNPC/10; //Mínimo de NPCs para considerar que el jugador está en una multitud
         this.timeInCrowd = 30000; //Van a ser 30 segundos
         //Misión 8: stalkeo de NPC
         this.currentTarget;
@@ -132,7 +132,7 @@ class Missions extends Phaser.GameObjects.Group
             }
         })
         if(crowd >= this.crowdMin)
-        { //Si el jugador está cerca de 2 o más NPCs, ya se considera aglomeración y comienza la misión
+        { 
             if(this.timeInCrowd<=0) this.player1.missionAccomplished = true;    
         } 
         else this.timeInCrowd = 30000; 

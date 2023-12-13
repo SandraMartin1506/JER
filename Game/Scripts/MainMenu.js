@@ -16,6 +16,7 @@ class MainMenu extends Phaser.Scene
 
     create()
     {
+        game.canvas.style.cursor = "auto";
         //Background y panel de transición:
         this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(100);
         this.backgroundImage1 = this.add.image(0,0,"Background").setOrigin(0,0);
@@ -24,7 +25,7 @@ class MainMenu extends Phaser.Scene
         //Audio de los botones
         this.clickSound = this.sound.add("Click");
         this.paperSound = this.sound.add("Paper");
-        //Variables de escalado:
+        //Botón para jugar:
         var scale = 10;
         this.StartButton = this.add.image(this.game.config.width/2, this.game.config.height/2 - 100, "buttonPlaceholder");
         this.StartButton.setScale(scale);
@@ -42,7 +43,7 @@ class MainMenu extends Phaser.Scene
         this.StartButton.on("pointerout", function(event) 
         {
             this.StartButton.setScale(scale);
-            game.canvas.style.cursor = "crosshair";
+            game.canvas.style.cursor = "auto";
         }.bind(this));
         //Botón para los créditos:
         this.creditsButton = this.add.image(this.game.config.width/2, this.game.config.height/2 + 100, "buttonPlaceholder");
@@ -61,7 +62,25 @@ class MainMenu extends Phaser.Scene
         this.creditsButton.on("pointerout", function(event) 
         {
             this.creditsButton.setScale(scale);
-            game.canvas.style.cursor = "crosshair";
+            game.canvas.style.cursor = "auto";
+        }.bind(this));
+        //Botón para dificultad:
+        this.NPCButton = this.add.image(this.game.config.width/2, this.game.config.height/2 + 300, "buttonPlaceholder");
+        this.NPCButton.setScale(scale);
+        this.NPCButton.setRotation(Phaser.Math.DegToRad(90));
+        this.NPCButton.setInteractive();
+        this.add.text(665, 730, "NPC Number", {font: "50px Courier", fill: "0#000000"});
+        this.NPCButton.on("pointerdown", function(){this.clickSound.play(); this.GoToNPCNumber();}.bind(this));
+        this.NPCButton.on("pointerover", function(event) 
+        {
+            this.paperSound.play();
+            this.NPCButton.setScale(scale * 1.25);
+            game.canvas.style.cursor = "pointer";
+        }.bind(this));
+        this.NPCButton.on("pointerout", function(event) 
+        {
+            this.NPCButton.setScale(scale);
+            game.canvas.style.cursor = "auto";
         }.bind(this));
     }
 
@@ -86,12 +105,20 @@ class MainMenu extends Phaser.Scene
 
     StartGame()
     {
+        this.scene.get("NPCNumber").ToggleVisibility(false);
+        this.scene.pause("NPCNumber");
         this.scene.add("CustomizationP1Menu",new CustomizationP1Menu);
-        this.scene.stop("MainMenu");
         this.scene.start("CustomizationP1Menu");
     }
 
     PlayCredits()
     {
+    }
+
+    GoToNPCNumber()
+    {
+        this.scene.stop();
+        this.scene.get("NPCNumber").ToggleVisibility(true);
+        this.scene.resume("NPCNumber");
     }
 }

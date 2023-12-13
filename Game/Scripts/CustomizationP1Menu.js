@@ -7,6 +7,9 @@ class CustomizationP1Menu extends Phaser.Scene
 
     preload()
     {
+        //Audios:
+        this.load.audio("Click", "./Sounds/click.mp3");
+        //UI:
         this.load.image("Player1Customizes", "./Sprites/player1customizes.png");
         this.load.image("ArrowButton", "./Sprites/flechas.png");
         this.load.image("ConfirmButton", "./Sprites/confirm.png");
@@ -48,6 +51,8 @@ class CustomizationP1Menu extends Phaser.Scene
 
     create()
     {
+        //Audios:
+        this.clickSound = this.sound.add("Click");
         //Decoración fondo
         this.cameras.main.setBackgroundColor('#FFFFFF')
         const hoja2 = this.add.image(((this.game.config.width*(0.2)/2)),(this.game.config.height*(0.3))/2, "HojaCuaderno").setOrigin(0.5,0.5);
@@ -166,6 +171,7 @@ class CustomizationP1Menu extends Phaser.Scene
         this.goToCustomP2 = false;
         confirm.on("pointerdown", function(event) 
         {
+            this.clickSound.play();
             if (this.alertText.alpha<1){
             this.goToCustomP2 = true;
             }
@@ -239,6 +245,7 @@ class CustomizationP1Menu extends Phaser.Scene
     }
 
     ChangeRandom(){
+        this.clickSound.play();
         //Hat
         var randomHat = Math.floor(Math.random()*(this.spritesheetsHat.length));
         this.hatNum = randomHat;
@@ -271,7 +278,7 @@ class CustomizationP1Menu extends Phaser.Scene
     }
 
     PartChange(part,add){
-
+        this.clickSound.play();
         switch(part){
 
             case 1:

@@ -12,6 +12,9 @@ class CustomizationP2Menu extends Phaser.Scene
 
     preload()
     {
+        //Audio:
+        this.load.audio("Click", "./Sounds/click.mp3");
+        //Imágenes:
         this.load.image("StartButton", "./Sprites/startgame.png");
         this.load.image("Player2Customizes", "./Sprites/player2customizes.png");
         this.load.image("HojaCuaderno", "./Sprites/hojacuaderno.png");
@@ -22,7 +25,7 @@ class CustomizationP2Menu extends Phaser.Scene
 
     create()
     {
-
+        this.clickSound = this.sound.add("Click");
         this.cameras.main.setBackgroundColor('#FFFFFF')
         const hoja = this.add.image(((this.game.config.width*(0.2)/2)),(this.game.config.height*(0.7))/2, "HojaCuaderno").setOrigin(0.5,0.5);
         hoja.setScale(1.7).setAngle(30);
@@ -41,6 +44,7 @@ class CustomizationP2Menu extends Phaser.Scene
         this.goToGame = false;
         confirm.on("pointerdown", function(event) 
         {
+            this.clickSound.play();
             if ( this.weaponSelected!=undefined){
             this.goToGame = true;
             }
@@ -63,6 +67,7 @@ class CustomizationP2Menu extends Phaser.Scene
         this.InteractButton2(weapon1box)
         weapon1box.on("pointerdown", function(event) 
         {
+            this.clickSound.play();
             weapon1box.setFillStyle(0x66cc4d);
             weapon1box.setAlpha(1);
             weapon2box.setFillStyle(0x000000);
@@ -73,6 +78,7 @@ class CustomizationP2Menu extends Phaser.Scene
         this.InteractButton2(weapon2box)
         weapon2box.on("pointerdown", function(event) 
         {
+            this.clickSound.play();
             weapon2box.setFillStyle(0x66cc4d);
             weapon2box.setAlpha(1);
             weapon1box.setFillStyle(0x000000);
@@ -147,7 +153,6 @@ class CustomizationP2Menu extends Phaser.Scene
     }
 
     InteractButton(button){
-
         button.setInteractive();
         button.on("pointerover", function(event) 
         {
@@ -162,7 +167,6 @@ class CustomizationP2Menu extends Phaser.Scene
     }
 
     InteractButton2(button){
-
         button.setInteractive();
         button.input.alwaysEnabled = true;
         button.on("pointerover", function(event) 
@@ -243,7 +247,7 @@ class CustomizationP2Menu extends Phaser.Scene
     }
 
     GoToGame()
-    {
+    {   
         this.scene.add("Game", new Game(this.hint1,this.hint2,this.hint3));
         this.scene.add("Info", new InfoMenu);
         this.scene.add("Pause", new PauseMenu);
