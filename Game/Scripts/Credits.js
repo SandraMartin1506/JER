@@ -10,14 +10,14 @@ class Credits extends Phaser.Scene
         this.load.image("buttonPlaceholder", "./Sprites/bala.png");
         this.load.image("BackgroundCredits", "./Sprites/credits.png");
         this.load.audio("Click", "./Sounds/click.mp3");
-        this.load.audio("Paper", "./Sounds/paper.mp3");
+        this.load.audio("Hacker", "./Sounds/hacker.mp3");
     }
 
     create()
     {
         this.backgroundImage1 = this.add.image(0,0,"BackgroundCredits").setOrigin(0,0);
         this.clickSound = this.sound.add("Click");
-        this.paperSound = this.sound.add("Paper");
+        this.hackerSound = this.sound.add("Hacker");
         var scale = 0.4;
         this.backButton = this.add.image(this.game.config.width/2, this.game.config.height/2 + 300, "buttonPlaceholder");
         this.backButton.setScale(scale);
@@ -26,7 +26,7 @@ class Credits extends Phaser.Scene
         this.backButton.on("pointerdown", function(){this.ReturnToMenu();}.bind(this));
         this.backButton.on("pointerover", function(event) 
         {
-            this.paperSound.play();
+            this.hackerSound.play();
             this.backButton.setScale(scale * 1.25);
             game.canvas.style.cursor = "pointer";
         }.bind(this));
