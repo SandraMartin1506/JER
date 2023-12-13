@@ -83,7 +83,7 @@ class MainMenu extends Phaser.Scene
         this.creditsButton.setInteractive();
         this.add.text(690, 530, "Credits", {font: "50px Courier", fill: "#ffffff"});
         this.goToCredits = false;
-        this.creditsButton.on("pointerdown", function(){this.goToCredits = true; this.clickSound.play();}.bind(this));
+        this.creditsButton.on("pointerdown", function(){this.clickSound.play();this.PlayCredits();}.bind(this));
         this.creditsButton.on("pointerover", function(event) 
         {
             this.hackerSound.play();
@@ -136,16 +136,16 @@ class MainMenu extends Phaser.Scene
 
     StartGame()
     {
-        this.scene.get("NPCNumber").ToggleVisibility(false);
-        this.scene.pause("NPCNumber");
+        //this.scene.get("NPCNumber").ToggleVisibility(false);
+        //this.scene.pause("NPCNumber");
         this.scene.add("CustomizationP1Menu",new CustomizationP1Menu);
         this.scene.start("CustomizationP1Menu");
     }
 
     PlayCredits()
     {
-        this.scene.add("Credits",new Credits);
         this.scene.stop();
+        this.scene.add("Credits", new Credits());
         this.scene.start("Credits");
     }
 
@@ -153,6 +153,6 @@ class MainMenu extends Phaser.Scene
     {
         this.scene.stop();
         this.scene.get("NPCNumber").ToggleVisibility(true);
-        this.scene.resume("NPCNumber");
+        this.scene.start("NPCNumber");
     }
 }

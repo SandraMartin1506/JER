@@ -5,7 +5,7 @@ const config =
     parent: "container",
     type: Phaser.AUTO,
     backgroundColor: '0x000000',
-    scene: [NPCNumber, MainMenu],
+    scene: [MainMenu, NPCNumber],
     physics: {
         default: 'arcade',
         arcade: {
