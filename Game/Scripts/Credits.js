@@ -18,12 +18,11 @@ class Credits extends Phaser.Scene
         this.backgroundImage1 = this.add.image(0,0,"BackgroundCredits").setOrigin(0,0);
         this.clickSound = this.sound.add("Click");
         this.paperSound = this.sound.add("Paper");
-        var scale = 10;
+        var scale = 0.4;
         this.backButton = this.add.image(this.game.config.width/2, this.game.config.height/2 + 300, "buttonPlaceholder");
         this.backButton.setScale(scale);
-        this.backButton.setRotation(Phaser.Math.DegToRad(90));
         this.backButton.setInteractive();
-        this.add.text(665, 730, "Back", {font: "50px Courier", fill: "0#000000"});
+        this.add.text(740, 730, "Back", {font: "50px Courier", fill: "#ffffff"});
         this.backButton.on("pointerdown", function(){this.ReturnToMenu();}.bind(this));
         this.backButton.on("pointerover", function(event) 
         {
