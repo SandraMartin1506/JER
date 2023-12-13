@@ -94,10 +94,10 @@ Las prendas de ropa que se utilizan son tan solo 3: pantalones, camiseta y gorro
 Hay dos armas seleccionables en el juego y cada una tiene sus propias características:
 
 ### **Francotirador**
-![Francotirador](../Sprites/rifle_de_francotirador.png)
+![Francotirador](Sprites/rifle_de_francotirador.png)
 Tiene la posibilidad de disparar 5 balas. Elimina al personaje seleccionado.
 
-![Lanzagranadas](../Sprites/lanzagranadas.png)
+![Lanzagranadas](Sprites/lanzagranadas.png)
 ### **Lanzagranadas**
 Tiene la posibilidad de disparar 3 balas cuyo impacto afecta en áreas y no individualmente como en el caso de la otra. Elimina a los personajes en el área.
 
@@ -105,8 +105,8 @@ Tiene la posibilidad de disparar 3 balas cuyo impacto afecta en áreas y no indi
 
 ### **Gráficos**
 Los gráficos del juego están dibujados a mano y en 2D, son muy minimalistas y orientados a representar puramente lo estricto y necesario. Todo el fondo es en blanco y negro, tiene algún detalle dibujado pero bastante poco, está mayormente vacío, el único color del juego son las prendas de los personajes. Los personajes tienen todos el mismo cuerpo simple, de color blanco y con un trazo negro, la única diferencia son sus prendas, que además son ligeramente más grandes que sus torsos y de colores vivos. El trazo de las mismas es ligeramente más grueso para que destaquen y se vean bien.
-![Sprite general](SpriteImage.png)
-![Ejemplo de personaje vestido](SpriteExample.png)
+![Sprite general](ReadmeImages/SpriteImage.png)
+![Ejemplo de personaje vestido](ReadmeImages/SpriteExample.png)
 
 Todo el juego se ve en cenital, imitando la perspectiva que tendría un tirador ubicado en un edificio alto de una plaza o calle muy transitada, quizá recordando ligeramente a las ilustraciones de un libro de encontrar a Wally. Ambos jugadores comparten punto de vista y tienen la misma información básica por pantalla. 
 
@@ -146,9 +146,9 @@ Va después de la del jugador 1 (simultáneamente si se está jugando en línea)
 ![Pantalla de customización jugador 1](ReadmeImages/Player2Customization.png)
 
 **Interfaces de partida**
+Durante la partida hay una interfaz visible en todo momento. En la esquina superior derecha de la pantalla aparece un botón en forma de cuaderno en el que pone diario. Al hacerle click izquierdo el jugador 2 se despliega hacia abajo una hoja de cuaderno con las pistas escritas. Al volver a seleccionar el botón en forma de cuaderno esta se cierra. Al lado izquierdo del cuaderno además se pueden consultar las balas del jugador 2, para saber cuántas le quedan.
 
-Durante la partida hay tres interfaces visibles en todo momento. En la esquina superior izquierda de la pantalla aparece un botón en forma de post it en el que pone diario. Al hacerle click izquierdo el jugador 2 se despliega una hoja de cuaderno con las pistas escritas, esta hoja tiene el mismo post it de diario debajo, al darle click izquierdo se cierra. En el lado derecho tiene otro post it: al darle click izquierdo pasa a otra página con todas las posibles misiones del jugador 1 descritas para consultarlas en todo momento. Finalmente, si el jugador hace click derecho en cualquier parte del escenario con una de las armas con zoom una ventana se abrirá en la esquina superior derecha que hace un zoom permanente a la zona clickeada hasta que se hace click derecho en otra zona, lo que hace un zoom nuevo, o en la propia ventana, lo que la cierra.
 ### <a name="_heading=h.oxkqnhw80ffp"></a>**Pantalla de pausa**
 Esta pantalla se puede acceder durante la partida del juego. Sirve para pausar la partida y se puede entrar a ella presionando la tecla esc. En ella se pueden elegir dos opciones, una para continuar la partida que se ha pausado y otra para volver a la pantalla de inicio de manera que se pueda iniciar una nueva partida.
 
-![](Aspose.Words.d11e08c1-7502-4c34-997f-3d8c28faeb34.014.png)
+
