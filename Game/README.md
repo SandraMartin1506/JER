@@ -151,4 +151,10 @@ Durante la partida hay una interfaz visible en todo momento. En la esquina super
 ### <a name="_heading=h.oxkqnhw80ffp"></a>**Pantalla de pausa**
 Esta pantalla se puede acceder durante la partida del juego. Sirve para pausar la partida y se puede entrar a ella presionando la tecla esc. En ella se pueden elegir dos opciones, una para continuar la partida que se ha pausado y otra para volver a la pantalla de inicio de manera que se pueda iniciar una nueva partida.
 
+<<<<<<< Updated upstream
 
+=======
+### <a name="_heading=h.oxkqnhw80ffp"></a>**Pantalla de fin de juego**
+Esta pantalla aparece cuando se termina la partida, es decir, uno de los dos jugadores ha ganado. En ella se explica cuál de los dos ha ganado y por qué. Tiene dos botones: Play Again, que devuelve a la pantalla de customización del jugador 1 y comienza el juego de nuevo; y Main Menu, que manda a los usuarios al menú principal
+![Pantalla de fin de juego](ReadmeImages/Player2Customization.png)
+>>>>>>> Stashed changes
