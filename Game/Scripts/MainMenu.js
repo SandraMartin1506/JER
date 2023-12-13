@@ -144,6 +144,9 @@ class MainMenu extends Phaser.Scene
 
     PlayCredits()
     {
+        this.scene.add("Credits",new Credits);
+        this.scene.stop();
+        this.scene.start("Credits");
     }
 
     GoToNPCNumber()
