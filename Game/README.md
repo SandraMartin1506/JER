@@ -22,8 +22,6 @@ Pablo Melgar Álvarez,p.melgar.2021@alumnos.urjc.es , PabloMelgar (https://githu
 # **MECÁNICAS:**
 
 **Pantalla de inicio:**
-
-**Fase 
 El juego cuenta con una pantalla de inicio en la cual sólo hay tres opciones: “Número de NPCs”, que despliega la personalización de NPCs del juego (explicado más adelante), “Jugar en línea” y “Jugar local”, dado que aun no podemos jugar en linea esto se implementará en la siguiente fase. No existen ajustes para el control de brillo, volumen de la música ni asignación de teclas, pues se trata de un minijuego muy simple y rápido de jugar. 
 
 **Fase de personalización:**
@@ -32,7 +30,7 @@ Al comenzar la partida se dará paso a una fase de personalización, en la cual 
 
 **Fase de juego:**
 
-El mundo se genera con un número de NPCs determinados por la dificultad elegida. La vestimenta de estos personajes es elegida por el juego, el cual proporciona a cada uno una camiseta, unos pantalones y un gorro aleatorios. Tanto la posición inicial de los NPCs como la del jugador 1 son también aleatorias.
+El mundo se genera con un número de NPCs determinados por la cantidad elegida. La vestimenta de estos personajes es elegida por el juego, el cual proporciona a cada uno una camiseta, unos pantalones y un gorro aleatorios. Tanto la posición inicial de los NPCs como la del jugador 1 son también aleatorias.
 
 Al jugador 1 se le presenta una misión de un banco de misiones, la cual debe completar para ganar la partida (siendo el jugador 2 desconocedor de esta). Por su parte, el jugador 2 recibe tres pistas sobre la apariencia de su oponente, dos de ellas generadas por el juego y la tercera escrita por el jugador 1 en la fase de personalización. La partida termina en victoria para el jugador 1 si consigue terminar su misión o si al jugador 2 se le acaba la munición (la cual depende del tipo de arma que haya escogido), mientras que termina en victoria para el jugador 2 si éste consigue eliminar al jugador 1.
 
@@ -85,33 +83,35 @@ Para interactuar con el videojuego es necesario el uso de teclado y ratón. El J
 **FASE 2: MODIFICACIONES. Se ha eliminado el zoom.**
 Por otro lado, el Jugador 2, que controla el arma, debe utilizar el ratón para controlar la mira del arma que previamente ha escogido. Esta se puede mover por todo el mapa siguiendo el movimiento del ratón. Para disparar se utiliza el click izquierdo.
 # **ITEMS**
-
 Los objetos del videojuego son las diferentes prendas de ropa que tienen tanto los NPCs como el personaje del Jugador 1 y las 3 diferentes armas que el Jugador 2 tiene que elegir.
 ## **Ropa**
 Las prendas de ropa que se utilizan son tan solo 3: pantalones, camiseta y gorro, y tan solo cambiarán los colores, los tipos (un gorro puede ser de lana o de copa, por ejemplo) y los patrones de estos.
+![Ejemplo ropa](Sprites/camisa_1.png)
+![Ejemplo ropa](Sprites/camisa_1.png)
 ## **Armas**
 **FASE 2: MODIFICACIONES. Se quita una de las tres armas y se quita el medidor de vida de personajes. Se cambia la cantidad de munición de cada arma para que la dificultad sea más equilibrada para ambos jugadores**
 Hay dos armas seleccionables en el juego y cada una tiene sus propias características:
 
 ### **Francotirador**
-![Francotirador](Sprites/rifle_de_francotirador.png)
 Tiene la posibilidad de disparar 5 balas. Elimina al personaje seleccionado.
+![Francotirador](Sprites/rifle_de_francotirador.png)
 
-![Lanzagranadas](Sprites/lanzagranadas.png)
 ### **Lanzagranadas**
 Tiene la posibilidad de disparar 3 balas cuyo impacto afecta en áreas y no individualmente como en el caso de la otra. Elimina a los personajes en el área.
+![Lanzagranadas](Sprites/lanzagranadas.png)
 
 # **ESTÉTICA** 
 
 ### **Gráficos**
 Los gráficos del juego están dibujados a mano y en 2D, son muy minimalistas y orientados a representar puramente lo estricto y necesario. Todo el fondo es en blanco y negro, tiene algún detalle dibujado pero bastante poco, está mayormente vacío, el único color del juego son las prendas de los personajes. Los personajes tienen todos el mismo cuerpo simple, de color blanco y con un trazo negro, la única diferencia son sus prendas, que además son ligeramente más grandes que sus torsos y de colores vivos. El trazo de las mismas es ligeramente más grueso para que destaquen y se vean bien.
+
 ![Sprite general](ReadmeImages/SpriteImage.png)
 ![Ejemplo de personaje vestido](ReadmeImages/SpriteExample.png)
 
-Todo el juego se ve en cenital, imitando la perspectiva que tendría un tirador ubicado en un edificio alto de una plaza o calle muy transitada, quizá recordando ligeramente a las ilustraciones de un libro de encontrar a Wally. Ambos jugadores comparten punto de vista y tienen la misma información básica por pantalla. 
+Todo el juego se ve en cenital, imitando la perspectiva que tendría un tirador ubicado en un edificio alto de una plaza o calle muy transitada, recordando ligeramente a las ilustraciones de un libro de encontrar a Wally. Ambos jugadores comparten punto de vista y tienen la misma información básica por pantalla. 
 
-**Menús**
-La estética de los menús también es minimalista. Los menús durante la partida imitan las hojas arrancadas de un típico cuaderno de cuadrícula con los textos imitando estar escritos  a boli en una caligrafía simple, mientras que los menús de fuera de partida imitan el estilo típico de código de las películas de hackers. Las pantallas de selección de antes de las partidas comparten esa estética minimalista blanco y negro aunque tienen imágenes a color.
+### **Menús**
+La estética de los menús también es minimalista. Los menús durante la partida imitan las hojas arrancadas de un típico cuaderno de cuadrícula con los textos imitando estar escritos a boli en una caligrafía simple, mientras que los menús de fuera de partida imitan el estilo típico de código de las películas de hackers. Las pantallas de selección de antes de las partidas comparten esa estética minimalista blanco y negro aunque tienen imágenes a color.
 
 # **APARTADO SONORO**
 
@@ -119,7 +119,7 @@ El apartado sonoro del videojuego también es bastante minimalista, ya que consi
 ### <a name="_heading=h.k3t9ht79yfhx"></a>**Sonido ambiente**
 Como sonido ambiente para el juego se utiliza un sonido de murmullo que se reproducirá en bucle a lo largo de toda la partida. Este sonido se pausará únicamente cuando el jugador 2 dispare, causando un silencio de varios segundos tras el disparo para enfatizar la acción del jugador. 
 ### <a name="_heading=h.bz577dtuv1ke"></a>**Sonidos de armas**
-Cada arma tiene un sonido propio correspondiente al disparo de cada una de las armas. El subfusil y el francotirador tiene un sonido del disparo del arma, y el lanzagranadas un sonido del disparo y de la explosión de la granada. Estos sonidos se reproducen cuando el jugador 2 hace click para disparar con el arma que haya elegido.
+Cada arma tiene un sonido propio correspondiente al disparo de cada una de las armas. Estos sonidos se reproducen cuando el jugador 2 hace click para disparar con el arma que haya elegido.
 ### <a name="_heading=h.g36fd59l1ks2"></a>**Sonidos de interfaces**
 Fuera de la partida, hay también varios efectos de sonido para las interacciones que haya con elementos de la interfaz y de los menús. Cuando se abre un menú se reproduce un sonido de papel arrugandose, para seguir la estética de hojas de cuaderno de las interfaces. También se reproduce otro sonido cuando se selecciona cualquier opción de los menús.
 
@@ -142,8 +142,11 @@ Esta se muestra al iniciar partida. Está dividida en dos zonas e introduce la e
 ![Pantalla de customización jugador 1](ReadmeImages/Player1Customization.png)
 
 ### <a name="_heading=h.bzehxrfmhyr"></a>**Pantalla de customización jugador 2**
-Va después de la del jugador 1 (simultáneamente si se está jugando en línea). A la izquierda, muestra ilustraciones de las dos armas en fila con su nombre y descripción en la estética de hackers para que el jugador 2 escoja y debajo las tres pistas que le han tocado.
+Va después de la del jugador 1. A la izquierda, muestra ilustraciones de las dos armas en fila con su nombre y descripción en la estética de hackers para que el jugador 2 escoja y debajo las tres pistas que le han tocado.
 ![Pantalla de customización jugador 1](ReadmeImages/Player2Customization.png)
+Entre cada pantalla de customización, aparece una imagen en pantalla que indica cuál de los dos jugadores debe estar mirando la pantalla en el momento.
+
+![Pantalla entre cada customización](ReadmeImages/FadeInP1.png)
 
 **Interfaces de partida**
 Durante la partida hay una interfaz visible en todo momento. En la esquina superior derecha de la pantalla aparece un botón en forma de cuaderno en el que pone diario. Al hacerle click izquierdo el jugador 2 se despliega hacia abajo una hoja de cuaderno con las pistas escritas. Al volver a seleccionar el botón en forma de cuaderno esta se cierra. Al lado izquierdo del cuaderno además se pueden consultar las balas del jugador 2, para saber cuántas le quedan.
@@ -151,10 +154,7 @@ Durante la partida hay una interfaz visible en todo momento. En la esquina super
 ### <a name="_heading=h.oxkqnhw80ffp"></a>**Pantalla de pausa**
 Esta pantalla se puede acceder durante la partida del juego. Sirve para pausar la partida y se puede entrar a ella presionando la tecla esc. En ella se pueden elegir dos opciones, una para continuar la partida que se ha pausado y otra para volver a la pantalla de inicio de manera que se pueda iniciar una nueva partida.
 
-<<<<<<< Updated upstream
 
-=======
 ### <a name="_heading=h.oxkqnhw80ffp"></a>**Pantalla de fin de juego**
 Esta pantalla aparece cuando se termina la partida, es decir, uno de los dos jugadores ha ganado. En ella se explica cuál de los dos ha ganado y por qué. Tiene dos botones: Play Again, que devuelve a la pantalla de customización del jugador 1 y comienza el juego de nuevo; y Main Menu, que manda a los usuarios al menú principal
 ![Pantalla de fin de juego](ReadmeImages/Player2Customization.png)
->>>>>>> Stashed changes
