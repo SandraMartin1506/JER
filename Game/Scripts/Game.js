@@ -11,6 +11,7 @@ class Game extends Phaser.Scene
     preload()
     {
         //IMÁGENES
+        this.load.image("BackgroundP", "./Sprites/fondo.png")
         this.load.image("Bullet", "./Sprites/bala1.png");
         this.load.image("Crosshair", "./Sprites/Mira.png");
         this.load.spritesheet("Character", "./Sprites/SpriteSheet.png", {frameWidth: 250, frameHeight: 450});
@@ -23,7 +24,7 @@ class Game extends Phaser.Scene
 
     create()
     {
-        this.cameras.main.setBackgroundColor('0xFFFF50');
+        this.backgroundImage1 = this.add.image(0,0,"BackgroundP").setOrigin(0,0);
         //Panel de fade in:
         this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(1000);
         //Audio
