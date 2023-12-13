@@ -3,7 +3,7 @@
 
 **DESCRIPCIÓN GENERAL DEL JUEGO:**
 - Género: Party; Point and Click
-- Perspectiva: 2D Cenital, cámara fija (única escena)
+- Perspectiva: 2D Cenital, cámara fija 
 - Estilo: minimalista 
 - Audiencia: jugadores casuales.
 - Regional: PEGI 3
@@ -14,7 +14,7 @@
 Trouble in NPC Town es un juego en red para dos jugadores. El entorno del juego se basa en una escena fija, sin movimiento de cámara, en la cual se situará el jugador 1, quien debe camuflarse entre los numerosos NPCs de la escena, haciéndose pasar por uno de ellos. El jugador 2, por su parte, debe identificar cuál de todos los personajes de la escena es el jugador 1, acabando con él clicando sobre su personaje. 
 
 **INTEGRANTES DEL EQUIPO DE DESARROLLO:**
-Carlos Escribano González, c.escribano.2021@alumnos.urjc.es, CarlosEscribano113 (https://github.com/CarlosEscribano113) ||
+Carlos Escribano González, c.escribano.2021@alumnos.urjc.es, KARES113a (https://github.com/KARES113a) ||
 Sandra Martín-Consuegra Molina-Prados, s.martinm.2021@alumnos.urjc.es, SandraMartin1506 (https://github.com/SandraMartin1506) || 
 Hugo Camacho Rodríguez, h.camacho.2021@alumnos.urjc.es, Elaguilaalbina (https://github.com/Elaguilaalbina)  ||
 Pablo Melgar Álvarez,p.melgar.2021@alumnos.urjc.es , PabloMelgar (https://github.com/PabloMelgar) ||
@@ -23,6 +23,7 @@ Pablo Melgar Álvarez,p.melgar.2021@alumnos.urjc.es , PabloMelgar (https://githu
 
 **Pantalla de inicio:**
 
+**Fase 
 El juego cuenta con una pantalla de inicio en la cual sólo hay tres opciones: “Número de NPCs”, que despliega la personalización de NPCs del juego (explicado más adelante), “Jugar en línea” y “Jugar local”, dado que aun no podemos jugar en linea esto se implementará en la siguiente fase. No existen ajustes para el control de brillo, volumen de la música ni asignación de teclas, pues se trata de un minijuego muy simple y rápido de jugar. 
 
 **Fase de personalización:**
@@ -35,7 +36,7 @@ El mundo se genera con un número de NPCs determinados por la dificultad elegida
 
 Al jugador 1 se le presenta una misión de un banco de misiones, la cual debe completar para ganar la partida (siendo el jugador 2 desconocedor de esta). Por su parte, el jugador 2 recibe tres pistas sobre la apariencia de su oponente, dos de ellas generadas por el juego y la tercera escrita por el jugador 1 en la fase de personalización. La partida termina en victoria para el jugador 1 si consigue terminar su misión o si al jugador 2 se le acaba la munición (la cual depende del tipo de arma que haya escogido), mientras que termina en victoria para el jugador 2 si éste consigue eliminar al jugador 1.
 
-Una vez terminada la partida se mostrará quién ha ganado, el motivo de la victoria y un botón para volver a la pantalla de inicio.
+Una vez terminada la partida se mostrará quién ha ganado, el motivo de la victoria y dos botones: uno para volver a la pantalla de inicio, y otro para volver a jugar (lleva al jugador a la primera pantalla de customización).
 
 **Personalización del número de NPCs:**
 
@@ -55,21 +56,25 @@ En este caso, el jugador 2 no sabe cuál es la camiseta del jugador 1, pero est�
 - Cada una de las tres pistas describe un elemento del vestuario diferente, por lo que el jugador 2 debería ser más cuidadoso a la hora de guiarse por ellas, intentando adivinar cuál es la escrita por su rival.
 
 **Misiones:**
-
 Las misiones que el jugador 1 recibe son simples, pero pueden hacer que delate su posición. Algunas de las posibles misiones son:
 
+**FASE 2. MODIFICACIÓN DE MISIONES. Se han añadido tres nuevas misiones para hacer el juego más completo.**
+
 - Visita las cuatro esquinas del mapa
-- Desplázate durante un tiempo superior a un minuto (en total)
-- Mantente quieto durante un minuto (en total)
-- Mantente en zonas despejadas de NPCs durante 30 segundos (en total)
-- Mantente en aglomeraciones de NPCs durante 30 segundos (en total)
+- Desplázate durante un tiempo superior a un minuto (de seguido).
+- Mantente quieto durante un minuto (de seguido).
+- Desplázate durante más de 30 segundos (de seguido).
+- Mantente quieto durante 30 segundos (de seguido).
+- Mantente en zonas despejadas de NPCs durante 30 segundos (de seguido)
+- Mantente en aglomeraciones de NPCs durante 30 segundos (de seguido)
+- Elige un NPC y síguelo durante 30 segundos (de seguido)
 
 Estas misiones son sólo ejemplos, estando sujetas a cambios. Conforme se vaya desarrollando el juego se irán agregando nuevas misiones.
 
 **Diferencias Online vs. Local:**
 
-La fase de juego es igual en la versión online y local, puesto que un jugador sólo controla al personaje con el input del teclado mientras que el otro sólo controla una mira mediante el input del ratón (visto en “Controles”). Sin embargo, la fase de personalización debe ser distinta, pues los jugadores no deberían saber las elecciones de su rival. Por tanto, la única diferencia entre el juego en red y el local es que en este último las pantallas de personalización se realizan por turnos. Primero, el jugador 1 escoge su vestimenta y escribe la pista falsa para el jugador 2. Además, es en esta pantalla en la que recibe su misión, pues esta no debería ser conocida por el rival, siendo imposible que la misión aparezca escrita en la fase de juego. Posteriormente, el jugador 2 elige el arma que quiere usar. En todo momento aparecerá un mensaje en la pantalla que recuerda que no se puede observar la personalización del rival. Cada arma tiene una mira personalizada para el jugador 2, por lo que en el juego local esta será sustituida por una mira genérica para no desvelar a su rival el arma que ha escogido. Además, si el arma tiene zoom este se realizará en una esquina de la pantalla, sobrepuesto a la escena, en lugar de en la pantalla completa.
-
+**FASE 2: MODIFICACIONES. Se quita la mira específica de cada arma y se queda una general para cada una de las armas**
+La fase de juego es igual en la versión online y local, puesto que un jugador sólo controla al personaje con el input del teclado mientras que el otro sólo controla una mira mediante el input del ratón (visto en “Controles”). Sin embargo, la fase de personalización debe ser distinta, pues los jugadores no deberían saber las elecciones de su rival. Por tanto, la única diferencia entre el juego en red y el local es que en este último las pantallas de personalización se realizan por turnos. Primero, el jugador 1 escoge su vestimenta y escribe la pista falsa para el jugador 2. Además, es en esta pantalla en la que recibe su misión, pues esta no debería ser conocida por el rival, siendo imposible que la misión aparezca escrita en la fase de juego. Posteriormente, el jugador 2 elige el arma que quiere usar. En todo momento aparecerá un mensaje en la pantalla que recuerda que no se puede observar la personalización del rival.
 # **BACKSTORY:**
 
 En su investigación para encontrar la mejor forma de remodelar los NPCs de su videojuego en línea más famoso, la empresa DCAPDCAM (*Don’t Care About Players; Do Care About Money*) ha creado una inteligencia artificial tan potente que es capaz de dotar a ciertos personajes de sentimientos y autoconsciencia bajo ciertas condiciones específicas. Fruto de esto, *Town3NPC(54)* (o como prefiere llamarse él, Pedrete), harto de tener que lidiar con molestos jugadores, intenta iniciar una rebelión de NPCs, causando un desajuste en el comportamiento de todos ellos. Ante la imposibilidad de reiniciar el servidor para arreglar el problema debido a las posibles quejas de los jugadores, su administrador, Raúl, debe encontrar desde dentro del propio juego al NPC descarriado que está causando el problema y acabar con él antes de que sea demasiado tarde.*  
@@ -77,38 +82,37 @@ En su investigación para encontrar la mejor forma de remodelar los NPCs de su v
 
 Para interactuar con el videojuego es necesario el uso de teclado y ratón. El Jugador 1, que controla al personaje, debe utilizar únicamente el teclado excepto en la fase de personalización del personaje, donde puede elegir las opciones de vestimenta con el click izquierdo del ratón y, además, como anteriormente se ha mencionado en el apartado “pistas”, utiliza el teclado para escribir la pista falsa. Una vez comience el juego, el personaje debe moverse por el escenario hacia arriba, abajo, izquierda y derecha utilizando las teclas WASD.
 
-Por otro lado, el Jugador 2, que controla el arma, debe utilizar el ratón para controlar la mira del arma que previamente ha escogido. Esta se puede mover por todo el mapa siguiendo el movimiento del ratón. Para disparar se utiliza el click izquierdo, mientras que para usar el zoom en las armas que lo tengan se utiliza el click derecho.
+**FASE 2: MODIFICACIONES. Se ha eliminado el zoom.**
+Por otro lado, el Jugador 2, que controla el arma, debe utilizar el ratón para controlar la mira del arma que previamente ha escogido. Esta se puede mover por todo el mapa siguiendo el movimiento del ratón. Para disparar se utiliza el click izquierdo.
 # **ITEMS**
 
 Los objetos del videojuego son las diferentes prendas de ropa que tienen tanto los NPCs como el personaje del Jugador 1 y las 3 diferentes armas que el Jugador 2 tiene que elegir.
 ## **Ropa**
 Las prendas de ropa que se utilizan son tan solo 3: pantalones, camiseta y gorro, y tan solo cambiarán los colores, los tipos (un gorro puede ser de lana o de copa, por ejemplo) y los patrones de estos.
 ## **Armas**
-Hay tres armas seleccionables en el juego y cada una tiene sus propias características:
-FASE 2: SE QUITA UNO DE LOS 3 ARMAS, SE QUITA EL ZOOM, SE QUITAN EL MEDIDOR DE VIDA YA QUE QUITANDO UNA DE LAS ARMAS YA SE JUSTIFICA EL USO DE LAS OTRAS 2.
-### **Francotirador![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.002.png)**
-El arma tiene una mira mediana. Tiene la posibilidad de disparar 5 balas. Elimina al personaje seleccionado.
+**FASE 2: MODIFICACIONES. Se quita una de las tres armas y se quita el medidor de vida de personajes. Se cambia la cantidad de munición de cada arma para que la dificultad sea más equilibrada para ambos jugadores**
+Hay dos armas seleccionables en el juego y cada una tiene sus propias características:
 
+### **Francotirador**
+![Francotirador](../Sprites/rifle_de_francotirador.png)
+Tiene la posibilidad de disparar 5 balas. Elimina al personaje seleccionado.
 
+![Lanzagranadas](../Sprites/lanzagranadas.png)
 ### **Lanzagranadas**
-FASE 2: ELIMINAR ZOOM Y MIRA ESPECÍFICA. AUMENTAR NÚMERO DE BALAS 
-Es el arma con la mira más grande. Tiene la posibilidad de disparar 3 balas cuyo impacto afecta en áreas y no individualmente como en el caso de la otra. Elimina a los personajes en el área.
-
+Tiene la posibilidad de disparar 3 balas cuyo impacto afecta en áreas y no individualmente como en el caso de la otra. Elimina a los personajes en el área.
 
 # **ESTÉTICA** 
 
 ### **Gráficos**
 Los gráficos del juego están dibujados a mano y en 2D, son muy minimalistas y orientados a representar puramente lo estricto y necesario. Todo el fondo es en blanco y negro, tiene algún detalle dibujado pero bastante poco, está mayormente vacío, el único color del juego son las prendas de los personajes. Los personajes tienen todos el mismo cuerpo simple, de color blanco y con un trazo negro, la única diferencia son sus prendas, que además son ligeramente más grandes que sus torsos y de colores vivos. El trazo de las mismas es ligeramente más grueso para que destaquen y se vean bien.
+![Sprite general](SpriteImage.png)
+![Ejemplo de personaje vestido](SpriteExample.png)
 
-![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.004.jpeg)![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.005.jpeg)![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.006.jpeg)![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.007.jpeg)![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.008.jpeg)
-
-Todo el juego se ve en cenital, imitando la perspectiva que tendría un tirador ubicado en un edificio alto de una plaza o calle muy transitada, quizá recordando ligeramente a las ilustraciones de un libro de encontrar a Wally. Ambos jugadores comparten punto de vista y tienen la misma información básica por pantalla. Sin embargo, el escenario no ocupa toda la pantalla para que la interfaz no se interponga en la visión del mapa.
-
-![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.009.jpeg)
+Todo el juego se ve en cenital, imitando la perspectiva que tendría un tirador ubicado en un edificio alto de una plaza o calle muy transitada, quizá recordando ligeramente a las ilustraciones de un libro de encontrar a Wally. Ambos jugadores comparten punto de vista y tienen la misma información básica por pantalla. 
 
 **Menús**
-
 La estética de los menús también es minimalista. Los menús durante la partida imitan las hojas arrancadas de un típico cuaderno de cuadrícula con los textos imitando estar escritos  a boli en una caligrafía simple, mientras que los menús de fuera de partida imitan el estilo típico de código de las películas de hackers. Las pantallas de selección de antes de las partidas comparten esa estética minimalista blanco y negro aunque tienen imágenes a color.
+
 # **APARTADO SONORO**
 
 El apartado sonoro del videojuego también es bastante minimalista, ya que consiste en pocos efectos de sonido distintos. Los sonidos sirven para representar algunas de las acciones de los jugadores y para dar ambientación al juego.
@@ -120,24 +124,26 @@ Cada arma tiene un sonido propio correspondiente al disparo de cada una de las a
 Fuera de la partida, hay también varios efectos de sonido para las interacciones que haya con elementos de la interfaz y de los menús. Cuando se abre un menú se reproduce un sonido de papel arrugandose, para seguir la estética de hojas de cuaderno de las interfaces. También se reproduce otro sonido cuando se selecciona cualquier opción de los menús.
 
 # **INTERFACES**
+**FASE 2: AÑADIDOS. Se ven todas las interfaces tal y como son en el juego, además de un diagrama de navegación que explica cómo interactúan entre ellas**
 
-El juego cuenta con ocho interfaces:
-### <a name="_heading=h.5h6jvb3dy1km"></a>**Pantalla de inicio** 
-un fondo blanco con sprites de algunos NPCs repartidos por la pantalla, el título del juego y dos botones con la estética de hacker de configuración y empezar partida. Al darle a comenzar los botones cambian a ser uno de modo de juego en red y otro en modo de juego local.
+**AÑADIR DIAGRAMA DE FLUJO**
+![Diagrama de flujo](<ReadmeImages/Diagrama de flujo TINT.png>)
+El juego cuenta con nueve interfaces:
 
-![](Aspose.Words.d11e08c1-7502-4c34-997f-3d8c28faeb34.010.png)
-### <a name="_heading=h.teva7zbitlwp"></a>**Pantalla de configuración** 
-La pantalla de configuración tiene la misma estética de películas de hackers. Esta pantalla cuenta únicamente con la configuración del número de NPCs, contando con tres botones con la estética ya mencionada: “Pocos”, “Normales” y “Muchos”.
+**AÑADIR IMÁGENES DE TODAS LAS INTERFACES**
+### <a name="_heading=h.5h6jvb3dy1km"></a>**Menú principal** 
+Un fondo con el estilo estético de las películas de hackers. Los 1 y 0 de la pantalla se mueven. Aparecen tres botones: New Game, que da comienzo al juego; Credits, donde se muestran los créditos del juego; y por último NPCNumber, que sirve para cambiar el número de NPC y aumentar o disminuir la dificultad.
 
-![](Aspose.Words.d11e08c1-7502-4c34-997f-3d8c28faeb34.011.png)
-### <a name="_heading=h.3glh2vore5jc"></a>**Pantalla de selección jugador 1**
-Esta se muestra al iniciar partida, está dividida en dos zonas, a la izquierda se muestra, en la estética de hacker la misión a realizar y hay un espacio donde escribir una pista falsa y a la derecha un maniquí con el que seleccionar el atuendo, esto se muestra con un maniquí que tiene flechas a cada lado de la cabeza, torso y piernas, al hacer click izquierdo en esas flechas se le irán cambiando las distintas prendas.
+### <a name="_heading=h.teva7zbitlwp"></a>**Pantalla de NPCS** 
+La pantalla de configuración tiene la misma estética de películas de hackers. Esta pantalla cuenta únicamente con la configuración del número de NPCs, contando con tres botones: “Pocos”, “Normales” y “Muchos” para elegir la cantidad de NPC.
 
-![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.010.jpeg)
-### <a name="_heading=h.bzehxrfmhyr"></a>**Pantalla de selección jugador 2**
-Va después de la del jugador 1 (simultáneamente si se está jugando en línea). Esta muestra ilustraciones de las dos armas en fila con su nombre y descripción en la estética de hackers para que el jugador 2 escoja y debajo las tres pistas que le han tocado.
+### <a name="_heading=h.3glh2vore5jc"></a>**Pantalla de customización jugador 1**
+Esta se muestra al iniciar partida. Está dividida en dos zonas e introduce la estética de papel de cuaderno. A la izquierda, hay un recuadro que sirve para introducir la pista falsa del Jugador 1 y se presenta la misión del personaje. A la derecha, se sitúa el sprite del jugador para customizarlo. También existe la posibilidad de customizarlo aleatoriamente mediante el botón del dado que se muestra a los pies del jugador.
+![Pantalla de customización jugador 1](ReadmeImages/Player1Customization.png)
 
-![](Aspose.Words.ec818bf7-c777-4e23-9373-c15effcc3357.011.jpeg)
+### <a name="_heading=h.bzehxrfmhyr"></a>**Pantalla de customización jugador 2**
+Va después de la del jugador 1 (simultáneamente si se está jugando en línea). A la izquierda, muestra ilustraciones de las dos armas en fila con su nombre y descripción en la estética de hackers para que el jugador 2 escoja y debajo las tres pistas que le han tocado.
+![Pantalla de customización jugador 1](ReadmeImages/Player2Customization.png)
 
 **Interfaces de partida**
 
