@@ -10,7 +10,7 @@ class NPCNumber extends Phaser.Scene
         this.load.image("buttonPlaceholder", "./Sprites/bala.png");
         this.load.image("Background", "./Sprites/fondohacker.png");
         this.load.image("BackgroundBlack", "./Sprites/fondohackernegro.png");
-        this.load.audio("Paper", "./Sounds/paper.mp3");
+        this.load.audio("Hacker", "./Sounds/hacker.mp3");
         this.load.audio("Click", "./Sounds/click.mp3");
     }
 
@@ -27,7 +27,7 @@ class NPCNumber extends Phaser.Scene
         this.maxNPC = 40;
         //Audio de los botones:
         this.clickSound = this.sound.add("Click");
-        this.paperSound = this.sound.add("Paper");
+        this.hackerSound = this.sound.add("Hacker");
         //Botones:
         var scale = 10;
         this.buttonBack = this.add.image(200, 200, "buttonPlaceholder").setScale(3).setRotation(Phaser.Math.DegToRad(90)).setInteractive();
@@ -46,7 +46,7 @@ class NPCNumber extends Phaser.Scene
         {
             button.on("pointerover", function()
             {
-                this.paperSound.play();
+                this.hackerSound.play();
                 button.setScale(scale * 1.25);
                 game.canvas.style.cursor = "pointer";
             }.bind(this));

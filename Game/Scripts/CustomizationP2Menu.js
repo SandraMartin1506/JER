@@ -14,6 +14,7 @@ class CustomizationP2Menu extends Phaser.Scene
     {
         //Audio:
         this.load.audio("Click", "./Sounds/click.mp3");
+        this.load.audio("Error","./Sounds/error.mp3")
         //Imágenes:
         this.load.image("StartButton", "./Sprites/startgame.png");
         this.load.image("Player2Customizes", "./Sprites/player2customizes.png");
@@ -26,6 +27,7 @@ class CustomizationP2Menu extends Phaser.Scene
     create()
     {
         this.clickSound = this.sound.add("Click");
+        this.errorSound = this.sound.add("Error")
         this.cameras.main.setBackgroundColor('#FFFFFF')
         const hoja = this.add.image(((this.game.config.width*(0.2)/2)),(this.game.config.height*(0.7))/2, "HojaCuaderno").setOrigin(0.5,0.5);
         hoja.setScale(1.7).setAngle(30);
@@ -44,9 +46,11 @@ class CustomizationP2Menu extends Phaser.Scene
         this.goToGame = false;
         confirm.on("pointerdown", function(event) 
         {
-            this.clickSound.play();
             if ( this.weaponSelected!=undefined){
+            this.clickSound.play();
             this.goToGame = true;
+            } else{
+                this.errorSound.play();
             }
         }.bind(this));
 
