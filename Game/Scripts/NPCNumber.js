@@ -30,17 +30,17 @@ class NPCNumber extends Phaser.Scene
         this.clickSound = this.sound.add("Click");
         this.hackerSound = this.sound.add("Hacker");
         //Botones:
-        var scale = 10;
-        this.buttonBack = this.add.image(200, 200, "buttonPlaceholder").setScale(3).setRotation(Phaser.Math.DegToRad(90)).setInteractive();
-        this.buttonLow = this.add.image(this.game.config.width/2, this.game.config.height/2 - 200, "buttonPlaceholder").setScale(scale).setRotation(Phaser.Math.DegToRad(90)).setInteractive();
-        this.buttonNormal = this.add.image((this.game.config.width)/2, this.game.config.height/2, "buttonPlaceholder").setScale(scale).setRotation(Phaser.Math.DegToRad(90)).setInteractive();
-        this.buttonHigh = this.add.image((this.game.config.width)/2, this.game.config.height/2 + 200, "buttonPlaceholder").setScale(scale).setRotation(Phaser.Math.DegToRad(90)).setInteractive();
+        var scale = 0.75;
+        this.buttonBack = this.add.image(200, 200, "buttonPlaceholder").setScale(0.40).setInteractive();
+        this.buttonLow = this.add.image(this.game.config.width/2, this.game.config.height/2 - 200, "buttonPlaceholder").setScale(scale).setInteractive();
+        this.buttonNormal = this.add.image((this.game.config.width)/2, this.game.config.height/2, "buttonPlaceholder").setScale(scale).setInteractive();
+        this.buttonHigh = this.add.image((this.game.config.width)/2, this.game.config.height/2 + 200, "buttonPlaceholder").setScale(scale).setInteractive();
         this.buttonNormal.setTint(0x00ffff);
         //Texto:
-        this.add.text(665, 230, "Low", {font: "50px Courier", fill: "0#000000"});
-        this.add.text(665, 430, "Normal", {font: "50px Courier", fill: "0#000000"});
-        this.add.text(665, 630, "High", {font: "50px Courier", fill: "0#000000"});
-        this.add.text(170, 190, "Back", {font: "25px Courier", fill: "0#000000"});
+        this.add.text(770, 230, "Low", {font: "50px Courier", fill: "#ffffff"});
+        this.add.text(700, 430, "Normal", {font: "50px Courier", fill: "#ffffff"});
+        this.add.text(750, 630, "High", {font: "50px Courier", fill: "#ffffff"});
+        this.add.text(170, 190, "Back", {font: "25px Courier", fill: "#ffffff"});
         //Manejo input:
         var buttonArray = [this.buttonLow, this.buttonNormal, this.buttonHigh];
         buttonArray.forEach((button) =>

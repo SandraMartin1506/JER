@@ -10,6 +10,7 @@ class MainMenu extends Phaser.Scene
         this.load.image("buttonPlaceholder", "./Sprites/bala.png");
         this.load.image("Background", "./Sprites/fondohacker.png");
         this.load.image("BackgroundBlack", "./Sprites/fondohackernegro.png");
+        this.load.image("Titulo","./Sprites/titulo.png")
         this.load.audio("Hacker", "./Sounds/hacker.mp3");
         this.load.audio("Click", "./Sounds/click.mp3");
 
@@ -53,16 +54,16 @@ class MainMenu extends Phaser.Scene
         this.backgroundImage1 = this.add.image(0,0,"Background").setOrigin(0,0);
         this.backgroundImage2 = this.add.image(this.game.config.width,0,"Background").setOrigin(0,0);
         this.backgroundBlack = this.add.image(0,0,"BackgroundBlack").setOrigin(0,0);
+        this.title = this.add.image(this.game.config.width/2 - 800 , this.game.config.height/2 - 450,"Titulo").setOrigin(0,0)
         //Audio de los botones
         this.clickSound = this.sound.add("Click");
         this.hackerSound = this.sound.add("Hacker");
         //Botón para jugar:
-        var scale = 10;
+        var scale = 0.75;
         this.StartButton = this.add.image(this.game.config.width/2, this.game.config.height/2 - 100, "buttonPlaceholder");
         this.StartButton.setScale(scale);
-        this.StartButton.setRotation(Phaser.Math.DegToRad(90));
         this.StartButton.setInteractive();
-        this.add.text(665, 330, "New Game", {font: "50px Courier", fill: "0#000000"});
+        this.add.text(680, 330, "New Game", {font: "50px Courier", fill: "#ffffff"});
         this.startGame = false;
         this.StartButton.on("pointerdown", function(){this.startGame = true;this.clickSound.play();}.bind(this));
         this.StartButton.on("pointerover", function(event) 
@@ -79,9 +80,8 @@ class MainMenu extends Phaser.Scene
         //Botón para los créditos:
         this.creditsButton = this.add.image(this.game.config.width/2, this.game.config.height/2 + 100, "buttonPlaceholder");
         this.creditsButton.setScale(scale);
-        this.creditsButton.setRotation(Phaser.Math.DegToRad(90));
         this.creditsButton.setInteractive();
-        this.add.text(665, 530, "Credits", {font: "50px Courier", fill: "0#000000"});
+        this.add.text(690, 530, "Credits", {font: "50px Courier", fill: "#ffffff"});
         this.goToCredits = false;
         this.creditsButton.on("pointerdown", function(){this.goToCredits = true; this.clickSound.play();}.bind(this));
         this.creditsButton.on("pointerover", function(event) 
@@ -98,9 +98,9 @@ class MainMenu extends Phaser.Scene
         //Botón para dificultad:
         this.NPCButton = this.add.image(this.game.config.width/2, this.game.config.height/2 + 300, "buttonPlaceholder");
         this.NPCButton.setScale(scale);
-        this.NPCButton.setRotation(Phaser.Math.DegToRad(90));
+
         this.NPCButton.setInteractive();
-        this.add.text(665, 730, "NPC Number", {font: "50px Courier", fill: "0#000000"});
+        this.add.text(655, 730, "NPC Number", {font: "50px Courier", fill: "#ffffff"});
         this.NPCButton.on("pointerdown", function(){this.clickSound.play(); this.GoToNPCNumber();}.bind(this));
         this.NPCButton.on("pointerover", function(event) 
         {

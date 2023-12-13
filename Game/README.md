@@ -70,7 +70,6 @@ Las misiones que el jugador 1 recibe son simples, pero pueden hacer que delate s
 Estas misiones son sólo ejemplos, estando sujetas a cambios. Conforme se vaya desarrollando el juego se irán agregando nuevas misiones.
 
 **Diferencias Online vs. Local:**
-
 **FASE 2: MODIFICACIONES. Se quita la mira específica de cada arma y se queda una general para cada una de las armas**
 La fase de juego es igual en la versión online y local, puesto que un jugador sólo controla al personaje con el input del teclado mientras que el otro sólo controla una mira mediante el input del ratón (visto en “Controles”). Sin embargo, la fase de personalización debe ser distinta, pues los jugadores no deberían saber las elecciones de su rival. Por tanto, la única diferencia entre el juego en red y el local es que en este último las pantallas de personalización se realizan por turnos. Primero, el jugador 1 escoge su vestimenta y escribe la pista falsa para el jugador 2. Además, es en esta pantalla en la que recibe su misión, pues esta no debería ser conocida por el rival, siendo imposible que la misión aparezca escrita en la fase de juego. Posteriormente, el jugador 2 elige el arma que quiere usar. En todo momento aparecerá un mensaje en la pantalla que recuerda que no se puede observar la personalización del rival.
 # **BACKSTORY:**
@@ -81,6 +80,7 @@ En su investigación para encontrar la mejor forma de remodelar los NPCs de su v
 Para interactuar con el videojuego es necesario el uso de teclado y ratón. El Jugador 1, que controla al personaje, debe utilizar únicamente el teclado excepto en la fase de personalización del personaje, donde puede elegir las opciones de vestimenta con el click izquierdo del ratón y, además, como anteriormente se ha mencionado en el apartado “pistas”, utiliza el teclado para escribir la pista falsa. Una vez comience el juego, el personaje debe moverse por el escenario hacia arriba, abajo, izquierda y derecha utilizando las teclas WASD.
 
 **FASE 2: MODIFICACIONES. Se ha eliminado el zoom.**
+
 Por otro lado, el Jugador 2, que controla el arma, debe utilizar el ratón para controlar la mira del arma que previamente ha escogido. Esta se puede mover por todo el mapa siguiendo el movimiento del ratón. Para disparar se utiliza el click izquierdo.
 # **ITEMS**
 Los objetos del videojuego son las diferentes prendas de ropa que tienen tanto los NPCs como el personaje del Jugador 1 y las 3 diferentes armas que el Jugador 2 tiene que elegir.
@@ -90,6 +90,7 @@ Las prendas de ropa que se utilizan son tan solo 3: pantalones, camiseta y gorro
 ![Ejemplo ropa](Sprites/banador_rojo.png)
 ## **Armas**
 **FASE 2: MODIFICACIONES. Se quita una de las tres armas y se quita el medidor de vida de personajes. Se cambia la cantidad de munición de cada arma para que la dificultad sea más equilibrada para ambos jugadores**
+
 Hay dos armas seleccionables en el juego y cada una tiene sus propias características:
 
 ### **Francotirador**
@@ -110,6 +111,8 @@ Los gráficos del juego están dibujados a mano y en 2D, son muy minimalistas y 
 ![Ejemplo de personaje vestido](ReadmeImages/SpriteExample.png)
 
 Todo el juego se ve en cenital, imitando la perspectiva que tendría un tirador ubicado en un edificio alto de una plaza o calle muy transitada, recordando ligeramente a las ilustraciones de un libro de encontrar a Wally. Ambos jugadores comparten punto de vista y tienen la misma información básica por pantalla. 
+
+![Pantalla de juego](ReadmeImages/GameImage.png)
 
 ### **Menús**
 La estética de los menús también es minimalista. Los menús durante la partida imitan las hojas arrancadas de un típico cuaderno de cuadrícula con los textos imitando estar escritos a boli en una caligrafía simple, mientras que los menús de fuera de partida imitan el estilo típico de código de las películas de hackers. Las pantallas de selección de antes de las partidas comparten esa estética minimalista blanco y negro aunque tienen imágenes a color.
