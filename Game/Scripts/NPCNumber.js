@@ -16,6 +16,7 @@ class NPCNumber extends Phaser.Scene
 
     create()
     {
+        this.scene.pause()
         //Panel y fondo:
         this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(100);
         this.backgroundImage1 = this.add.image(0,0,"Background").setOrigin(0,0);
