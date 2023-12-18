@@ -18,13 +18,26 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/Usuarios")
 public class UserController 
 {
-	@PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public User nuevoItem(@RequestBody User item) 
+	Collection<User> users = new ArrayList<>();
+	@PostMapping("/Register")
+	public User RegisterUser(String userName, String password)
 	{
-        return new User("hola", "contraseña");
-    }
+		for(User user : users)
+		{
+			if(user.GetUserName().equals(userName) && user.GetPassword().equals(password))
+			{
+				return user;
+			}
+		}
+		return null;
+	}
+	
+	@PostMapping("/CreateAccount")
+	public void CreateAccount(String userName, String password)
+	{
+		User newUser = new User(userName, password);
+		users.add(newUser);
+	}
 }
