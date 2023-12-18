@@ -10,11 +10,12 @@ $(document).ready(function() {
         // Realizar la solicitud AJAX
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/CreateAccount", // La URL de tu endpoint de registro
+            url: "/CreateAccount", 
             data: {
                 userName: userName,
                 password: password
             },
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success: function(response) {
                 // Manejar la respuesta exitosa
                 console.log("Usuario registrado:", response);
