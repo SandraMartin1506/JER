@@ -22,7 +22,7 @@ public class UserController
 {
 	Collection<User> users = new ArrayList<>();
 	@PostMapping("/Register")
-	public User RegisterUser(String userName, String password)
+	public User RegisterUser(@RequestParam String userName, @RequestParam String password)
 	{
 		for(User user : users)
 		{
@@ -35,9 +35,21 @@ public class UserController
 	}
 	
 	@PostMapping("/CreateAccount")
-	public void CreateAccount(String userName, String password)
+	public void CreateAccount(@RequestParam String userName, @RequestParam String password)
 	{
 		User newUser = new User(userName, password);
 		users.add(newUser);
+	}
+	
+	@PostMapping("/UpdateVictoryP1")
+	public void UpdateVictoryP1(@RequestParam User user)
+	{
+		user.AddVictoryP1();
+	}
+	
+	@PostMapping("/UpdateVictoryP2")
+	public void UpdateVictoryP2(@RequestParam User user)
+	{
+		user.AddVictoryP2();
 	}
 }

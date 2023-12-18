@@ -6,6 +6,7 @@ public class User
 	private String password;
 	private int victoryP1;
 	private int victoryP2;
+	private int totalVictories;
 	//Constructor:
 	public User(String n, String p)
 	{
@@ -13,6 +14,7 @@ public class User
 		password = p;
 		victoryP1 = 0;
 		victoryP2 = 0;
+		totalVictories = 0;
 	}
 	
 	//Getters:
@@ -37,13 +39,15 @@ public class User
 	}
 	
 	//Setters:
-	public void SetVictoryP1(int v)
+	public void AddVictoryP1()
 	{
-		victoryP1 = v;
+		victoryP1++;
+		totalVictories++;
 	}
 	
-	public void SetVictoryP2(int v)
+	public void AddVictoryP2()
 	{
-		victoryP2 = v;
+		victoryP2++;
+		totalVictories++;
 	}
 }
