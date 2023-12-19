@@ -10,26 +10,30 @@
 
 	<body>
 		<div id = "container"></div>
-		<h4>Login:</h4>
-		<form id="registerForm">
-			<label for="userName">User name:</label>
-			<input type="text" id="userNamer" name="userName" required>
-	
-			<label for="password">Password:</label>
-			<input type="password" id="passwordr" name="password" required>
-	
-			<button type="submit">Login</button>
-		</form>
-		<h4>Create account:</h4>
-		<form id="createAccountForm">
-			<label for="userName">User name:</label>
-			<input type="text" id="userNamec" name="userName" required>
-	
-			<label for="password">Password:</label>
-			<input type="password" id="passwordc" name="password" required>
-	
-			<button type="submit">Create account</button>
-		</form>
+		<div id = "login">
+			<p id = "incorrectData" style = "color:red; display: none"><strong>Incorrect data</strong></p>
+		<p id = "nameTaken" style = "color:red; display: none"><strong>That username is already taken</strong></p>
+			<h4>Login:</h4>
+			<form id="registerForm">
+				<label for="userName">User name:</label>
+				<input type="text" id="userNamer" name="userName" required>
+		
+				<label for="password">Password:</label>
+				<input type="password" id="passwordr" name="password" required>
+		
+				<button type="submit">Login</button>
+			</form>
+			<h4>Create account:</h4>
+			<form id="createAccountForm">
+				<label for="userName">User name:</label>
+				<input type="text" id="userNamec" name="userName" required>
+		
+				<label for="password">Password:</label>
+				<input type="password" id="passwordc" name="password" required>
+		
+				<button type="submit">Create account</button>
+			</form>
+		</div>
 
 		<script src = "./node_modules/phaser/dist/phaser.js"></script>
 		<script src = "./Scripts/MainMenu.js"></script>

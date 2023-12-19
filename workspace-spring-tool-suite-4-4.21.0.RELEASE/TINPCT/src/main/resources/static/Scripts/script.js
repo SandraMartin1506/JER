@@ -22,11 +22,16 @@ $(document).ready(function() {
 			success: function(response) {
                 // Manejar la respuesta exitosa
                 console.log("Usuario registrado.", response);
+                document.getElementById("incorrectData").style.display = "none";
+                document.getElementById("nameTaken").style.display = "none";
+                document.getElementById("login").style.display = "none";
                 // Puedes realizar acciones adicionales aquí si es necesario
             },
             error: function(error) {
                 // Manejar errores
                 console.error("Ese nombre de usuario ya está en uso.", error);
+                document.getElementById("incorrectData").style.display = "none";
+                document.getElementById("nameTaken").style.display = "block";
             }
 		});
     });
@@ -53,11 +58,16 @@ $(document).ready(function() {
 			success: function(response) {
                 // Manejar la respuesta exitosa
                 console.log("Sesión iniciada correctamente", response);
+                document.getElementById("nameTaken").style.display = "none";
+                document.getElementById("incorrectData").style.display = "none";
+                document.getElementById("login").style.display = "none";
                 // Puedes realizar acciones adicionales aquí si es necesario
             },
             error: function(error) {
                 // Manejar errores
                 console.error("Credenciales incorrectas", error);
+                document.getElementById("incorrectData").style.display = "block";
+                document.getElementById("nameTaken").style.display = "none";
             }
 		})       
     });
