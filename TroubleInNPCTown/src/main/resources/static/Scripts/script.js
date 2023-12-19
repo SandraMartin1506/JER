@@ -7,15 +7,18 @@ $(document).ready(function() {
         var userName = $("#userName").val();
         var password = $("#password").val();
 
+        var userData = {
+            name: userName,
+            password: password
+        };
+        
         // Realizar la solicitud AJAX
         $.ajax({
             type: "POST",
-            url: "/CreateAccount", 
-            data: {
-                userName: userName,
-                password: password
-            },
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            url: "http://localhost:8080/users",  // Cambié la URL para que coincida con la ruta del controlador
+            data: JSON.stringify(userData),
+            processData: false,
+            contentType: 'application/json',
             success: function(response) {
                 // Manejar la respuesta exitosa
                 console.log("Usuario registrado:", response);
@@ -28,4 +31,3 @@ $(document).ready(function() {
         });
     });
 });
-

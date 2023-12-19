@@ -19,38 +19,41 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserController 
-{
-	Collection<User> users = new ArrayList<>();
-	@PostMapping("/Register")
-	public User RegisterUser(@RequestParam String userName, @RequestParam String password)
-	{
-		for(User user : users)
-		{
-			if(user.GetUserName().equals(userName) && user.GetPassword().equals(password))
-			{
-				return user;
-			}
-		}
-		return null;
-	}
-	
-	@PostMapping("/CreateAccount")
-	public void CreateAccount(@RequestParam String userName, @RequestParam String password)
-	{
-		User newUser = new User(userName, password);
-		users.add(newUser);
-	}
-	
-	@PostMapping("/UpdateVictoryP1")
-	public void UpdateVictoryP1(@RequestParam User user)
-	{
-		user.AddVictoryP1();
-	}
-	
-	@PostMapping("/UpdateVictoryP2")
-	public void UpdateVictoryP2(@RequestParam User user)
-	{
-		user.AddVictoryP2();
-	}
+@RequestMapping("/users")
+public class UserController {
+
+    private Map<String, User> users = new ConcurrentHashMap<>();
+
+    @GetMapping
+    public Collection<User> getUsers() {
+        return users.values();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public User newUser(@RequestBody User user) {
+        users.put(user.GetUserName(), user);
+        return user;   
+    }
+
+    @PutMapping("/{userName}")
+    public ResponseEntity<User> updateUser(@PathVariable String userName, @RequestBody User updatedUser) {
+        if (users.containsKey(userName)) {
+            users.put(userName, updatedUser);
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{userName}")
+    public ResponseEntity<User> getUser(@PathVariable String userName) {
+        User savedUser = users.get(userName);
+
+        if (savedUser != null) {
+            return new ResponseEntity<>(savedUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
