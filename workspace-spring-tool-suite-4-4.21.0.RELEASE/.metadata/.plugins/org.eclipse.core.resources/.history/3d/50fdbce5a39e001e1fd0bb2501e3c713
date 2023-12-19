@@ -1,0 +1,18 @@
+$(document).ready(function() {
+    $("#registerForm").submit(function(event) {
+        // Evitar que se envíe el formulario de manera convencional
+        event.preventDefault();
+
+        // Obtener los valores del formulario
+        var userName = $("#userName").val();
+        var password = $("#password").val();
+
+        var userData = {
+            name: userName,
+            password: password,
+        };
+        console.log(userData);
+        
+        // Realizar la solicitud AJAX
+    });
+});

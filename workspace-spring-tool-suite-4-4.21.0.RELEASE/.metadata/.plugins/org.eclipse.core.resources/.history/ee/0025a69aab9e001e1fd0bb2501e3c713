@@ -1,0 +1,51 @@
+$(document).ready(function() {
+    $("#createAccountForm").submit(function(event) {
+        // Evitar que se envíe el formulario de manera convencional
+        event.preventDefault();
+
+        // Obtener los valores del formulario
+        var userName = $("#userName").val();
+        var password = $("#password").val();
+		
+		
+        var userData = {
+            name: userName,
+            password: password,
+        };
+        
+        /*$.ajax({
+			method: "GET",
+			url: "http://localhost:8080/Login",
+			data: JSON.stringify(userData),
+			processData: false,
+			headers: {"Content-type": "application/json"},
+			success: function(response) {
+                // Manejar la respuesta exitosa
+                console.log("Usuario registrado:", response);
+                // Puedes realizar acciones adicionales aquí si es necesario
+            },
+            error: function(error) {
+                // Manejar errores
+                console.error("No existe ninguna cuenta con esos datos. Se creará una nueva.");
+            }
+		});*/
+        
+        // Realizar la solicitud AJAX
+        $.ajax({
+			method: "POST",
+			url: "http://localhost:8080/CreateAccount",
+			data: JSON.stringify(userData),
+			processData: false,
+			headers: {"Content-type": "application/json"},
+			success: function(response) {
+                // Manejar la respuesta exitosa
+                console.log("Usuario registrado:", response);
+                // Puedes realizar acciones adicionales aquí si es necesario
+            },
+            error: function(error) {
+                // Manejar errores
+                console.error("Error al registrar usuario:", error);
+            }
+		});
+    });
+});

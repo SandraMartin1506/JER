@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Trouble In NPC Town</title>
+		<meta charset="UTF-8">
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js">
+		</script>
+		<script src="./Scripts/script.js"></script>
+	</head>
+
+	<body>
+		<div id = "container"></div>
+		<form id="registerForm">
+			<label for="userName">Nombre de usuario:</label>
+			<input type="text" id="userName" name="userName" required>
+	
+			<label for="password">Contraseña:</label>
+			<input type="password" id="password" name="password" required>
+	
+			<button type="submit">Registrar</button>
+		</form>
+
+		<script src = "./node_modules/phaser/dist/phaser.js"></script>
+		<script src = "./Scripts/MainMenu.js"></script>
+		<script src = "./Scripts/Credits.js"></script>
+		<script src = "./Scripts/NPCNumber.js"></script>
+		<script src = "./Scripts/NPC.js"></script>
+		<script src = "./Scripts/Missions.js"></script>
+		<script src = "./Scripts/Player.js"></script>
+		<script src = "./Scripts/Player2.js"></script>
+		<script src = "./Scripts/Game.js"></script>
+		<script src = "./Scripts/PauseMenu.js"></script>
+		<script src = "./Scripts/InfoMenu.js"></script>
+		<script src = "./Scripts/GameEndedMenu.js"></script>
+		<script src = "./Scripts/CustomizationP1Menu.js"></script>
+		<script src = "./Scripts/CustomizationP2Menu.js"></script>
+		<script src = "./Scripts/Init.js"></script>
+	</body>
+<html>
