@@ -163,8 +163,11 @@ El sonido de Hacker ha sido sacado de pixelbay. Sound Effect by <a href="https:/
 
 ![Diagrama de flujo](<ReadmeImages/Diagrama de flujo TINT.png>)
 El juego cuenta con nueve interfaces:
+**FASE 3: CAMBIO DE IMAGEN DEL MENÚ PRINCIPAL.**
+
+
 ### <a name="_heading=h.5h6jvb3dy1km"></a>**Menú principal** 
-Un fondo con el estilo estético de las películas de hackers. Los 1 y 0 de la pantalla se mueven. Aparecen tres botones: New Game, que da comienzo al juego; Credits, donde se muestran los créditos del juego; y por último NPCNumber, que sirve para cambiar el número de NPC y aumentar o disminuir la dificultad.
+Un fondo con el estilo estético de las películas de hackers. Los 1 y 0 de la pantalla se mueven. Aparecen tres botones: New Game, que da comienzo al juego; Credits, donde se muestran los créditos del juego; y por último NPCNumber, que sirve para cambiar el número de NPC y aumentar o disminuir la dificultad. Ahora además, en el menú principal aparece el nombre de usuario, el tiempo jugado y los jugadores conectados en el momento.
 ![Menú principal](ReadmeImages/MainMenu.png)
 
 ### <a name="_heading=h.teva7zbitlwp"></a>**Pantalla de NPCS** 
@@ -199,7 +202,9 @@ Esta pantalla aparece cuando se termina la partida, es decir, uno de los dos jug
 
 **FASE 3: NUEVAS CLASES.**
 ![Diagrama de clases](<ReadmeImages/Diagrama de clases.png>)
-se han añadido dos clases: User y UserController que sirven para registrar usuarios en el servidor.
+
+
+Se han añadido dos clases: User y UserController que sirven para registrar usuarios en el servidor y almacenarlos en un documento de texto junto a algunas características más.
 **MODIFICACIONES A LA PANTALLA DEL JUEGO**
 ![introducción y registro de usuario](<ReadmeImages/Login.png>)
 ![usuario ya registrado](<ReadmeImages/Usuario loggeado.png>)
