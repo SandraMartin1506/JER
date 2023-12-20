@@ -1,5 +1,6 @@
 window.userName = null;
 window.numGames = null;
+window.numPlayers = null;
 $(document).ready(function() {
     RestoreUsers();   
     $("#createAccountForm").submit(function(event) {
@@ -28,6 +29,7 @@ $(document).ready(function() {
                 document.getElementById("incorrectData").style.display = "none";
                 document.getElementById("nameTaken").style.display = "none";
                 document.getElementById("login").style.display = "none";
+                EmptyForms();
                 DisplayUserInformation(response.userName);
             },
             error: function(error) {
@@ -64,6 +66,7 @@ $(document).ready(function() {
                 document.getElementById("nameTaken").style.display = "none";
                 document.getElementById("incorrectData").style.display = "none";
                 document.getElementById("login").style.display = "none";
+                EmptyForms();
                 DisplayUserInformation(response.userName);
             },
             error: function(error) {
@@ -83,6 +86,12 @@ $(window).on('beforeunload', function() {
         async: false, 
     });
 }); 
+
+function EmptyForms()
+{
+	$("#registerForm")[0].reset();
+	$("#createAccountForm")[0].reset();
+}
 
 function RestoreUsers()
 {
@@ -127,6 +136,11 @@ function Logout()
 	window.userName = null;
 	document.getElementById("UserInfo").style.display = "none";
 	document.getElementById("login").style.display = "block";
+	$.ajax({
+        method: 'GET',
+        url: "http://localhost:8080/DecreasePlayers",
+        async: false, 
+    });
 }
 
 function DeleteAccount()
@@ -166,7 +180,8 @@ function CurrentPlayers()
 		url: "http://localhost:8080/CurrentPlayers",
 		success: function(response) {
             // Manejar la respuesta exitosa
-            document.getElementById("CurrentPlayers").innerHTML = response;
+            window.numPlayers = response;
+            document.getElementById("CurrentPlayers").innerHTML = window.numPlayers;
         },
         error: function(error) {
             // Manejar errores
