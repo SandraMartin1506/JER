@@ -24,6 +24,7 @@ public class UserController {
 	private Map<String, User> users = new ConcurrentHashMap<>();
 	
 	@PostMapping(value = "/Login")
+	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<User> Login(@RequestBody User userToLogin)
 	{
 		 User login = users.get(userToLogin.getUserName());
@@ -42,5 +43,24 @@ public class UserController {
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+	}
+	
+	@GetMapping(value = "/NumGames/{userName}")
+	public ResponseEntity<Integer> TotalGames(@PathVariable String userName)
+	{
+		User user = users.get(userName);
+		if(user != null) return new ResponseEntity<>(user.getTotalVictories(), HttpStatus.OK);
+		else return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value = "/DeleteAccount/{userName}")
+	public ResponseEntity<User> DeleteAccount(@PathVariable String userName)
+	{
+		User user = users.get(userName);
+		if(user != null) {
+			users.remove(user.getUserName());
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }

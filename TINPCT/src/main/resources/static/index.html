@@ -35,6 +35,23 @@
 			</form>
 		</div>
 
+		<div id = "UserInfo" style = "display: none">
+			<p style = "display: inline;"><strong>User: </strong></p>
+			<p id = "UserName" style = "display: inline;">Username</p> 
+			<br><br>
+			<p style = "display: inline;"><strong>Games played: </strong></p>
+			<p id = "NumGames" style = "display: inline;">numGames</p>	
+			<br><br>
+			<button id = "logout" onclick = "Logout()" style = "display: inline;">Logout</button>
+			<button id = "deleteAccount" onclick = "DeleteAccount()" style = "display: inline;">Delete account</button>				
+		</div>
+		
+		<div id = "Confirmation" style = "display: none">
+			<p><strong>Do you really want to delete your account? This action can't be undone </strong></p>
+			<button id = "Confirm" onclick = "Confirm()" style = "display: inline;">Confirm</button>
+			<button id = "Cancel" onclick = "Cancel()" style = "display: inline;">Cancel</button>				
+		</div>
+
 		<script src = "./node_modules/phaser/dist/phaser.js"></script>
 		<script src = "./Scripts/MainMenu.js"></script>
 		<script src = "./Scripts/Credits.js"></script>
