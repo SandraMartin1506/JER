@@ -14,6 +14,8 @@ class GameEndedMenu extends Phaser.Scene
 
     create()
     {
+		this.host = window.location.host;
+        if(window.userName != null) this.UpdateUser();
         //Jugadores:
         this.player1 = this.scene.get("Game").player;
         this.player2 = this.scene.get("Game").player2;
@@ -126,4 +128,24 @@ class GameEndedMenu extends Phaser.Scene
         this.scene.remove("PauseMenu")
         this.scene.remove();
     }
+    
+    UpdateUser()
+    {
+		var newNumGames = window.numGames + 1;
+		$.ajax({
+			method: "PUT",
+			url: "http://localhost:8080/UpdateNumGames/" + window.userName,
+			data: JSON.stringify(newNumGames),
+			processData: false,
+			headers: {"Content-type": "application/json"},
+			success: function(response) {
+                window.numGames = response;
+                document.getElementById("NumGames").innerHTML = window.numGames;
+            },
+            error: function(error) {
+                // Manejar errores
+                console.error("No se ha podido actualizar el número de partidas", error);
+            }
+		});
+	}
 }

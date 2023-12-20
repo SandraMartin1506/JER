@@ -1,5 +1,7 @@
-this.userName = null;
+window.userName = null;
+window.numGames = null;
 $(document).ready(function() {
+    RestoreUsers();   
     $("#createAccountForm").submit(function(event) {
         // Evitar que se envíe el formulario de manera convencional
         event.preventDefault();
@@ -74,28 +76,55 @@ $(document).ready(function() {
     });
 });
 
-function DisplayUserInformation(userName)
+$(window).on('beforeunload', function() {
+    $.ajax({
+        method: 'GET',
+        url: "http://localhost:8080/DecreasePlayers",
+        async: false, 
+    });
+}); 
+
+function RestoreUsers()
 {
-	if(this.userName == null) this.userName = userName;
-	document.getElementById("UserInfo").style.display = "block";
-	document.getElementById("UserName").innerHTML = this.userName;
 	$.ajax({
 		method: "GET",
-		url: "http://localhost:8080/NumGames/" + this.userName,
+		url: "http://localhost:8080/LoadUsers",
 		success: function(response) {
             // Manejar la respuesta exitosa
-            document.getElementById("NumGames").innerHTML = response;
+            console.log("Usuarios cargados con éxito", response);
+        },
+        error: function(error) {
+            // Manejar errores
+            console.error("Fichero no encontrado", error);
+       	}
+	});   
+}
+
+function DisplayUserInformation(userName)
+{
+	if(window.userName == null) window.userName = userName;
+	document.getElementById("UserInfo").style.display = "block";
+	document.getElementById("UserName").innerHTML = window.userName;
+	$.ajax({
+		method: "GET",
+		url: "http://localhost:8080/NumGames/" + window.userName,
+		success: function(response) {
+            // Manejar la respuesta exitosa
+            window.numGames = response;
+            document.getElementById("NumGames").innerHTML = window.numGames;
         },
         error: function(error) {
             // Manejar errores
             console.error("Error al acceder a las partidas", error);
        	}
-	});       
+	});
+	CurrentPlayers();
+	setInterval(CurrentPlayers, 10000);     
 }
 
 function Logout()
 {
-	this.userName = null;
+	window.userName = null;
 	document.getElementById("UserInfo").style.display = "none";
 	document.getElementById("login").style.display = "block";
 }
@@ -116,7 +145,7 @@ function Confirm()
 {
 	$.ajax({
 		method: "DELETE",
-		url: "http://localhost:8080/DeleteAccount/" + this.userName,
+		url: "http://localhost:8080/DeleteAccount/" + window.userName,
 		success: function(response) {
             Logout();
             document.getElementById("Confirmation").style.display = "none";
@@ -127,4 +156,21 @@ function Confirm()
             console.error("Ha sucedido un error inesperado.", error);
        	}
 	})
+}
+
+function CurrentPlayers()
+{
+	console.log("Jugadores actualizados");
+	$.ajax({
+		method: "GET",
+		url: "http://localhost:8080/CurrentPlayers",
+		success: function(response) {
+            // Manejar la respuesta exitosa
+            document.getElementById("CurrentPlayers").innerHTML = response;
+        },
+        error: function(error) {
+            // Manejar errores
+            console.error("No se puede acceder al número de jugadores", error);
+       	}
+	});   
 }

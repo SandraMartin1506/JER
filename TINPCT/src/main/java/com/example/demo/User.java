@@ -1,11 +1,14 @@
 package com.example.demo;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
 	private String userName;
 	private String password;
 	private int victoriesP1;
 	private int victoriesP2;
 	private int totalVictories;
+	private int numGames;
 	
 	public User(String name, String password) {
 		this.userName = name;
@@ -13,6 +16,7 @@ public class User {
 		this.victoriesP1 = 0;
 		this.victoriesP2 = 0;
 		this.totalVictories = 0;
+		this.numGames = 0;
 	}
 	
 	public String getUserName(){
@@ -35,6 +39,10 @@ public class User {
 		return this.totalVictories;
 	}
 	
+	public int getNumGames() {
+		return this.numGames;
+	}
+	
 	public void addVictoryP1() {
 		this.victoriesP1++;
 		this.totalVictories++;
@@ -43,5 +51,9 @@ public class User {
 	public void addVictoryP2() {
 		this.victoriesP2++;
 		this.totalVictories++;
+	}
+	
+	public void setNumGames(int newNumGames) {
+		this.numGames = newNumGames;
 	}
 }
