@@ -196,3 +196,12 @@ Esta pantalla se puede acceder durante la partida del juego. Sirve para pausar l
 ### <a name="_heading=h.oxkqnhw80ffp"></a>**Pantalla de fin de juego**
 Esta pantalla aparece cuando se termina la partida, es decir, uno de los dos jugadores ha ganado. En ella se explica cuál de los dos ha ganado y por qué. Tiene dos botones: Play Again, que devuelve a la pantalla de customización del jugador 1 y comienza el juego de nuevo; y Main Menu, que manda a los usuarios al menú principal.
 ![Pantalla de fin de juego](ReadmeImages/GameEndedMenu.png)
+
+**FASE 3: NUEVAS CLASES.**
+![Diagrama de clases](<ReadmeImages/Diagrama de clases.png>)
+se han añadido dos clases: User y UserController que sirven para registrar usuarios en el servidor.
+**MODIFICACIONES A LA PANTALLA DEL JUEGO**
+![introducción y registro de usuario](<ReadmeImages/Login.png>)
+![usuario ya registrado](<ReadmeImages/Usuario loggeado.png>)
+
+
