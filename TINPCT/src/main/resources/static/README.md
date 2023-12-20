@@ -168,7 +168,7 @@ El juego cuenta con nueve interfaces:
 
 ### <a name="_heading=h.5h6jvb3dy1km"></a>**Menú principal** 
 Un fondo con el estilo estético de las películas de hackers. Los 1 y 0 de la pantalla se mueven. Aparecen tres botones: New Game, que da comienzo al juego; Credits, donde se muestran los créditos del juego; y por último NPCNumber, que sirve para cambiar el número de NPC y aumentar o disminuir la dificultad. Ahora además, en el menú principal aparece el nombre de usuario, el tiempo jugado y los jugadores conectados en el momento.
-![Menú principal](ReadmeImages/MainMenu.png)
+![Menú principal](ReadmeImages/MainMenuUpdated.png)
 
 ### <a name="_heading=h.teva7zbitlwp"></a>**Pantalla de NPCS** 
 La pantalla de configuración tiene la misma estética de películas de hackers. Esta pantalla cuenta únicamente con la configuración del número de NPCs, contando con tres botones: “Pocos”, “Normales” y “Muchos” para elegir la cantidad de NPC.
