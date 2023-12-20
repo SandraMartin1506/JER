@@ -114,10 +114,44 @@ class MainMenu extends Phaser.Scene
             this.NPCButton.setScale(scale);
             game.canvas.style.cursor = "auto";
         }.bind(this));
+        
+        //Jugador
+      	this.boxText = this.add.rectangle(30,330,450, 170, 0x001F00).setOrigin(0,0).setAlpha(1);
+        this.userText = this.add.text(50, 350, "User:"+window.userName, {font: "35px Courier", fill: "#FFFFFF"});
+        this.gamesText = this.add.text(50, 400, "Games played: "+window.numGames, {font: "35px Courier", fill: "#FFFFFF"});
+        this.playersText = this.add.text(50, 450, "Current players: "+window.numPlayers, {font: "35px Courier", fill: "#FFFFFF"});
+        if (window.userName == null){
+			this.boxText.setAlpha(0);
+			this.userText.text = ""	;
+			this.gamesText.text = "" ;	
+			this.playersText.text = "" ;	
+		}
     }
 
     update(time, deltaTime)
     {
+		if (window.userName == null){
+			this.boxText.setAlpha(0);
+			this.userText.text = ""	;
+			this.gamesText.text = "" ;
+		}else{
+			this.boxText.setAlpha(1);
+			this.userText.text = "User: "+window.userName;	
+		if (window.numGames == null){
+			this.gamesText.text = ""	;
+		}else{
+			this.gamesText.text = "Games played: "+window.numGames;
+		}
+		if (window.numPlayers == null){
+			this.playersText.text = ""	;
+		}else{
+			this.playersText.text = "Current players: "+window.numPlayers;
+		}
+		}
+		
+		
+		
+		
         this.backgroundImage1.setPosition(this.backgroundImage1.x-0.05*deltaTime,0)
         this.backgroundImage2.setPosition(this.backgroundImage2.x-0.05*deltaTime,0)
         if (this.backgroundImage1.x<-this.game.config.width){
