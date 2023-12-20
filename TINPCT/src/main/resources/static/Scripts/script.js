@@ -80,11 +80,14 @@ $(document).ready(function() {
 });
 
 $(window).on('beforeunload', function() {
-    $.ajax({
-        method: 'GET',
-        url: "http://localhost:8080/DecreasePlayers",
-        async: false, 
-    });
+	if(window.userName != null)
+	{
+	    $.ajax({
+	        method: 'GET',
+	        url: "http://localhost:8080/DecreasePlayers",
+	        async: true, 
+	    });
+	}
 }); 
 
 function EmptyForms()
@@ -139,7 +142,7 @@ function Logout()
 	$.ajax({
         method: 'GET',
         url: "http://localhost:8080/DecreasePlayers",
-        async: false, 
+        async: true, 
     });
 }
 

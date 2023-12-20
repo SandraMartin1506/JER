@@ -134,19 +134,20 @@ class MainMenu extends Phaser.Scene
 			this.boxText.setAlpha(0);
 			this.userText.text = ""	;
 			this.gamesText.text = "" ;
+			this.playersText.text = "" ;
 		}else{
 			this.boxText.setAlpha(1);
 			this.userText.text = "User: "+window.userName;	
-		if (window.numGames == null){
-			this.gamesText.text = ""	;
-		}else{
-			this.gamesText.text = "Games played: "+window.numGames;
-		}
-		if (window.numPlayers == null){
-			this.playersText.text = ""	;
-		}else{
-			this.playersText.text = "Current players: "+window.numPlayers;
-		}
+			if (window.numGames == null){
+				this.gamesText.text = ""	;
+			}else{
+				this.gamesText.text = "Games played: "+window.numGames;
+			}
+			if (window.numPlayers == null){
+				this.playersText.text = ""	;
+			}else{
+				this.playersText.text = "Current players: "+window.numPlayers;
+			}
 		}
 		
 		
