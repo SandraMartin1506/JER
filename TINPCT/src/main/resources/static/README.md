@@ -209,4 +209,7 @@ Se han añadido dos clases: User y UserController que sirven para registrar usua
 ![introducción y registro de usuario](<ReadmeImages/Login.png>)
 ![usuario ya registrado](<ReadmeImages/Usuario loggeado.png>)
 
+**FASE 3: INICIAR JAR.**
 
+
+Para abrir el archivo JAR, se recomienda utilizar winrar para descomprimir el paquete y desde ahí se accede a BOOT-INF que contiene toda la información del proyecto. Una vez ahí, se selecciona "classes", y después, "dom" (En "static" es donde se situa el juego hecho en la fase anterior). Tras ello se abre el proyecto con spring boot y se ejecuta el servidor. 
