@@ -1,6 +1,7 @@
 window.userName = null;
 window.numGames = null;
 window.numPlayers = null;
+window.ip = window.location.host;
 $(document).ready(function() {
     RestoreUsers();   
     $("#createAccountForm").submit(function(event) {
@@ -19,7 +20,7 @@ $(document).ready(function() {
         // Realizar la solicitud AJAX
         $.ajax({
 			method: "POST",
-			url: "http://localhost:8080/CreateAccount",
+			url: "http://" + window.ip + "/CreateAccount",
 			data: JSON.stringify(userData),
 			processData: false,
 			headers: {"Content-type": "application/json"},
@@ -56,7 +57,7 @@ $(document).ready(function() {
         };
         $.ajax({
 			method: "POST",
-			url: "http://localhost:8080/Login",
+			url: "http://" + window.ip + "/Login",
 			data: JSON.stringify(userData),
 			processData: false,
 			headers: {"Content-type": "application/json"},
@@ -84,7 +85,7 @@ $(window).on('beforeunload', function() {
 	{
 	    $.ajax({
 	        method: 'GET',
-	        url: "http://localhost:8080/DecreasePlayers",
+	        url: "http://" + window.ip + "/DecreasePlayers",
 	        async: true, 
 	    });
 	}
@@ -100,7 +101,7 @@ function RestoreUsers()
 {
 	$.ajax({
 		method: "GET",
-		url: "http://localhost:8080/LoadUsers",
+		url: "http://" + window.ip + "/LoadUsers",
 		success: function(response) {
             // Manejar la respuesta exitosa
             console.log("Usuarios cargados con éxito", response);
@@ -119,7 +120,7 @@ function DisplayUserInformation(userName)
 	document.getElementById("UserName").innerHTML = window.userName;
 	$.ajax({
 		method: "GET",
-		url: "http://localhost:8080/NumGames/" + window.userName,
+		url: "http://" + window.ip + "/NumGames/" + window.userName,
 		success: function(response) {
             // Manejar la respuesta exitosa
             window.numGames = response;
@@ -141,7 +142,7 @@ function Logout()
 	document.getElementById("login").style.display = "block";
 	$.ajax({
         method: 'GET',
-        url: "http://localhost:8080/DecreasePlayers",
+        url: "http://" + window.ip + "/DecreasePlayers",
         async: true, 
     });
 }
@@ -162,7 +163,7 @@ function Confirm()
 {
 	$.ajax({
 		method: "DELETE",
-		url: "http://localhost:8080/DeleteAccount/" + window.userName,
+		url: "http://" + window.ip + "/DeleteAccount/" + window.userName,
 		success: function(response) {
             Logout();
             document.getElementById("Confirmation").style.display = "none";
@@ -180,7 +181,7 @@ function CurrentPlayers()
 	console.log("Jugadores actualizados");
 	$.ajax({
 		method: "GET",
-		url: "http://localhost:8080/CurrentPlayers",
+		url: "http://" + window.ip + "/CurrentPlayers",
 		success: function(response) {
             // Manejar la respuesta exitosa
             window.numPlayers = response;

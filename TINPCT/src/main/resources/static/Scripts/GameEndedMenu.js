@@ -134,7 +134,7 @@ class GameEndedMenu extends Phaser.Scene
 		var newNumGames = window.numGames + 1;
 		$.ajax({
 			method: "PUT",
-			url: "http://localhost:8080/UpdateNumGames/" + window.userName,
+			url: "http://" + window.ip + "/UpdateNumGames/" + window.userName,
 			data: JSON.stringify(newNumGames),
 			processData: false,
 			headers: {"Content-type": "application/json"},
