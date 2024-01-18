@@ -59,30 +59,48 @@ class MainMenu extends Phaser.Scene
         //Audio de los botones
         this.clickSound = this.sound.add("Click");
         this.hackerSound = this.sound.add("Hacker");
-        //Botón para jugar:
-        var scale = 0.75;
-        this.StartButton = this.add.image(this.game.config.width/2, this.game.config.height/2 - 100, "buttonPlaceholder");
-        this.StartButton.setScale(scale);
-        this.StartButton.setInteractive();
-        this.add.text(680, 330, "New Game", {font: "50px Courier", fill: "#ffffff"});
-        this.startGame = false;
-        this.StartButton.on("pointerdown", function(){this.startGame = true;this.clickSound.play();}.bind(this));
-        this.StartButton.on("pointerover", function(event) 
+        //Botón para jugar offline:
+        var scale = 0.55;
+        this.StartButtonOffline = this.add.image(this.game.config.width/2, this.game.config.height/2, "buttonPlaceholder");
+        this.StartButtonOffline.setScale(scale);
+        this.StartButtonOffline.setInteractive();
+        this.add.text(700, 410, "Play\nOffline", {font: "50px Courier", fill: "#ffffff"});
+        this.startGameOffline = false;
+        this.StartButtonOffline.on("pointerdown", function(){this.startGameOffline = true;this.clickSound.play();}.bind(this));
+        this.StartButtonOffline.on("pointerover", function(event) 
         {
             this.hackerSound.play();
-            this.StartButton.setScale(scale * 1.25);
+            this.StartButtonOffline.setScale(scale * 1.25);
             game.canvas.style.cursor = "pointer";
         }.bind(this));
-        this.StartButton.on("pointerout", function(event) 
+        this.StartButtonOffline.on("pointerout", function(event) 
         {
-            this.StartButton.setScale(scale);
+            this.StartButtonOffline.setScale(scale);
+            game.canvas.style.cursor = "auto";
+        }.bind(this));
+        //Botón para jugar online:
+        this.StartButtonOnline = this.add.image(this.game.config.width/2, this.game.config.height/2 - 150, "buttonPlaceholder");
+        this.StartButtonOnline.setScale(scale);
+        this.StartButtonOnline.setInteractive();
+        this.add.text(700, 260, "Play\nOnline", {font: "50px Courier", fill: "#ffffff"});
+        this.startGameOnline = false;
+        this.StartButtonOnline.on("pointerdown", function(){this.startGameOnline = true;this.clickSound.play();}.bind(this));
+        this.StartButtonOnline.on("pointerover", function(event) 
+        {
+            this.hackerSound.play();
+            this.StartButtonOnline.setScale(scale * 1.25);
+            game.canvas.style.cursor = "pointer";
+        }.bind(this));
+        this.StartButtonOnline.on("pointerout", function(event) 
+        {
+            this.StartButtonOnline.setScale(scale);
             game.canvas.style.cursor = "auto";
         }.bind(this));
         //Botón para los créditos:
-        this.creditsButton = this.add.image(this.game.config.width/2, this.game.config.height/2 + 100, "buttonPlaceholder");
+        this.creditsButton = this.add.image(this.game.config.width/2, this.game.config.height/2 + 150, "buttonPlaceholder");
         this.creditsButton.setScale(scale);
         this.creditsButton.setInteractive();
-        this.add.text(690, 530, "Credits", {font: "50px Courier", fill: "#ffffff"});
+        this.add.text(690, 580, "Credits", {font: "50px Courier", fill: "#ffffff"});
         this.goToCredits = false;
         this.creditsButton.on("pointerdown", function(){this.clickSound.play();this.PlayCredits();}.bind(this));
         this.creditsButton.on("pointerover", function(event) 
@@ -101,7 +119,7 @@ class MainMenu extends Phaser.Scene
         this.NPCButton.setScale(scale);
 
         this.NPCButton.setInteractive();
-        this.add.text(655, 730, "NPC Number", {font: "50px Courier", fill: "#ffffff"});
+        this.add.text(685, 730, "NPC Number", {font: "40px Courier", fill: "#ffffff"});
         this.NPCButton.on("pointerdown", function(){this.clickSound.play(); this.GoToNPCNumber();}.bind(this));
         this.NPCButton.on("pointerover", function(event) 
         {
@@ -120,7 +138,8 @@ class MainMenu extends Phaser.Scene
         this.userText = this.add.text(50, 350, "User:"+window.userName, {font: "35px Courier", fill: "#FFFFFF"});
         this.gamesText = this.add.text(50, 400, "Games played: "+window.numGames, {font: "35px Courier", fill: "#FFFFFF"});
         this.playersText = this.add.text(50, 450, "Current players: "+window.numPlayers, {font: "35px Courier", fill: "#FFFFFF"});
-        if (window.userName == null){
+        if (window.userName == null)
+        {
 			this.boxText.setAlpha(0);
 			this.userText.text = ""	;
 			this.gamesText.text = "" ;	
@@ -161,22 +180,28 @@ class MainMenu extends Phaser.Scene
         if (this.backgroundImage2.x<-this.game.config.width){
             this.backgroundImage2.setPosition(this.backgroundImage1.x+this.game.config.width,0)
         }
-        if(!this.startGame && !this.goToCredits) this.panel.alpha -= deltaTime/500;
+        if(!this.startGameOffline && !this.goToCredits && !this.startGameOnline) this.panel.alpha -= deltaTime/500;
         else 
         {
             this.panel.alpha += deltaTime/500;
-            if(this.panel.alpha >= 1 && this.startGame) this.StartGame();
+            if(this.panel.alpha >= 1 && this.startGameOffline) this.StartGameOffline();
+            else if(this.panel.alpha >= 1 && this.startGameOnline) this.StartGameOnline();
             else if(this.panel.apha >= 1 && this.goToCredits) this.PlayCredits();
         }
     }
 
-    StartGame()
+    StartGameOffline()
     {
         this.scene.get("NPCNumber").ToggleVisibility(false);
         this.scene.pause("NPCNumber");
         this.scene.add("CustomizationP1Menu",new CustomizationP1Menu);
         this.scene.start("CustomizationP1Menu");
     }
+    
+    StartGameOnline()
+    {
+		
+	}
 
     PlayCredits()
     {
