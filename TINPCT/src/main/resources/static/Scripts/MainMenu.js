@@ -185,7 +185,10 @@ class MainMenu extends Phaser.Scene
         {
             this.panel.alpha += deltaTime/500;
             if(this.panel.alpha >= 1 && this.startGameOffline) this.StartGameOffline();
-            else if(this.panel.alpha >= 1 && this.startGameOnline) this.StartGameOnline();
+            else if(this.panel.alpha >= 1 && this.startGameOnline) {
+				this.StartGameOnline();
+				this.startGameOnline = false;
+				}
             else if(this.panel.apha >= 1 && this.goToCredits) this.PlayCredits();
         }
     }
@@ -194,14 +197,9 @@ class MainMenu extends Phaser.Scene
     {
         this.scene.get("NPCNumber").ToggleVisibility(false);
         this.scene.pause("NPCNumber");
-        this.scene.add("CustomizationP1Menu",new CustomizationP1Menu);
+        this.scene.add("CustomizationP1Menu",new CustomizationP1Menu());
         this.scene.start("CustomizationP1Menu");
     }
-    
-    StartGameOnline()
-    {
-		
-	}
 
     PlayCredits()
     {
@@ -216,4 +214,30 @@ class MainMenu extends Phaser.Scene
         this.scene.get("NPCNumber").ToggleVisibility(true);
         this.scene.resume("NPCNumber");
     }
+    
+        
+    StartGameOnline()
+    {
+		var mensaje = { type: "assignPlayer" };
+    	window.socket.onmessage = (event) => this.LoadScene(event);
+    	window.socket.send(JSON.stringify(mensaje));
+	}	
+	
+	LoadScene(event){
+		var playerType = event.data;
+		this.scene.get("NPCNumber").ToggleVisibility(false);
+        this.scene.pause("NPCNumber");
+		if(playerType === "Player1") 
+		{
+        	this.scene.add("CustomizationP1MenuOnline",new CustomizationP1MenuOnline());
+        	this.scene.start("CustomizationP1MenuOnline");
+			console.log("Jugador 1 asignado");
+		}
+		else
+		{
+			this.scene.add("CustomizationP2MenuOnline",new CustomizationP2MenuOnline());
+        	this.scene.start("CustomizationP2MenuOnline");
+			console.log("Jugador 2 asignado");
+		} 
+	}
 }

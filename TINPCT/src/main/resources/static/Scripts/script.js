@@ -2,6 +2,7 @@ window.userName = null;
 window.numGames = null;
 window.numPlayers = null;
 window.ip = window.location.host;
+window.socket = new WebSocket("ws://" + window.ip + "/ws");
 $(document).ready(function() {
     RestoreUsers();   
     $("#createAccountForm").submit(function(event) {
@@ -193,3 +194,7 @@ function CurrentPlayers()
        	}
 	});   
 }
+
+window.socket.onopen = function(){
+	console.log("Usuario conectado");
+};
