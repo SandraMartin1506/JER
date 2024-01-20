@@ -72,7 +72,6 @@ class GameOnline extends Phaser.Scene
         this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
         if(window.player === "Player1") game.canvas.style.cursor = "none"; //A partir de ahora el cursor será una mira (no la nuestra, una por defecto)
         else game.canvas.style.cursor = "crosshair";
-        //this.scene.run("InfoMenu"); //La información está siempre disponible mientras se juega
         //this.gameEndedMenu = new GameEndedMenu(this.player, this.player2);
     }
 
@@ -99,20 +98,25 @@ class GameOnline extends Phaser.Scene
 
     InitializePlayer(event) //Inicializa al jugador en una posición aleatoria
     {
-        var randomX = Math.floor(Math.random() * (1550 - 50 + 1) + 50);
-	    var randomY = Math.floor(Math.random() * (850 - 50 + 1) + 50);
 	    var components = event.data.split(";");
-        var hatNum = components[2];
-        var topNum = components[3];
-        var botNum = components[4];
-	    this.player = new PlayerOnline(randomX, randomY, this, "Character", this.hats[hatNum], this.tops[topNum], this.bottoms[botNum], "DeadBody");
-    	var numMission = components[5];
+        var hatNum = parseInt(components[2]);
+        var topNum = parseInt(components[3]);
+        var botNum = parseInt(components[4]);
+        var initialX = parseInt(components[5]);
+        var initialY = parseInt(components[6]);
+	    this.player = new PlayerOnline(initialX, initialY, this, "Character", this.hats[hatNum], this.tops[topNum], this.bottoms[botNum], "DeadBody");
+    	var numMission = parseInt(components[1]);
         this.mission = new Missions(numMission, this.player, this);
         if(window.player === "Player1") {
 			this.player.ManageInput(this); //Se añade la gestión del input al ser pulsada una tecla. Se pasa como parámetro la escena del juego.
         	this.player.StopMovement(this); //Gestión del input: cuando deja de pulsarse la tecla de movimiento el jugador se queda quieto
+        	console.log("Jugador 1 inicializado");
         }
-        console.log("Jugador 1 inicializado");
+        else{
+        	this.scene.add("InfoMenuOnline", new InfoMenuOnline(hatNum, topNum, botNum, components[7]));
+        	this.scene.run("InfoMenuOnline"); //La información está siempre disponible mientras se juega
+		}
+        
     }
 
     InitializePlayer2(event) 

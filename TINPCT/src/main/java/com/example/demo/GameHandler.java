@@ -1,5 +1,6 @@
 package com.example.demo;
 import java.io.IOException;
+import java.util.Random;
 
 import org.json.JSONObject;
 import org.springframework.web.socket.TextMessage;
@@ -79,8 +80,9 @@ public class GameHandler extends TextWebSocketHandler {
 		top = json.getInt("top");
 		bot = json.getInt("bot");
 		hint = json.getString("hint");
-		//initialX = json.getInt("initialX");
-		//initialY = json.getInt("initialY");
+		Random rand = new Random();
+		initialX = rand.nextInt(1550) + 50;
+		initialY = rand.nextInt(850) + 50;
 		p1Ready = true;
 	}
 	
@@ -102,7 +104,7 @@ public class GameHandler extends TextWebSocketHandler {
 	
 	private void GetP1Info(WebSocketSession session) throws IOException
 	{
-		String msg = "p1;" + mission + ";" + hat + ";" + top + ";" + bot;
+		String msg = "p1;" + mission + ";" + hat + ";" + top + ";" + bot + ";" + initialX + ";" + initialY + ";" + hint;
 		session.sendMessage(new TextMessage(msg));
 	}
 	
