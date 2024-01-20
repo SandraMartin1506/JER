@@ -48,6 +48,11 @@ class MainMenu extends Phaser.Scene
 
     create()
     {
+		//Arrays con los spritesheets
+        this.spritesheetsHat = [undefined,"GorrolanaAzul","GorrolanaRojo","GorrolanaAmarillo","GorraRoja","GorraVerde","GorraAzul","SombreroMarron","SombreroNegro","SombreroAzul"];
+        this.spritesheetsTop = [undefined,"CamisaAzul","CamisaBlanca","CamisaRoja","CamisetaVerde","CamisetaRosa","CamisetaAmarilla","TanktopRojo","TanktopAzul","TanktopAmarillo"];
+        this.spritesheetsBot = [undefined,"BanadorRojo","BanadorAzul","BanadorAmarillo","VaquerosAzul","VaquerosNegros","VaquerosRojos","FaldaRoja","FaldaVerde","FaldaNaranja"];
+
         game.canvas.style.cursor = "auto";
         //Background y panel de transición:
         this.panel = this.add.rectangle(0,0,this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(100);
@@ -229,12 +234,14 @@ class MainMenu extends Phaser.Scene
         this.scene.pause("NPCNumber");
 		if(playerType === "Player1") 
 		{
+			window.player = "Player1";
         	this.scene.add("CustomizationP1MenuOnline",new CustomizationP1MenuOnline());
         	this.scene.start("CustomizationP1MenuOnline");
 			console.log("Jugador 1 asignado");
 		}
-		else
+		else if(playerType === "Player2")
 		{
+			window.player = "Player2";
 			this.scene.add("CustomizationP2MenuOnline",new CustomizationP2MenuOnline());
         	this.scene.start("CustomizationP2MenuOnline");
 			console.log("Jugador 2 asignado");

@@ -80,10 +80,9 @@ class CustomizationP1MenuOnline extends Phaser.Scene
         this.spriteBot = undefined;
 
         //Arrays con los spritesheets
-        this.spritesheetsHat = [undefined,"GorrolanaAzul","GorrolanaRojo","GorrolanaAmarillo","GorraRoja","GorraVerde","GorraAzul","SombreroMarron","SombreroNegro","SombreroAzul"];
-        this.spritesheetsTop = [undefined,"CamisaAzul","CamisaBlanca","CamisaRoja","CamisetaVerde","CamisetaRosa","CamisetaAmarilla","TanktopRojo","TanktopAzul","TanktopAmarillo"];
-        this.spritesheetsBot = [undefined,"BanadorRojo","BanadorAzul","BanadorAmarillo","VaquerosAzul","VaquerosNegros","VaquerosRojos","FaldaRoja","FaldaVerde","FaldaNaranja"];
-
+        this.spritesheetsHat = this.scene.get("MainMenu").spritesheetsHat;
+        this.spritesheetsTop = this.scene.get("MainMenu").spritesheetsTop;
+        this.spritesheetsBot = this.scene.get("MainMenu").spritesheetsBot;
         //Boton gorro 1
         const changeHat1 = this.add.image(((this.game.config.width*(1+0.3)/2)),(this.game.config.height*(1-0.3))/2, "ArrowButton");
         this.InteractButton(changeHat1)
@@ -386,9 +385,7 @@ class CustomizationP1MenuOnline extends Phaser.Scene
         var msg = {type: "InitializeP1", mission: this.numMission, hat: this.hatNum, top: this.topNum, bot: this.botNum, hint: this.fakeHint.text};
         window.socket.send(JSON.stringify(msg));
         this.CheckPlayersReady();
-        setInterval(() => this.CheckPlayersReady(), 1000);
-        //this.scene.add("CustomizationP2Menu", new CustomizationP2Menu(this.numMission,this.hatNum,this.topNum,this.botNum,this.fakeHint.text));
-        //this.scene.start("CustomizationP2Menu");
+        this.interval = setInterval(() => this.CheckPlayersReady(), 1000);
     }
     
     CheckPlayersReady()
@@ -403,7 +400,9 @@ class CustomizationP1MenuOnline extends Phaser.Scene
 		var isReady = event.data;
 		if(isReady == "true")
 		{
-			console.log("Preparados");
+			clearInterval(this.interval);
+			this.scene.add("GameOnline", new GameOnline());
+			this.scene.start("GameOnline");
 			this.scene.stop("CustomizationP1MenuOnline");
 		}
 	}

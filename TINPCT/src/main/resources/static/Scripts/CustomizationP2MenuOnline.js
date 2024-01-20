@@ -183,12 +183,7 @@ class CustomizationP2MenuOnline extends Phaser.Scene
         var msg = {type: "InitializeP2", weapon: this.weaponSelected};
         window.socket.send(JSON.stringify(msg));
         this.CheckPlayersReady();
-        setInterval(() => this.CheckPlayersReady(), 1000);
-        //this.scene.add("Game", new Game(this.hint1,this.hint2,this.hint3));
-        //this.scene.add("Info", new InfoMenu);
-        //this.scene.add("Pause", new PauseMenu);
-        //this.scene.start("Game");
-        //this.scene.remove("CustomizationP2Menu");
+        this.interval = setInterval(() => this.CheckPlayersReady(), 1000);
     }
     
     CheckPlayersReady()
@@ -203,6 +198,9 @@ class CustomizationP2MenuOnline extends Phaser.Scene
 		var isReady = event.data;
 		if(isReady == "true")
 		{
+			clearInterval(this.interval);
+			this.scene.add("GameOnline", new GameOnline());
+			this.scene.start("GameOnline");
 			this.scene.stop("CustomizationP2MenuOnline");
 		}
 	}

@@ -14,10 +14,15 @@ public class GameHandler extends TextWebSocketHandler {
 	int top;
 	int bot;
 	String hint;
+	float initialX;
+	float initialY;
 	String weapon;
 	//Jugadores preparados:
 	boolean p1Ready = false;
 	boolean p2Ready = false;
+	//Input de P1:
+	String inputP1;
+	String inputType;
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -39,18 +44,30 @@ public class GameHandler extends TextWebSocketHandler {
 			case "PlayersReady":
 				StartGame(session);
 				break;
+			case "GetP1Info":
+				GetP1Info(session);
+				break;
+			case "GetP2Info":
+				GetP2Info(session);
+				break;
+			case "MoveP1":
+				MoveP1(session, json);
+				break;
+			case "ObtainP1Input":
+				ObtainP1Input(session);
+				break;
 		}
 	}
 	
 	private void AssignPlayer(WebSocketSession session) throws IOException 
 	{
-		String msg;
+		String msg = "";
 		counter++;
-		if(counter%2 == 0) {
-			msg = "Player2";
-		}
-		else {
+		if(counter == 1) {
 			msg = "Player1";
+		}
+		else if (counter == 2){
+			msg = "Player2";
 		}
 		session.sendMessage(new TextMessage(msg));
 	}
@@ -62,6 +79,8 @@ public class GameHandler extends TextWebSocketHandler {
 		top = json.getInt("top");
 		bot = json.getInt("bot");
 		hint = json.getString("hint");
+		//initialX = json.getInt("initialX");
+		//initialY = json.getInt("initialY");
 		p1Ready = true;
 	}
 	
@@ -79,5 +98,30 @@ public class GameHandler extends TextWebSocketHandler {
 			msg = "true";
 		}
 		session.sendMessage(new TextMessage(msg));
+	}
+	
+	private void GetP1Info(WebSocketSession session) throws IOException
+	{
+		String msg = "p1;" + mission + ";" + hat + ";" + top + ";" + bot;
+		session.sendMessage(new TextMessage(msg));
+	}
+	
+	private void GetP2Info(WebSocketSession session) throws IOException
+	{
+		String msg = "p2;" + weapon + ";" + hint;
+		session.sendMessage(new TextMessage(msg));
+	}
+	
+	private void MoveP1(WebSocketSession session, JSONObject json) throws IOException
+	{
+		inputP1 = json.getString("key");
+		inputType = json.getString("inputType");
+	}
+	
+	private void ObtainP1Input(WebSocketSession session) throws IOException
+	{
+		System.out.println("Datos enviados");
+		String msg = "movePlayer;" + this.inputP1 + ";" + this.inputType;
+		if(this.inputP1 != null) session.sendMessage(new TextMessage(msg));
 	}
 }

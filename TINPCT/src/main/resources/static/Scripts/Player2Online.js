@@ -1,7 +1,7 @@
-class Player2 extends Phaser.GameObjects.Group
+class Player2Online extends Phaser.GameObjects.Group
 {
     constructor(scene, weapon, bulletsImg, crosshairImg, gameSound, explosion){
-        super({key: "Player2"});
+        super({key: "Player2Online"});
         this.scene = scene;
         this.bulletsImg = bulletsImg;
         this.weapon = weapon;
