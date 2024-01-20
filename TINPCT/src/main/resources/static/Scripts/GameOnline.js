@@ -41,32 +41,35 @@ class GameOnline extends Phaser.Scene
         this.player2;
 		window.socket.onmessage = (event) => {
 			var content = event.data.split(";");
-			console.log(content[0]);
 			if(content[0] === "p1") this.InitializePlayer(event);
 			else if(content[0] === "p2") this.InitializePlayer2(event);
 			else if(content[0] === "movePlayer")
 			{
-				console.log("moviendo al jugador");
-				console.log(content[2]);
-				console.log(content[1]);
 				if(content[2] == "move") this.player.MovePlayer(content[1]);
 				else this.player.StopPlayer(content[1]);
+			}
+			else if(content[0] === "movePlayer2")
+			{
+				console.log("Moviendo al jugador 2");
+				this.player2.UpdatePositionP2(parseInt(content[1]), parseInt(content[2]));
+				if(content[3] === "true"){
+					this.player2.Shoot();
+				}
+				if(content[4] === "true") this.player.KillCharacter();
 			}
 		}
 		var msg = {type: "GetP1Info"};
 		window.socket.send(JSON.stringify(msg));
-		if(window.player === "Player2")
-		{
-			var msg = {type: "GetP2Info"};
-			window.socket.send(JSON.stringify(msg));
-		}
+		var msg = {type: "GetP2Info"};
+		window.socket.send(JSON.stringify(msg));
+
         /*/NPCs:
         var minNPC = this.scene.get("NPCNumber").minNPC;
         var maxNPC = this.scene.get("NPCNumber").maxNPC;
         var numberNPC = Math.floor(Math.random() * (maxNPC-minNPC+1) + minNPC); //NPCs son un número aleatorio entre 9 y 15 (de momento)
 	    this.npcs = new Array(numberNPC);
-        //this.InitializeNPCS(); //Se inicializan los NPCs con posiciones aleatorias
-        //Animaciones:*/
+        //this.InitializeNPCS(); //Se inicializan los NPCs con posiciones aleatorias*/
+        //Animaciones:
         this.GenerateAnimations();
        	//Otros:
         this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
@@ -116,19 +119,20 @@ class GameOnline extends Phaser.Scene
         	this.scene.add("InfoMenuOnline", new InfoMenuOnline(hatNum, topNum, botNum, components[7]));
         	this.scene.run("InfoMenuOnline"); //La información está siempre disponible mientras se juega
 		}
-        
     }
 
     InitializePlayer2(event) 
     {
        var components = event.data.split(";");
        var weaponT = components[1];
-       this.player2 = new Player2Online(this, weaponT, "Bullet", "Crosshair", this.gameSound, "Explosion"); // Le paso la escena actual. De momento le paso directamente el arma yo, pero después será una variable que vendrá dada por la escena de personalización
-       this.input.on('pointermove',this.player2.UpdatePositionP2.bind(this.player2), this); //Cada vez que el ratón se mueve le paso la función para cambiar la posición del jugador 2 (que va a ser la del ratón)
-       //le paso el contexto con el último this para que lo haga bien
+       this.player2 = new Player2Online(this, weaponT, "Bullet", "Crosshair", this.gameSound, "Explosion");
        this.player2.InitializeBullets();  //Inicializa las balas del jugador según su arma
-       this.player2.ManageBullets(); //Se añade la gestión de las balas. Cada vez que se haga click izquierdo, se pierde una bala
-       console.log("Jugador 2 inicializado");
+       if(window.player === "Player2")
+       {
+		   this.player2.ManageBullets();
+		   this.player2.ManageMousePosition(); 
+		   console.log("Jugador 2 inicializado");
+	   }  //Se añade la gestión de las balas. Cada vez que se haga click izquierdo, se pierde una bala
     }
 
     UpdateCharacters(deltaTime) //Actualiza posiciones de los jugadores y NPCs
@@ -139,12 +143,15 @@ class GameOnline extends Phaser.Scene
         }*/
         if(this.player !== undefined) this.player.UpdatePosition(deltaTime);
         if(window.player === "Player2"){
-			console.log("Obteniendo datos");
 			var msg = {type: "ObtainP1Input"}
 			window.socket.send(JSON.stringify(msg));
 		} 
+		else if(window.player === "Player1"){
+			var msg = {type: "ObtainP2Input"}
+			window.socket.send(JSON.stringify(msg));
+		}
         //Si el jugador 2 ha disparado se para momentáneamente el sonido del juego con esta función
-        //if(window.player === "Player2") this.player2.StopGameSound();
+        if(this.player2 !== undefined) this.player2.StopGameSound();
     }
 /*
     CheckGameCondition()

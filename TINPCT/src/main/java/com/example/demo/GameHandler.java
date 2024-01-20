@@ -24,6 +24,12 @@ public class GameHandler extends TextWebSocketHandler {
 	//Input de P1:
 	String inputP1;
 	String inputType;
+	//Input de P2:
+	float xPosP2;
+	float yPosP2;
+	boolean hasShot = false;
+	//Game Condition:
+	boolean playerKilled = false;
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -56,6 +62,15 @@ public class GameHandler extends TextWebSocketHandler {
 				break;
 			case "ObtainP1Input":
 				ObtainP1Input(session);
+				break;
+			case "MoveP2":
+				MoveP2(session, json);
+				break;
+			case "Shoot":
+				Shoot(session, json);
+				break;
+			case "ObtainP2Input":
+				ObtainP2Input(session);
 				break;
 		}
 	}
@@ -122,8 +137,26 @@ public class GameHandler extends TextWebSocketHandler {
 	
 	private void ObtainP1Input(WebSocketSession session) throws IOException
 	{
-		System.out.println("Datos enviados");
 		String msg = "movePlayer;" + this.inputP1 + ";" + this.inputType;
 		if(this.inputP1 != null) session.sendMessage(new TextMessage(msg));
+	}
+	
+	private void MoveP2(WebSocketSession session, JSONObject json) throws IOException
+	{
+		xPosP2 = json.getInt("x");
+		yPosP2 = json.getInt("y");
+	}
+	
+	private void Shoot(WebSocketSession session, JSONObject json) throws IOException
+	{
+		hasShot = true;
+		playerKilled = json.getBoolean("playerKilled");
+	}
+	
+	private void ObtainP2Input(WebSocketSession session) throws IOException
+	{
+		String msg = "movePlayer2;" + xPosP2 + ";" + yPosP2 + ";" + hasShot + ";" + playerKilled;
+		if(hasShot) hasShot = false;
+		session.sendMessage(new TextMessage(msg));
 	}
 }
