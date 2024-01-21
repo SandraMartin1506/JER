@@ -72,7 +72,13 @@ class Player2Online extends Phaser.GameObjects.Group
             window.socket.send(JSON.stringify(msg));
 		}.bind(this));
 	}
-   
+	
+	NoBullets(){
+		if(this.bullets.length <= 0){
+			var msg = {type: "NoBullets", numBullets: 0};
+            window.socket.send(JSON.stringify(msg));
+		}
+	}
     UpdatePositionP2(posX, posY) //Se le pasa directamente el puntero activo
     { 
         this.crosshair.x = posX;
@@ -93,10 +99,7 @@ class Player2Online extends Phaser.GameObjects.Group
      				this.Shoot();
      			    var msg = {type: "Shoot", playerKilled: this.scene.player.killed};
             		window.socket.send(JSON.stringify(msg));
-     			} else{
-					 var msg = {type: "NoBullets", numBullets: 0};
-            		window.socket.send(JSON.stringify(msg));
-				 }
+     			} 
             }
         }.bind(this));
     }

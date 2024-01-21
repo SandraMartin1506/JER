@@ -114,13 +114,14 @@ class MissionsOnline extends Phaser.GameObjects.Group
         {
             this.timePerforming -= game.loop.delta;
             if(this.timePerforming <= 0){
+				this.player1.missionAccomplished = true;
                 var msg = {type: "MissionAcomplished", p1MissionAcomplished: this.player1.missionAccomplished};
                 window.socket.send(JSON.stringify(msg));
             }
         } 
         
         else this.timePerforming = 30000;
-        //console.log(this.timePerforming);
+        
     }
 
     Mission5() //Si el jugador se mueve durante 30 segundos de seguido sin parar gana

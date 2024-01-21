@@ -184,7 +184,10 @@ class GameOnline extends Phaser.Scene
 			window.socket.send(JSON.stringify(msg));
 		}
         //Si el jugador 2 ha disparado se para momentáneamente el sonido del juego con esta función
-        if(this.player2 !== undefined) this.player2.StopGameSound();
+        if(this.player2 !== undefined) {
+			this.player2.StopGameSound();
+			this.player2.NoBullets();
+			}
     }
     
     CheckGameCondition(){
@@ -199,10 +202,9 @@ class GameOnline extends Phaser.Scene
         this.scene.add("GameEndedMenuOnline", this.gameEndedMenu);
         this.scene.run("GameEndedMenuOnline");
         this.scene.pause();
-        if(window.player === "Player2"){
-        this.scene.pause("InfoMenuOnline");
-        this.scene.pause("InfoMenuP1Online");
-        }
+        this.scene.remove("InfoMenuOnline");
+        this.scene.remove("InfoMenuP1Online");
+        
     }
     }
     

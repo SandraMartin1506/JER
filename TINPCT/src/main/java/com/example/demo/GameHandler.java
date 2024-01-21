@@ -37,6 +37,9 @@ public class GameHandler extends TextWebSocketHandler {
 	boolean playerKilled = false;
 	boolean p1MissionAcomplished = false;
 	boolean p2NoBullets = false;
+	//EndedMenu Conditions:
+	boolean P1MM = false;
+	boolean P2MM = false;
 
 	
 	@Override
@@ -223,6 +226,11 @@ public class GameHandler extends TextWebSocketHandler {
 		playerKilled = false;
 		p2NoBullets = false;	
 	}
+	
+	//private void Options()
+	//private void checkSameOption(WebSocketSession session) throws IOException{}
+		
+	
 	
 	
 ;}
