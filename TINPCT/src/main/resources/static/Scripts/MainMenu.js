@@ -10,6 +10,7 @@ class MainMenu extends Phaser.Scene
         this.load.image("buttonPlaceholder", "./Sprites/bala.png");
         this.load.image("Background", "./Sprites/fondohacker.png");
         this.load.image("BackgroundBlack", "./Sprites/fondohackernegro.png");
+        this.load.image("Tutorial", "./Sprites/tutorial.png");
         this.load.image("Titulo","./Sprites/titulo.png")
         this.load.audio("Hacker", "./Sounds/hacker.mp3");
         this.load.audio("Click", "./Sounds/click.mp3");
@@ -137,6 +138,21 @@ class MainMenu extends Phaser.Scene
             this.NPCButton.setScale(scale);
             game.canvas.style.cursor = "auto";
         }.bind(this));
+        
+        //Botón TUTORIAL:
+        this.TutorialButton = this.add.image(this.game.config.width/2-650, this.game.config.height/2 + 300+50, "buttonPlaceholder");
+        this.TutorialButton.setScale(scale);
+        this.TutorialButton.setInteractive();
+        this.add.text(688-650, 730+50, "HOW TO PLAY", {font: "36px Courier", fill: "#ffffff"});
+        this.TutorialButton.on("pointerover", function(event) 
+        {
+		this.tutorialImage.setAlpha(1);
+        }.bind(this));
+        this.TutorialButton.on("pointerout", function(event) 
+        {
+this.tutorialImage.setAlpha(0);
+        }.bind(this));
+        this.tutorialImage = this.add.image(0,0,"Tutorial").setOrigin(0,0).setAlpha(0);
         
         //Jugador
       	this.boxText = this.add.rectangle(30,330,450, 170, 0x001F00).setOrigin(0,0).setAlpha(1);

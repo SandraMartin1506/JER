@@ -20,6 +20,10 @@ class CustomizationP2MenuOnline extends Phaser.Scene
         this.load.image("SniperRifle", "./Sprites/rifle_de_francotirador.png");
         this.load.image("GrenadeLauncher", "./Sprites/lanzagranadas.png");
         this.load.image("Wanted", "./Sprites/wanted.png")
+        this.load.image("WantedPablo", "./Sprites/wantedpablo.png")
+        this.load.image("WantedSandra", "./Sprites/wantedsandra.png")
+        this.load.image("WantedKares", "./Sprites/wantedkares.png")
+        this.load.image("WantedHugo", "./Sprites/wantedhugo.png")
     }
 
     create()
@@ -39,8 +43,57 @@ class CustomizationP2MenuOnline extends Phaser.Scene
         //hoja3.setScale(1.7).setAngle(-60);
         const hoja3 = this.add.image(((this.game.config.width*(0.6)/2)),(this.game.config.height*(1))/2, "HojaCuaderno").setOrigin(0.5,0.5);
         hoja3.setScale(-1.75,1.75).setAngle(-6);
-        this.cartel = this.add.image(((this.game.config.width-400)),(this.game.config.height*(1))/2, "Wanted").setScale(0.5);
+        var poswanted=0;
+        var imagewanted4 = this.add.image(((this.game.config.width-400)),(this.game.config.height*(1))/2, "WantedHugo").setScale(0.5).setAlpha(0);
+        var imagewanted3 = this.add.image(((this.game.config.width-400)),(this.game.config.height*(1))/2, "WantedKares").setScale(0.5).setAlpha(0);
+        var imagewanted2 = this.add.image(((this.game.config.width-400)),(this.game.config.height*(1))/2, "WantedSandra").setScale(0.5).setAlpha(0);
+        var imagewanted1 = this.add.image(((this.game.config.width-400)),(this.game.config.height*(1))/2, "WantedPablo").setScale(0.5).setAlpha(0);
+        var imagewanted0 = this.add.image(((this.game.config.width-400)),(this.game.config.height*(1))/2, "Wanted").setScale(0.5).setAlpha(1);
+        var imagewanted = this.add.image(((this.game.config.width-400)),(this.game.config.height*(1))/2, "Wanted").setScale(0.5).setAlpha(0.001);
+        var botonwanted = imagewanted;
+		botonwanted.setInteractive();
+        botonwanted.on("pointerdown", function()
+        {
+			poswanted+=1;
+			if (poswanted==5){
+				poswanted=0;
+			}
+			switch(poswanted){
+				case 0:
+				imagewanted0.setAlpha(1);
+				imagewanted4.setAlpha(0);
+				break;
+				case 1:
+				imagewanted1.setAlpha(1);
+				imagewanted0.setAlpha(0);
+				break;
+				case 2:
+				imagewanted2.setAlpha(1);
+				imagewanted1.setAlpha(0);
+				break;
+				case 3:
+				imagewanted3.setAlpha(1);
+				imagewanted2.setAlpha(0);
+				break;
+				case 4:
+				imagewanted4.setAlpha(1);
+				imagewanted3.setAlpha(0);
+				break;
+			}
 
+            this.clickSound.play();
+        }.bind(this));
+        botonwanted.on("pointerover", function(event) 
+        {
+            this.paperSound.play();
+            botonwanted.setScale(0.52);
+            game.canvas.style.cursor = "pointer";
+        }.bind(this));
+        botonwanted.on("pointerout", function(event) 
+        {
+            botonwanted.setScale(0.5);
+            game.canvas.style.cursor = "auto";
+        }.bind(this));
         //Boton confirmar
         this.goToGame = false;
         const confirmButton = this.add.image(this.game.config.width/2, this.game.config.height*1.75/2, "TrozoPapel").setOrigin(0.5,0.5).setDepth(53).setScale(0.8);
