@@ -72,11 +72,9 @@ class GameOnline extends Phaser.Scene
             }
 		}else if(content[0] === "npcinfo")
 			{
-				console.log("PENEE");
 				this.UpdateNPCOnline(content);
 			}else if(content[0] === "npcdead")
 			{
-				console.log("PENEE");
 				this.UpdateNPCOnline(content);
 			}
 		}
