@@ -80,22 +80,25 @@ class GameEndedMenuOnline extends Phaser.Scene
             game.canvas.style.cursor = "crosshair";
         }.bind(this));
         //Texto de victoria:
-        var victoryText;
-        if(!this.scene.get("GameOnline").player.killed) victoryText = "PLAYER 1 WINS";
-        else victoryText = "PLAYER 2 WINS";
+        var victoryText; 
         console.log(this.condition);
-        this.add.text(this.game.config.width/2, this.game.config.height/8, victoryText, {font: "100px cursive", fill: "#FFFFFF"}).setStroke('#000000', 10).setOrigin(0.5,0.5);
         if(this.condition === "K")
         {
+			victoryText = "PLAYER 2 WINS";
+		    this.add.text(this.game.config.width/2, this.game.config.height/8, victoryText, {font: "100px cursive", fill: "#FFFFFF"}).setStroke('#000000', 10).setOrigin(0.5,0.5);
             this.add.text(this.game.config.width/2, this.game.config.height*2/8, "Player 1 was brutally shot", {font: "75px cursive", fill: "#FFFFFF"}).setStroke('#000000', 10).setOrigin(0.5,0.5);
             
         }
         else if(this.condition === "NB")
         {
+			victoryText = "PLAYER 1 WINS";
+		    this.add.text(this.game.config.width/2, this.game.config.height/8, victoryText, {font: "100px cursive", fill: "#FFFFFF"}).setStroke('#000000', 10).setOrigin(0.5,0.5);
             this.add.text(this.game.config.width/2, this.game.config.height*2/8, "Player 2 can't aim properly", {font: "75px cursive", fill: "#FFFFFF"}).setStroke('#000000', 10).setOrigin(0.5,0.5);
         }
         else if(this.condition === "MA")
         {
+			victoryText = "PLAYER 1 WINS";
+			this.add.text(this.game.config.width/2, this.game.config.height/8, victoryText, {font: "100px cursive", fill: "#FFFFFF"}).setStroke('#000000', 10).setOrigin(0.5,0.5);
             this.add.text(this.game.config.width/2, this.game.config.height*2/8, "Player 1 accomplished his mission", {font: "75px cursive", fill: "#FFFFFF"}).setStroke('#000000', 10).setOrigin(0.5,0.5);
         }
     }
@@ -113,8 +116,10 @@ class GameEndedMenuOnline extends Phaser.Scene
 		var msg = {type: "RestoreValues"};
 		window.socket.send(JSON.stringify(msg));
 		this.scene.run("InfoMenuOnline");
+		this.scene.run("InfoMenuP1Online");
         this.scene.remove("GameOnline");
         this.scene.remove("InfoMenuOnline");
+        this.scene.remove("InfoMenuP1Online");
 		if(window.player === "Player1") this.scene.start("CustomizationP1MenuOnline");
 	    else  this.scene.start("CustomizationP2MenuOnline");
         this.scene.remove("GameEndedMenu");
@@ -126,8 +131,15 @@ class GameEndedMenuOnline extends Phaser.Scene
 		var msg = {type: "RestoreValues"};
 		window.socket.send(JSON.stringify(msg));
         this.scene.start("MainMenu");
+		if(window.player !== undefined){
+		var msg2 = {type: "playerAvailable", player: window.player};
+		window.socket.send(JSON.stringify(msg2));
+	}
         this.scene.remove("GameOnline");
         this.scene.remove("InfoMenuOnline");
+        this.scene.remove("InfoMenuP1Online");
+        this.scene.remove("CustomizationP1MenuOnline");
+        this.scene.remove("CustomizationP2MenuOnline");
         this.scene.remove();
     }
     

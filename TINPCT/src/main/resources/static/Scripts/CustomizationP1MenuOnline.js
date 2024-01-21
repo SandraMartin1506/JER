@@ -150,7 +150,7 @@ class CustomizationP1MenuOnline extends Phaser.Scene
         "Explosion hater",
         "Stalker"]
         this.textMission = this.add.text((this.game.config.width*(1-0.85)/2), (this.game.config.height*(1+0.20))/2, "YOUR MISSION: " + missionName[this.numMission-1], { font: '30px cursive', fill: '#ff0000' }).setAngle(-2); 
-        const missionDesc = ["Visit every corner of the map.",
+        this.missionDesc = ["Visit every corner of the map.",
         "Keep moving during an entire minute in total.",
         "Stay still during an entire minute in total.",
         "Stay still during thirty seconds straight.",
@@ -158,7 +158,7 @@ class CustomizationP1MenuOnline extends Phaser.Scene
         "Be close to a multitude during thirty seconds straight.",
         "Stay away from any multitude during thirty seconds straight.",
         "Choose any NPC and follow it from a extremely close distance during thirty seconds straight."];
-        this.missionObjective = this.add.text((this.game.config.width*(1-0.85)/2), (this.game.config.height*(1+0.30))/2, missionDesc[this.numMission-1], { font: '32px cursive', fill: '#000000', wordWrap: { width: 500 }}).setAngle(-2);
+        this.missionObjective = this.add.text((this.game.config.width*(1-0.85)/2), (this.game.config.height*(1+0.30))/2, this.missionDesc[this.numMission-1], { font: '32px cursive', fill: '#000000', wordWrap: { width: 500 }}).setAngle(-2);
         
         //Decorar
         const hojaDer = this.add.image(((this.game.config.width*(1.6)/2)),(this.game.config.height*(1.5))/2, "HojaCuaderno").setOrigin(0.5,0.5);
@@ -386,7 +386,7 @@ class CustomizationP1MenuOnline extends Phaser.Scene
         var maxNPC = this.scene.get("NPCNumber").maxNPC;
 		this.numberNPC = Math.floor(Math.random() * (maxNPC-minNPC+1) + minNPC);
 		this.seed=Math.random()*1000000;
-        var msg = {type: "InitializeP1", mission: this.numMission, hat: this.hatNum, top: this.topNum, bot: this.botNum, hint: this.fakeHint.text, numNPC: this.numberNPC, seed: this.seed};
+		var msg = {type: "InitializeP1", mission: this.numMission, hat: this.hatNum, top: this.topNum, bot: this.botNum, hint: this.fakeHint.text, numNPC: this.numberNPC, seed: this.seed};
         window.socket.send(JSON.stringify(msg));
         this.CheckPlayersReady();
         this.interval = setInterval(() => this.CheckPlayersReady(), 1000);
@@ -406,8 +406,14 @@ class CustomizationP1MenuOnline extends Phaser.Scene
 		{
 			clearInterval(this.interval);
 			this.scene.add("GameOnline", new GameOnline());
+			this.scene.add("InfoMenuP1Online", new InfoMenuP1Online(this.missionDesc[this.numMission - 1]));
 			this.scene.start("GameOnline");
 			this.scene.stop("CustomizationP1MenuOnline");
+		} 
+		else
+		{
+			this.alertText = this.add.text((this.game.config.width*(1)/2), (this.game.config.height*(1))/2, "WAITING FOR PLAYER 2", { font: '120px cursive', fill: '#ffffff',wordWrap: { width: 880 }}).setOrigin(0.5,0.5).setDepth(60);
+        	this.proTip = this.add.text((this.game.config.width*(1)/2) - 93, (this.game.config.height*(1))/2 + 200, "Pro tip: there's nothing you can do", { font: '40px cursive', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
 		}
 	}
 }

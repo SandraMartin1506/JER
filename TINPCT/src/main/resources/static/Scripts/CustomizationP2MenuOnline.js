@@ -182,7 +182,7 @@ class CustomizationP2MenuOnline extends Phaser.Scene
  
     GoToGame()
     {   
-        var msg = {type: "InitializeP2", weapon: this.weaponSelected};
+		var msg = {type: "InitializeP2", weapon: this.weaponSelected};
         window.socket.send(JSON.stringify(msg));
         this.CheckPlayersReady();
         this.interval = setInterval(() => this.CheckPlayersReady(), 1000);
@@ -204,6 +204,11 @@ class CustomizationP2MenuOnline extends Phaser.Scene
 			this.scene.add("GameOnline", new GameOnline());
 			this.scene.start("GameOnline");
 			this.scene.stop("CustomizationP2MenuOnline");
+		}
+		else
+		{
+			this.alertText = this.add.text((this.game.config.width*(1)/2), (this.game.config.height*(1))/2 - 50, "WAITING FOR PLAYER 1", { font: '120px cursive', fill: '#ffffff',wordWrap: { width: 880 }}).setOrigin(0.5,0.5).setDepth(60);
+       		this.proTip = this.add.text((this.game.config.width*(1)/2), (this.game.config.height*(1))/2 + 200, "Pro tip: look at him dead in the eye (if you aren't in the same room look at the nearest wall and cry)", { font: '40px cursive', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
 		}
 	}
 }

@@ -52,7 +52,6 @@ class GameOnline extends Phaser.Scene
 			}
 			else if(content[0] === "movePlayer2")
 			{
-				console.log("Moviendo al jugador 2");
 				this.player2.UpdatePositionP2(parseInt(content[1]), parseInt(content[2]));
 				if(content[3] === "true"){
 					this.player2.Shoot();
@@ -98,7 +97,7 @@ class GameOnline extends Phaser.Scene
         this.GenerateAnimations();
        	//Otros:
         this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
-        if(window.player === "Player1") game.canvas.style.cursor = "none"; //A partir de ahora el cursor será una mira (no la nuestra, una por defecto)
+        if(window.player === "Player1") game.canvas.style.cursor = "default"; //A partir de ahora el cursor será una mira (no la nuestra, una por defecto)
         else game.canvas.style.cursor = "crosshair";
         this.gameEndedMenu = new GameEndedMenuOnline(this.player, this.player2);
 
@@ -183,6 +182,7 @@ class GameOnline extends Phaser.Scene
         if(window.player === "Player1") {
 			this.player.ManageInput(this); //Se añade la gestión del input al ser pulsada una tecla. Se pasa como parámetro la escena del juego.
         	this.player.StopMovement(this); //Gestión del input: cuando deja de pulsarse la tecla de movimiento el jugador se queda quieto
+        	this.scene.run("InfoMenuP1Online");
         	console.log("Jugador 1 inicializado");
         }
         else{
@@ -258,7 +258,10 @@ class GameOnline extends Phaser.Scene
 			window.socket.send(JSON.stringify(msg));
 		}
         //Si el jugador 2 ha disparado se para momentáneamente el sonido del juego con esta función
-        if(this.player2 !== undefined) this.player2.StopGameSound();
+        if(this.player2 !== undefined) {
+			this.player2.StopGameSound();
+			zthis.player2.NoBullets();
+			}
     }
     
     WorkNPC(){
@@ -348,9 +351,9 @@ class GameOnline extends Phaser.Scene
         this.scene.add("GameEndedMenuOnline", this.gameEndedMenu);
         this.scene.run("GameEndedMenuOnline");
         this.scene.pause();
-        if(window.player === "Player2"){
-        this.scene.pause("InfoMenuOnline");
-        }
+        this.scene.remove("InfoMenuOnline");
+        this.scene.remove("InfoMenuP1Online");
+        
     }
     }
     
