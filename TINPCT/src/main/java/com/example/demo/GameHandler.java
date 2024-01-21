@@ -14,9 +14,12 @@ public class GameHandler extends TextWebSocketHandler {
 	int hat;
 	int top;
 	int bot;
+	int numNPC;
+	int seed;
 	String hint;
 	float initialX;
 	float initialY;
+	//int numNPC;
 	String weapon;
 	//Jugadores preparados:
 	boolean p1Ready = false;
@@ -98,6 +101,9 @@ public class GameHandler extends TextWebSocketHandler {
 		Random rand = new Random();
 		initialX = rand.nextInt(1550) + 50;
 		initialY = rand.nextInt(850) + 50;
+		numNPC = json.getInt("numNPC");
+		seed = json.getInt("seed");
+		//numNPC = json.getInt("numNPC");
 		p1Ready = true;
 	}
 	
@@ -119,7 +125,7 @@ public class GameHandler extends TextWebSocketHandler {
 	
 	private void GetP1Info(WebSocketSession session) throws IOException
 	{
-		String msg = "p1;" + mission + ";" + hat + ";" + top + ";" + bot + ";" + initialX + ";" + initialY + ";" + hint;
+		String msg = "p1;" + mission + ";" + hat + ";" + top + ";" + bot + ";" + initialX + ";" + initialY + ";" + hint + ";" + numNPC + ";" + seed;
 		session.sendMessage(new TextMessage(msg));
 	}
 	

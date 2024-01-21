@@ -39,6 +39,8 @@ class GameOnline extends Phaser.Scene
         //Jugadores:
         this.player;
         this.player2;
+        this.npcs;
+        
 		window.socket.onmessage = (event) => {
 			var content = event.data.split(";");
 			if(content[0] === "p1") this.InitializePlayer(event);
@@ -69,6 +71,8 @@ class GameOnline extends Phaser.Scene
         var numberNPC = Math.floor(Math.random() * (maxNPC-minNPC+1) + minNPC); //NPCs son un número aleatorio entre 9 y 15 (de momento)
 	    this.npcs = new Array(numberNPC);
         //this.InitializeNPCS(); //Se inicializan los NPCs con posiciones aleatorias*/
+        this.seed;
+        this.randomizr;
         //Animaciones:
         this.GenerateAnimations();
        	//Otros:
@@ -76,6 +80,7 @@ class GameOnline extends Phaser.Scene
         if(window.player === "Player1") game.canvas.style.cursor = "none"; //A partir de ahora el cursor será una mira (no la nuestra, una por defecto)
         else game.canvas.style.cursor = "crosshair";
         //this.gameEndedMenu = new GameEndedMenu(this.player, this.player2);
+        //this.interval = setInterval(() => this.UpdateNPCFix(), 10);
     }
 
     update(time, deltaTime)
@@ -90,14 +95,18 @@ class GameOnline extends Phaser.Scene
     {
         for(var i = 0; i < this.npcs.length; i++)
         {
-            var randomX = Math.floor(Math.random() * (1550-50+1) + 50);
-            var randomY = Math.floor(Math.random() * (850-50+1) + 50);
-            var randomHat = Math.floor(Math.random() * this.hats.length);
-            var randomTop = Math.floor(Math.random() * this.tops.length);
-            var randomBotton = Math.floor(Math.random() * this.bottoms.length);
-            this.npcs[i] = new NPC(randomX, randomY, this, "Character", this.hats[randomHat], this.tops[randomTop], this.bottoms[randomBotton], "DeadBody");
+            var randomX = Math.floor(this.randomizr.call() * (1550-50+1) + 50);
+            var randomY = Math.floor(this.randomizr.call() * (850-50+1) + 50);
+            var randomHat = Math.floor(this.randomizr.call() * this.hats.length);
+            var randomTop = Math.floor(this.randomizr.call() * this.tops.length);
+            var randomBotton = Math.floor(this.randomizr.call() * this.bottoms.length);
+            this.npcs[i] = new NPC2(randomX, randomY, this, "Character", this.hats[randomHat], this.tops[randomTop], this.bottoms[randomBotton], "DeadBody");
         }
     }
+    
+    UpdateNPCFix(){
+		
+	}
 
     InitializePlayer(event) //Inicializa al jugador en una posición aleatoria
     {
@@ -110,6 +119,12 @@ class GameOnline extends Phaser.Scene
 	    this.player = new PlayerOnline(initialX, initialY, this, "Character", this.hats[hatNum], this.tops[topNum], this.bottoms[botNum], "DeadBody");
     	var numMission = parseInt(components[1]);
         this.mission = new Missions(numMission, this.player, this);
+        var numNPC = parseInt(components[8]);
+       	this.npcs = new Array(numNPC);
+       	var seedWord = components[9];
+       	this.seed = this.cyrb128(seedWord);
+        this.randomizr = this.splitmix32(this.seed[0]);
+        this.InitializeNPCS();
         if(window.player === "Player1") {
 			this.player.ManageInput(this); //Se añade la gestión del input al ser pulsada una tecla. Se pasa como parámetro la escena del juego.
         	this.player.StopMovement(this); //Gestión del input: cuando deja de pulsarse la tecla de movimiento el jugador se queda quieto
@@ -137,10 +152,13 @@ class GameOnline extends Phaser.Scene
 
     UpdateCharacters(deltaTime) //Actualiza posiciones de los jugadores y NPCs
     {
-        /*for(var i = 0; i < this.npcs.length; i++)
-        {
-            this.npcs[i].UpdatePosition(deltaTime);
-        }*/
+
+	if (this.npcs!=null){
+        for(var i = 0; i < this.npcs.length; i++)
+	        {
+	            this.npcs[i].UpdatePosition(deltaTime);
+	        }
+        }
         if(this.player !== undefined) this.player.UpdatePosition(deltaTime);
         if(window.player === "Player2"){
 			var msg = {type: "ObtainP1Input"}
@@ -165,6 +183,39 @@ class GameOnline extends Phaser.Scene
             this.scene.pause("InfoMenu");
         }
     }*/
+    
+    randomNumberGenerator(){
+		return this.randomizr.call();
+	}
+
+
+	splitmix32(a) {
+	    return function() {
+	      a |= 0; a = a + 0x9e3779b9 | 0;
+	      var t = a ^ a >>> 16; t = Math.imul(t, 0x21f0aaad);
+	          t = t ^ t >>> 15; t = Math.imul(t, 0x735a2d97);
+	      return ((t = t ^ t >>> 15) >>> 0) / 4294967296;
+	    }
+	}
+	
+    
+	cyrb128(str) {
+	    let h1 = 1779033703, h2 = 3144134277,
+	        h3 = 1013904242, h4 = 2773480762;
+	    for (let i = 0, k; i < str.length; i++) {
+	        k = str.charCodeAt(i);
+	        h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
+	        h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
+	        h3 = h4 ^ Math.imul(h3 ^ k, 951274213);
+	        h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+	    }
+	    h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
+	    h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
+	    h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
+	    h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
+	    h1 ^= (h2 ^ h3 ^ h4), h2 ^= h1, h3 ^= h1, h4 ^= h1;
+	    return [h1>>>0, h2>>>0, h3>>>0, h4>>>0];
+	}
 
     GenerateAnimations()
     {

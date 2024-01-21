@@ -382,7 +382,11 @@ class CustomizationP1MenuOnline extends Phaser.Scene
 
     GoToGame()
     {
-        var msg = {type: "InitializeP1", mission: this.numMission, hat: this.hatNum, top: this.topNum, bot: this.botNum, hint: this.fakeHint.text};
+		var minNPC = this.scene.get("NPCNumber").minNPC;
+        var maxNPC = this.scene.get("NPCNumber").maxNPC;
+		this.numberNPC = Math.floor(Math.random() * (maxNPC-minNPC+1) + minNPC);
+		this.seed=Math.random()*1000000;
+        var msg = {type: "InitializeP1", mission: this.numMission, hat: this.hatNum, top: this.topNum, bot: this.botNum, hint: this.fakeHint.text, numNPC: this.numberNPC, seed: this.seed};
         window.socket.send(JSON.stringify(msg));
         this.CheckPlayersReady();
         this.interval = setInterval(() => this.CheckPlayersReady(), 1000);
