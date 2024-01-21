@@ -36,8 +36,9 @@ public class GameHandler extends TextWebSocketHandler {
 	boolean playerKilled = false;
 	boolean p1MissionAcomplished = false;
 	boolean p2NoBullets = false;
-
-	
+	//NPC
+	String npcinfo;
+	String npcdead;
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("Message received: " + message.getPayload());
@@ -91,6 +92,20 @@ public class GameHandler extends TextWebSocketHandler {
 			case "RestoreValues":
 				RestoreValues();
 				break;
+			case "UpdateNPC":
+				UpdateNPC(session, json);
+				break;
+			case "GetNPC":
+				GetNPC(session, json);
+				break;
+				
+			case "UpdateNPCStart":
+				UpdateNPCStart(json);
+				break;
+			case "GetNPCStart":
+				GetNPCStart(json);
+				break;
+				
 		}
 	}
 	
@@ -204,5 +219,28 @@ public class GameHandler extends TextWebSocketHandler {
 		p2NoBullets = false;	
 	}
 	
+	private void UpdateNPCStart(JSONObject json) throws IOException
+	{
+		npcinfo=json.getString("npcinfo");
+	}
+	private void GetNPCStart(JSONObject json) throws IOException
+	{
+		npcdead=json.getString("npcdead");
+	}
+	
+	private void UpdateNPC(WebSocketSession session, JSONObject json) throws IOException
+	{
+		npcinfo=json.getString("npcinfo");
+		
+		String msg = "npcdead;" + npcdead;
+		session.sendMessage(new TextMessage(msg));
+		
+	}
+	private void GetNPC(WebSocketSession session, JSONObject json) throws IOException
+	{
+		npcdead=json.getString("npcdead");
+		String msg = "npcinfo;" + npcinfo;
+		session.sendMessage(new TextMessage(msg));
+	}
 	
 ;}

@@ -71,7 +71,15 @@ class GameOnline extends Phaser.Scene
 					this.condition = "NB"
                     this.GoToEnding();
             }
-		}
+		}else if(content[0] === "npcinfo")
+			{
+				console.log("PENEE");
+				this.UpdateNPCOnline(content);
+			}else if(content[0] === "npcdead")
+			{
+				console.log("PENEE");
+				this.UpdateNPCOnline(content);
+			}
 		}
 		var msg = {type: "GetP1Info"};
 		window.socket.send(JSON.stringify(msg));
@@ -116,11 +124,42 @@ class GameOnline extends Phaser.Scene
             var randomBotton = Math.floor(this.randomizr.call() * this.bottoms.length);
             this.npcs[i] = new NPC2(randomX, randomY, this, "Character", this.hats[randomHat], this.tops[randomTop], this.bottoms[randomBotton], "DeadBody");
         }
+        
+			var npcinfostring;
+			
+			if (this.npcs!=null){
+	        	for(var i = 0; i < this.npcs.length; i++)
+		        {
+		            npcinfostring+=this.npcs[i].GetCurrentX();
+		            npcinfostring+=";";
+		            npcinfostring+=this.npcs[i].GetCurrentY();
+		            if((i+1)<this.npcs.length){
+						npcinfostring+=";";
+					}
+		        }
+       		}
+       		
+       		var msg = {type: "UpdateNPCStart" , npcinfo: npcinfostring};
+			window.socket.send(JSON.stringify(msg));
+			
+			
+			var npcinfostring2;
+			
+			if (this.npcs!=null){
+	        	for(var i = 0; i < this.npcs.length; i++)
+		        {
+		            npcinfostring+=this.npcs[i].GetDead();
+		            //if((i+1)<this.npcs.length){
+						npcinfostring2+=";";
+					//}
+		        }
+       		}
+			
+			var msg = {type: "GetNPCStart", npcdead: npcinfostring2};
+			window.socket.send(JSON.stringify(msg));
+			
     }
     
-    UpdateNPCFix(){
-		
-	}
 
     InitializePlayer(event) //Inicializa al jugador en una posición aleatoria
     {
@@ -139,6 +178,7 @@ class GameOnline extends Phaser.Scene
        	this.seed = this.cyrb128(seedWord);
         this.randomizr = this.splitmix32(this.seed[0]);
         this.InitializeNPCS();
+        this.interval = setInterval(() => this.WorkNPC(), 50);
         console.log(this.mission);
         if(window.player === "Player1") {
 			this.player.ManageInput(this); //Se añade la gestión del input al ser pulsada una tecla. Se pasa como parámetro la escena del juego.
@@ -167,24 +207,132 @@ class GameOnline extends Phaser.Scene
 
     UpdateCharacters(deltaTime) //Actualiza posiciones de los jugadores y NPCs
     {
-
-	if (this.npcs!=null){
-        for(var i = 0; i < this.npcs.length; i++)
-	        {
-	            this.npcs[i].UpdatePosition(deltaTime);
-	        }
-        }
+		var msg;
         if(this.player !== undefined) this.player.UpdatePosition(deltaTime);
         if(window.player === "Player2"){
-			var msg = {type: "ObtainP1Input"}
+			
+			if (this.npcs!=null){
+	        	for(var i = 0; i < this.npcs.length; i++)
+		        {
+		            this.npcs[i].UpdatePosition2(deltaTime);
+		            /*
+		            npcinfostring+=this.npcs[i].GetCurrentX();
+		            npcinfostring+=";";
+		            npcinfostring+=this.npcs[i].GetCurrentY();
+		            if((i+1)<this.npcs.length){
+						npcinfostring+=";";
+					}
+					*/
+		        }
+       		}
+			/*
+			msg = {type: "GetNPC"};
+			window.socket.send(JSON.stringify(msg));
+			*/
+			msg = {type: "ObtainP1Input"}
 			window.socket.send(JSON.stringify(msg));
 		} 
 		else if(window.player === "Player1"){
-			var msg = {type: "ObtainP2Input"}
+			
+			var npcinfostring;
+			
+			if (this.npcs!=null){
+	        	for(var i = 0; i < this.npcs.length; i++)
+		        {
+		            this.npcs[i].UpdatePosition(deltaTime);
+		            /*
+		            npcinfostring+=this.npcs[i].GetCurrentX();
+		            npcinfostring+=";";
+		            npcinfostring+=this.npcs[i].GetCurrentY();
+		            if((i+1)<this.npcs.length){
+						npcinfostring+=";";
+					}
+					*/
+		        }
+       		}
+       		/*
+       		msg = {type: "UpdateNPC" , npcinfo: npcinfostring};
+			window.socket.send(JSON.stringify(msg));
+			*/
+			msg = {type: "ObtainP2Input"}
 			window.socket.send(JSON.stringify(msg));
 		}
         //Si el jugador 2 ha disparado se para momentáneamente el sonido del juego con esta función
         if(this.player2 !== undefined) this.player2.StopGameSound();
+    }
+    
+    WorkNPC(){
+		if(window.player === "Player2"){
+			
+			var npcinfostring;
+			
+			if (this.npcs!=null){
+	        	for(var i = 0; i < this.npcs.length; i++)
+		        {
+		            npcinfostring+=this.npcs[i].GetDead();
+		            //if((i+1)<this.npcs.length){
+						npcinfostring+=";";
+					//}
+		        }
+       		}
+			
+			var msg = {type: "GetNPC", npcdead: npcinfostring};
+			
+			//var msg = {type: "GetNPC"};
+			window.socket.send(JSON.stringify(msg));
+
+		} 
+		else if(window.player === "Player1"){
+			
+			var npcinfostring;
+			
+			if (this.npcs!=null){
+	        	for(var i = 0; i < this.npcs.length; i++)
+		        {
+		            npcinfostring+=this.npcs[i].GetCurrentX();
+		            npcinfostring+=";";
+		            npcinfostring+=this.npcs[i].GetCurrentY();
+		            npcinfostring+=";";
+		            npcinfostring+=this.npcs[i].GetNextX();
+		            npcinfostring+=";";
+		            npcinfostring+=this.npcs[i].GetNextY();
+		            npcinfostring+=";";
+		            npcinfostring+=this.npcs[i].GetDir();
+		            //if((i+1)<this.npcs.length){
+						npcinfostring+=";";
+					//}
+		        }
+       		}
+       		
+       		var msg = {type: "UpdateNPC" , npcinfo: npcinfostring};
+			window.socket.send(JSON.stringify(msg));
+			
+		}
+	}
+    
+    UpdateNPCOnline(component){
+		
+		if(component[0] === "npcinfo"){
+				if (this.npcs!=null){
+	        	for(var i = 0; i < this.npcs.length; i++)
+		        {
+		            this.npcs[i].SetCurrentX(parseFloat(component[1+i*5]));
+		            this.npcs[i].SetCurrentY(parseFloat(component[2+i*5]));
+		            this.npcs[i].SetNextX(parseFloat(component[3+i*5]));
+		            this.npcs[i].SetNextY(parseFloat(component[4+i*5]));
+		            this.npcs[i].SetDir(Math.floor(parseFloat(component[5+i*5])));
+		        }
+       		}
+       	}else if(component[0] === "npcdead"){
+				if (this.npcs!=null){
+	        	for(var i = 0; i < this.npcs.length; i++)
+		        {
+		            if((this.npcs[i].GetDead()==0)&&(component[1+i])==="1"){
+						this.npcs[i].KillCharacter();
+					}
+		        }
+			   }
+	}
     }
     
     CheckGameCondition(){
@@ -195,6 +343,7 @@ class GameOnline extends Phaser.Scene
     GoToEnding()
     {
 		if (!this.scene.isActive("GameEndedMenuOnline")) {
+			clearInterval(this.interval);
         this.gameSound.stop();
         this.scene.add("GameEndedMenuOnline", this.gameEndedMenu);
         this.scene.run("GameEndedMenuOnline");
