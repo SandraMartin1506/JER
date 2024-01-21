@@ -179,8 +179,9 @@ class CustomizationP2MenuOnline extends Phaser.Scene
         //alerta inicial
         this.alertTime = 0;
         this.alertBox = this.add.rectangle(0,0, this.game.config.width*2, this.game.config.height*2, 0x000000).setDepth(59);
-        const title = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(0.17))/2, "Player2Customizes").setOrigin(0.5,0.5);
-        title.setScale(1);
+        //const title = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(0.17))/2, "Player2Customizes").setOrigin(0.5,0.5);
+        //title.setScale(1);
+        this.add.text(this.game.config.width/2, this.game.config.height/10, "PLAYER 2 CUSTOMIZES", {font: "100px cursive", fill: "#FFFFFF"}).setStroke('#000000', 10).setOrigin(0.5,0.5);
     }
 
     update()

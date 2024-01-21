@@ -230,8 +230,9 @@ class CustomizationP1MenuOnline extends Phaser.Scene
             }
         });
 
-        const title = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(0.17))/2, "Player1Customizes").setOrigin(0.5,0.5);
-        title.setScale(1);
+        //const title = this.add.image(((this.game.config.width*(1)/2)),(this.game.config.height*(0.17))/2, "Player1Customizes").setOrigin(0.5,0.5);
+        //title.setScale(1);
+        this.add.text(this.game.config.width/2, this.game.config.height/10, "PLAYER 1 CUSTOMIZES", {font: "100px cursive", fill: "#FFFFFF"}).setStroke('#000000', 10).setOrigin(0.5,0.5);
 
         //alerta inicial
         this.alertTime = 0;
