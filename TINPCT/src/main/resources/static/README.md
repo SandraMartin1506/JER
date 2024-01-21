@@ -205,7 +205,7 @@ Esta pantalla aparece cuando se termina la partida, es decir, uno de los dos jug
 
 **FASE 4: AÑADIDOS. Se añaden dos clases más para la inclusión de websockets**
 
-![Diagrama de clases](<ReadmeImages/Diagrama de clases.png>)
+![Diagrama de clases](<ReadmeImages/Diagramaclasesactualizado.png>)
 
 
 Se han añadido dos clases: User y UserController que sirven para registrar usuarios en el servidor y almacenarlos en un documento de texto junto a algunas características más.
