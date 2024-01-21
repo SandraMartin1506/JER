@@ -200,7 +200,11 @@ Esta pantalla se puede acceder durante la partida del juego. Sirve para pausar l
 Esta pantalla aparece cuando se termina la partida, es decir, uno de los dos jugadores ha ganado. En ella se explica cuál de los dos ha ganado y por qué. Tiene dos botones: Play Again, que devuelve a la pantalla de customización del jugador 1 y comienza el juego de nuevo; y Main Menu, que manda a los usuarios al menú principal.
 ![Pantalla de fin de juego](ReadmeImages/GameEndedMenu.png)
 
+
 **FASE 3: NUEVAS CLASES.**
+
+**FASE 4: AÑADIDOS. Se añaden dos clases más para la inclusión de websockets**
+
 ![Diagrama de clases](<ReadmeImages/Diagrama de clases.png>)
 
 
@@ -210,6 +214,9 @@ Se han añadido dos clases: User y UserController que sirven para registrar usua
 ![usuario ya registrado](<ReadmeImages/Usuario loggeado.png>)
 
 **FASE 3: INICIAR JAR.**
-
-
 Para abrir el archivo JAR, se recomienda utilizar winrar para descomprimir el paquete y desde ahí se accede a BOOT-INF que contiene toda la información del proyecto. Una vez ahí, se selecciona "classes", y después, "dom" (En "static" es donde se situa el juego hecho en la fase anterior). Tras ello se abre el proyecto con spring boot y se ejecuta el servidor. 
+
+**FASE 4: INCLUSIÓN DE WEBSOCKETS.**
+Mediante el software SpringTool se ha añadido comunicación entre dos jugadores mediante el uso de un servidor. Para ello, se han creado dos nuevas clases de JAVA cuyo propósito es manejar las peticiones al servidor y devolver los datos correspondientes a estas. La clase "Websocket Config" como su propio nombre indica se encarga de configurar el manejo de WebSockets en Spring Tool. En este caso el manejador de utilizado se llama GameHandler(), por tanto este se añade a la lista de manejadores de WebSocket.
+
+Con respecto a la clase GameHandler, es la que implementa toda la lógica de recibir y enviar mensajes. Tiene una función principal que se ocupa de recibir los mensajes enviados desde las diferentes clases del juego implementado. Según el nombre del mensaje recibido, se realiza una función u otra. Esto se hace a partir de un switch que recibe los valores del mensaje en formato JSON para después transformarlos en una variable String, y según el caso del nombre recibido se llamarán a las diferentes funciones implementadas en esa misma clase. Esta clase cuenta además con sus propios atributos que se utilizan para enviar valores concretos en los mensajes con los que se comunica el estado de juego general y atributos propios de cada uno de los jugadores a ambos clientes.
