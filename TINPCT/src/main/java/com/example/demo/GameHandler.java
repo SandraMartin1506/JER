@@ -8,7 +8,9 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 public class GameHandler extends TextWebSocketHandler {
-	int counter = 0;
+	//Asignación de jugadores:
+	boolean p1Assigned = false;
+	boolean p2Assigned = false;
 	//Inicialización de jugadores:
 	int mission;
 	int hat;
@@ -24,7 +26,6 @@ public class GameHandler extends TextWebSocketHandler {
 	//Jugadores preparados:
 	boolean p1Ready = false;
 	boolean p2Ready = false;
-	
 	//Input de P1:
 	String inputP1;
 	String inputType;
@@ -48,6 +49,9 @@ public class GameHandler extends TextWebSocketHandler {
 		{
 			case "assignPlayer":
 				AssignPlayer(session);
+				break;
+			case "playerAvailable":
+				PlayerAvailable(json);
 				break;
 			case "InitializeP1":
 				InitializeP1(json);
@@ -97,14 +101,30 @@ public class GameHandler extends TextWebSocketHandler {
 	private void AssignPlayer(WebSocketSession session) throws IOException 
 	{
 		String msg = "";
-		counter++;
-		if(counter == 1) {
+		if(!p1Assigned && !p2Ready) {
+			p1Assigned = true;
 			msg = "Player1";
 		}
-		else if (counter == 2){
+		else if (!p2Assigned && !p1Ready){
+			p2Assigned = true;
 			msg = "Player2";
 		}
 		session.sendMessage(new TextMessage(msg));
+	}
+	
+	private void PlayerAvailable(JSONObject json) throws IOException 
+	{
+		String player = json.getString("player");
+		if(player.equals("Player1")) 
+		{
+			p1Assigned = false;
+			p1Ready = false;
+		}
+		else if(player.equals("Player2"))
+		{
+			p2Assigned = false;
+			p2Ready = false;
+		}
 	}
 	
 	private void InitializeP1(JSONObject json)

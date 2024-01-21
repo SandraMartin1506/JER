@@ -22,10 +22,10 @@ class PlayerOnline extends Phaser.GameObjects.Group
         this.deadSprite = deadSprite;
         scene.physics.add.existing(this.body);
         scene.physics.world.enable(this.body);
-        this.body.setInteractive();
-        this.body.on('pointerdown',function(pointer)
+        if(window.player === "Player2") this.body.setInteractive();
+		this.body.on('pointerdown',function(pointer)
         {
-            this.KillCharacter();
+           	this.KillCharacter();
         }.bind(this));
     }
 

@@ -90,6 +90,10 @@ $(window).on('beforeunload', function() {
 	        async: true, 
 	    });
 	}
+	if(window.player !== undefined){
+		var msg = {type: "playerAvailable", player: window.player};
+		window.socket.send(JSON.stringify(msg));
+	}
 }); 
 
 function EmptyForms()

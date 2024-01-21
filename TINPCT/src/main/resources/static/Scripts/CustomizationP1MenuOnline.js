@@ -386,7 +386,7 @@ class CustomizationP1MenuOnline extends Phaser.Scene
         var maxNPC = this.scene.get("NPCNumber").maxNPC;
 		this.numberNPC = Math.floor(Math.random() * (maxNPC-minNPC+1) + minNPC);
 		this.seed=Math.random()*1000000;
-        var msg = {type: "InitializeP1", mission: this.numMission, hat: this.hatNum, top: this.topNum, bot: this.botNum, hint: this.fakeHint.text, numNPC: this.numberNPC, seed: this.seed};
+		var msg = {type: "InitializeP1", mission: this.numMission, hat: this.hatNum, top: this.topNum, bot: this.botNum, hint: this.fakeHint.text, numNPC: this.numberNPC, seed: this.seed};
         window.socket.send(JSON.stringify(msg));
         this.CheckPlayersReady();
         this.interval = setInterval(() => this.CheckPlayersReady(), 1000);
@@ -408,6 +408,11 @@ class CustomizationP1MenuOnline extends Phaser.Scene
 			this.scene.add("GameOnline", new GameOnline());
 			this.scene.start("GameOnline");
 			this.scene.stop("CustomizationP1MenuOnline");
+		} 
+		else
+		{
+			this.alertText = this.add.text((this.game.config.width*(1)/2), (this.game.config.height*(1))/2, "WAITING FOR PLAYER 2", { font: '120px cursive', fill: '#ffffff',wordWrap: { width: 880 }}).setOrigin(0.5,0.5).setDepth(60);
+        	this.proTip = this.add.text((this.game.config.width*(1)/2) - 93, (this.game.config.height*(1))/2 + 200, "Pro tip: there's nothing you can do", { font: '40px cursive', fill: '#ffffff',wordWrap: { width: 800 }}).setOrigin(0.5,0.5).setDepth(60);
 		}
 	}
 }
