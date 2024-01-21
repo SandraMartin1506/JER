@@ -260,7 +260,7 @@ class GameOnline extends Phaser.Scene
         //Si el jugador 2 ha disparado se para momentáneamente el sonido del juego con esta función
         if(this.player2 !== undefined) {
 			this.player2.StopGameSound();
-			zthis.player2.NoBullets();
+			this.player2.NoBullets();
 			}
     }
     

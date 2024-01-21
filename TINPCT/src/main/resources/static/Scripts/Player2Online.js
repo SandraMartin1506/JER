@@ -43,13 +43,16 @@ class Player2Online extends Phaser.GameObjects.Group
 
     AreaShot(){ //Saber si se va a cambiar la mira al final
         var distanceP1 = Phaser.Math.Distance.Between(this.crosshair.x,this.crosshair.y, this.scene.player.body.x,this.scene.player.body.y) //Calcula la distancia entre el jugador y la mira
-        /*this.scene.npcs.forEach((objeto)=>{ //Calcula la distancia por cada npc
+        if(this.scene.npcs!=null)
+        {
+        this.scene.npcs.forEach((objeto)=>{ //Calcula la distancia por cada npc
 	        var distanceNPC = Phaser.Math.Distance.Between(this.crosshair.x,this.crosshair.y, objeto.body.x,objeto.body.y)
 	        if(distanceNPC < 100)//Si es menor que 100, se vuelve invisible (muere)
 	        { 
 	            objeto.KillCharacter();
 	        }
-        })*/
+        })
+        }
         if(distanceP1 < 100)//Si el jugador está en área, entonces muere y por tanto gana la partida
         { 
             this.scene.player.KillCharacter();
