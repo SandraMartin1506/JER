@@ -26,6 +26,7 @@ public class GameHandler extends TextWebSocketHandler {
 	//Jugadores preparados:
 	boolean p1Ready = false;
 	boolean p2Ready = false;
+	boolean prueba = true;
 	//Input de P1:
 	String inputP1;
 	String inputType;
@@ -100,7 +101,7 @@ public class GameHandler extends TextWebSocketHandler {
 				CheckGame(session);
 				break;
 			case "RestoreValues":
-				RestoreValues();
+				RestoreValues(json);
 				break;
 			case "UpdateNPC":
 				UpdateNPC(session, json);
@@ -108,25 +109,23 @@ public class GameHandler extends TextWebSocketHandler {
 			case "GetNPC":
 				GetNPC(session, json);
 				break;
-				
 			case "UpdateNPCStart":
 				UpdateNPCStart(json);
 				break;
 			case "GetNPCStart":
 				GetNPCStart(json);
 				break;
-				
 		}
 	}
 	
 	private void AssignPlayer(WebSocketSession session) throws IOException 
 	{
 		String msg = "";
-		if(!p1Assigned && !p2Ready) {
+		if(!p1Assigned) {
 			p1Assigned = true;
 			msg = "Player1";
 		}
-		else if (!p2Assigned && !p1Ready){
+		else if (!p2Assigned){
 			p2Assigned = true;
 			msg = "Player2";
 		}
@@ -162,12 +161,14 @@ public class GameHandler extends TextWebSocketHandler {
 		seed = json.getInt("seed");
 		//numNPC = json.getInt("numNPC");
 		p1Ready = true;
+		p1Assigned = true;
 	}
 	
 	private void InitializeP2(JSONObject json)
 	{
 		weapon = json.getString("weapon");
 		p2Ready = true;
+		p2Assigned = true;
 	}
 	
 	private void StartGame(WebSocketSession session) throws IOException
@@ -239,10 +240,15 @@ public class GameHandler extends TextWebSocketHandler {
 		session.sendMessage(new TextMessage(msg));
 	}
 	
-	private void RestoreValues() throws IOException{
+	private void RestoreValues(JSONObject json) throws IOException{
 		p1MissionAcomplished = false;
 		playerKilled = false;
-		p2NoBullets = false;	
+		p2NoBullets = false;
+		if(prueba) {
+			p1Ready = false;
+			p2Ready = false;
+		}
+		prueba = !prueba;
 	}
 	
 	private void UpdateNPCStart(JSONObject json) throws IOException

@@ -389,7 +389,7 @@ class CustomizationP1MenuOnline extends Phaser.Scene
 		var msg = {type: "InitializeP1", mission: this.numMission, hat: this.hatNum, top: this.topNum, bot: this.botNum, hint: this.fakeHint.text, numNPC: this.numberNPC, seed: this.seed};
         window.socket.send(JSON.stringify(msg));
         this.CheckPlayersReady();
-        this.interval = setInterval(() => this.CheckPlayersReady(), 1000);
+        this.interval = setInterval(() => this.CheckPlayersReady(), 100);
     }
     
     CheckPlayersReady()

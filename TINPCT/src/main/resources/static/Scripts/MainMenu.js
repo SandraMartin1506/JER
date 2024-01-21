@@ -246,7 +246,5 @@ class MainMenu extends Phaser.Scene
         	this.scene.start("CustomizationP2MenuOnline");
 			console.log("Jugador 2 asignado");
 		} 
-		var msg = {type: "RestoreValues"};
-		window.socket.send(JSON.stringify(msg));
 	}
 }

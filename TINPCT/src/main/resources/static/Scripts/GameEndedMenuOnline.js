@@ -113,7 +113,7 @@ class GameEndedMenuOnline extends Phaser.Scene
 
     PlayAgain()
     {
-		var msg = {type: "RestoreValues"};
+		var msg = {type: "RestoreValues", playAgain: true};
 		window.socket.send(JSON.stringify(msg));
 		this.scene.run("InfoMenuOnline");
 		this.scene.run("InfoMenuP1Online");
@@ -128,7 +128,7 @@ class GameEndedMenuOnline extends Phaser.Scene
 
     ReturnToMenu()
     {
-		var msg = {type: "RestoreValues"};
+		var msg = {type: "RestoreValues", playAgain: false};
 		window.socket.send(JSON.stringify(msg));
         this.scene.start("MainMenu");
 		if(window.player !== undefined){
