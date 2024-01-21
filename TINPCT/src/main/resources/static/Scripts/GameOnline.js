@@ -142,6 +142,7 @@ class GameOnline extends Phaser.Scene
         if(window.player === "Player1") {
 			this.player.ManageInput(this); //Se añade la gestión del input al ser pulsada una tecla. Se pasa como parámetro la escena del juego.
         	this.player.StopMovement(this); //Gestión del input: cuando deja de pulsarse la tecla de movimiento el jugador se queda quieto
+        	this.scene.run("InfoMenuP1Online");
         	console.log("Jugador 1 inicializado");
         }
         else{
@@ -200,6 +201,7 @@ class GameOnline extends Phaser.Scene
         this.scene.pause();
         if(window.player === "Player2"){
         this.scene.pause("InfoMenuOnline");
+        this.scene.pause("InfoMenuP1Online");
         }
     }
     }

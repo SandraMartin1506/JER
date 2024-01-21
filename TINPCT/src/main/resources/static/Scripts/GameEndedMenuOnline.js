@@ -113,8 +113,10 @@ class GameEndedMenuOnline extends Phaser.Scene
 		var msg = {type: "RestoreValues"};
 		window.socket.send(JSON.stringify(msg));
 		this.scene.run("InfoMenuOnline");
+		this.scene.run("InfoMenuP1Online");
         this.scene.remove("GameOnline");
         this.scene.remove("InfoMenuOnline");
+        this.scene.remove("InfoMenuP1Online");
 		if(window.player === "Player1") this.scene.start("CustomizationP1MenuOnline");
 	    else  this.scene.start("CustomizationP2MenuOnline");
         this.scene.remove("GameEndedMenu");
@@ -128,6 +130,7 @@ class GameEndedMenuOnline extends Phaser.Scene
         this.scene.start("MainMenu");
         this.scene.remove("GameOnline");
         this.scene.remove("InfoMenuOnline");
+        this.scene.remove("InfoMenuP1Online");
         this.scene.remove();
     }
     
