@@ -58,7 +58,20 @@ class GameOnline extends Phaser.Scene
 					this.player2.Shoot();
 				}
 				if(content[4] === "true") this.player.KillCharacter();
-			}
+                
+			} else if (content[0] === "checkGame" ){
+                if(content[1]=== "true"){
+					this.condition = "K"
+					 this.GoToEnding();
+				} else if (content[2] === "true"){
+					this.condition = "MA"
+					 this.GoToEnding();
+				}
+				else if(content[3] === "true"){
+					this.condition = "NB"
+                    this.GoToEnding();
+            }
+		}
 		}
 		var msg = {type: "GetP1Info"};
 		window.socket.send(JSON.stringify(msg));
@@ -79,7 +92,8 @@ class GameOnline extends Phaser.Scene
         this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
         if(window.player === "Player1") game.canvas.style.cursor = "none"; //A partir de ahora el cursor será una mira (no la nuestra, una por defecto)
         else game.canvas.style.cursor = "crosshair";
-        //this.gameEndedMenu = new GameEndedMenu(this.player, this.player2);
+        this.gameEndedMenu = new GameEndedMenuOnline(this.player, this.player2);
+
         //this.interval = setInterval(() => this.UpdateNPCFix(), 10);
     }
 
@@ -88,7 +102,7 @@ class GameOnline extends Phaser.Scene
         if(this.panel.alpha > 0) this.panel.alpha -= deltaTime/500;
         if(window.player === "Player1" && this.mission !== undefined) this.mission.CheckMission();
         this.UpdateCharacters(deltaTime);
-        //this.CheckGameCondition();
+        this.CheckGameCondition();
     }
 
     InitializeNPCS() //Inicializa todos los NPCs en posiciones aleatorias
@@ -118,13 +132,14 @@ class GameOnline extends Phaser.Scene
         var initialY = parseInt(components[6]);
 	    this.player = new PlayerOnline(initialX, initialY, this, "Character", this.hats[hatNum], this.tops[topNum], this.bottoms[botNum], "DeadBody");
     	var numMission = parseInt(components[1]);
-        this.mission = new Missions(numMission, this.player, this);
+        this.mission = new MissionsOnline(numMission, this.player, this);
         var numNPC = parseInt(components[8]);
        	this.npcs = new Array(numNPC);
        	var seedWord = components[9];
        	this.seed = this.cyrb128(seedWord);
         this.randomizr = this.splitmix32(this.seed[0]);
         this.InitializeNPCS();
+        console.log(this.mission);
         if(window.player === "Player1") {
 			this.player.ManageInput(this); //Se añade la gestión del input al ser pulsada una tecla. Se pasa como parámetro la escena del juego.
         	this.player.StopMovement(this); //Gestión del input: cuando deja de pulsarse la tecla de movimiento el jugador se queda quieto
@@ -171,18 +186,24 @@ class GameOnline extends Phaser.Scene
         //Si el jugador 2 ha disparado se para momentáneamente el sonido del juego con esta función
         if(this.player2 !== undefined) this.player2.StopGameSound();
     }
-/*
-    CheckGameCondition()
+    
+    CheckGameCondition(){
+		var msg = {type: "checkGame"};
+		window.socket.send(JSON.stringify(msg));
+	}
+
+    GoToEnding()
     {
-        if(this.player2.bullets == 0 || this.player.killed || this.player.missionAccomplished) 
-        {
-            this.gameSound.stop();
-            this.scene.add("GameEndedMenu",this.gameEndedMenu);
-            this.scene.run("GameEndedMenu");
-            this.scene.pause();
-            this.scene.pause("InfoMenu");
+		if (!this.scene.isActive("GameEndedMenuOnline")) {
+        this.gameSound.stop();
+        this.scene.add("GameEndedMenuOnline", this.gameEndedMenu);
+        this.scene.run("GameEndedMenuOnline");
+        this.scene.pause();
+        if(window.player === "Player2"){
+        this.scene.pause("InfoMenuOnline");
         }
-    }*/
+    }
+    }
     
     randomNumberGenerator(){
 		return this.randomizr.call();

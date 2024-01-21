@@ -24,6 +24,7 @@ public class GameHandler extends TextWebSocketHandler {
 	//Jugadores preparados:
 	boolean p1Ready = false;
 	boolean p2Ready = false;
+	
 	//Input de P1:
 	String inputP1;
 	String inputType;
@@ -33,6 +34,9 @@ public class GameHandler extends TextWebSocketHandler {
 	boolean hasShot = false;
 	//Game Condition:
 	boolean playerKilled = false;
+	boolean p1MissionAcomplished = false;
+	boolean p2NoBullets = false;
+
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -74,6 +78,18 @@ public class GameHandler extends TextWebSocketHandler {
 				break;
 			case "ObtainP2Input":
 				ObtainP2Input(session);
+				break;
+			case "MissionAcomplished":
+				MissionAcomplished(session, json);
+				break;
+			case "NoBullets":
+				NoBullets(session,json);
+				break;
+			case "checkGame":
+				CheckGame(session);
+				break;
+			case "RestoreValues":
+				RestoreValues();
 				break;
 		}
 	}
@@ -165,4 +181,28 @@ public class GameHandler extends TextWebSocketHandler {
 		if(hasShot) hasShot = false;
 		session.sendMessage(new TextMessage(msg));
 	}
-}
+	
+	private void MissionAcomplished(WebSocketSession session, JSONObject json)throws IOException { //Para comprobar si se ha pasado la misión
+		p1MissionAcomplished = json.getBoolean("p1MissionAcomplished");
+	}
+	
+	private void NoBullets(WebSocketSession session, JSONObject json)throws IOException {
+		
+		    if(json.getInt("numBullets") <= 0) {
+			p2NoBullets = true;
+		    }
+	}
+	
+	private void CheckGame(WebSocketSession session) throws IOException{
+		String msg = "checkGame;" + playerKilled + ";" + p1MissionAcomplished + ";" + p2NoBullets;
+		session.sendMessage(new TextMessage(msg));
+	}
+	
+	private void RestoreValues() throws IOException{
+		p1MissionAcomplished = false;
+		playerKilled = false;
+		p2NoBullets = false;	
+	}
+	
+	
+;}

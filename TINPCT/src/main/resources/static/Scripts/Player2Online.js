@@ -93,7 +93,10 @@ class Player2Online extends Phaser.GameObjects.Group
      				this.Shoot();
      			    var msg = {type: "Shoot", playerKilled: this.scene.player.killed};
             		window.socket.send(JSON.stringify(msg));
-     			}
+     			} else{
+					 var msg = {type: "NoBullets", numBullets: 0};
+            		window.socket.send(JSON.stringify(msg));
+				 }
             }
         }.bind(this));
     }
