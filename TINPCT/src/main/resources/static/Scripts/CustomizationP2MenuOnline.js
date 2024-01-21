@@ -39,7 +39,7 @@ class CustomizationP2MenuOnline extends Phaser.Scene
         //hoja3.setScale(1.7).setAngle(-60);
         const hoja3 = this.add.image(((this.game.config.width*(0.6)/2)),(this.game.config.height*(1))/2, "HojaCuaderno").setOrigin(0.5,0.5);
         hoja3.setScale(-1.75,1.75).setAngle(-6);
-        this.cartel = this.add.image(((this.game.config.width-400)),(this.game.config.height*(0.7))/2, "Wanted").setScale(0.4);
+        this.cartel = this.add.image(((this.game.config.width-400)),(this.game.config.height*(1))/2, "Wanted").setScale(0.5);
 
         //Boton confirmar
         this.goToGame = false;

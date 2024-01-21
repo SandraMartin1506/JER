@@ -14,13 +14,18 @@ class NPC2 extends Phaser.GameObjects.Group
 		//Lógica:
 		this.scene = scene;
 		this.speed = 45;
+		this.anim = true;
         this.nextX = this.body.x; //Próxima posición en x
         this.nextY = this.body.y; //Próxima posición en y
         this.calculatingPosition = false; //Indica si el NPC está quieto calculando cuál va a ser su próxima posición
 		//Gestión de clicks para ser eliminados:
 		this.deadSprite = deadSprite;
+		this.dead = 0;
 		scene.physics.add.existing(this.body);
-        this.body.setInteractive();
+		if (window.player==="Player2"){
+			this.body.setInteractive();
+		}
+     
         this.body.on('pointerdown',function(pointer)
 		{
             this.KillCharacter();
@@ -151,13 +156,174 @@ class NPC2 extends Phaser.GameObjects.Group
         if(this.top !== undefined) this.top.depth = this.body.depth;
         if(this.bottom !== undefined) this.bottom.depth = this.body.depth;	
     }
+    
+    UpdatePosition3() //Actualiza la posición de los enemigos
+    {
+			if(this.hat !== undefined) this.hat.x= this.body.x;
+            if(this.top !== undefined) this.top.x= this.body.x;
+            if(this.bottom !== undefined) this.bottom.x= this.body.x;
+            
+            if(this.hat !== undefined) this.hat.y= this.body.y;
+            if(this.top !== undefined) this.top.y= this.body.y;
+            if(this.bottom !== undefined) this.bottom.y= this.body.y;
+		
+		this.body.depth = this.body.y;
+		if(this.hat !== undefined) this.hat.depth = this.body.depth;
+        if(this.top !== undefined) this.top.depth = this.body.depth;
+        if(this.bottom !== undefined) this.bottom.depth = this.body.depth;	
+		
+    }
+    UpdatePosition2(deltaTime) //Actualiza la posición de los enemigos
+    {
+		if (this.anim==true){
+		if(this.nextY > this.body.y && this.direction === 2) 
+		{
+			this.body.anims.play("Character_front_walk");
+			if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_front_walk");
+            if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_front_walk");
+            if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_front_walk");
+            this.anim=false;
+		}
+		else if(this.nextY < this.body.y && this.direction === 0) 
+		{
+			this.body.anims.play("Character_back_walk");
+			if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_back_walk");
+            if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_back_walk");
+            if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_back_walk");
+            this.anim=false;
+		}
+		else if(this.nextX > this.body.x && this.direction === 1) 
+		{
+			this.body.anims.play("Character_right_walk");
+			if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_right_walk");
+            if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_right_walk");
+            if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_right_walk");
+            this.anim=false;
+		}
+		else if(this.nextX < this.body.x && this.direction === 3) 
+		{
+			this.body.anims.play("Character_left_walk");
+			if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_left_walk");
+            if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_left_walk");
+            if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_left_walk");
+            this.anim=false;
+		}
+		}
+		
+        if(this.body.x < this.nextX && this.direction === 1)
+		{
+			this.body.x += this.speed * deltaTime/1000;
+		}
+		else if(this.body.x > this.nextX && this.direction === 3) 
+		{
+			this.body.x -= this.speed * deltaTime/1000;
+		}
+		else if(this.body.y < this.nextY && this.direction === 2) 
+		{
+			this.body.y+= this.speed * deltaTime/1000;
+		}
+		else if(this.body.y > this.nextY && this.direction === 0) 
+		{
+			this.body.y-= this.speed * deltaTime/1000;
+		}
+		else //Si el NPC ya ha llegado a su destino se esperará un intervalo aleatorio de tiempo (corto) antes de elegir su nueva ruta
+		{
+			this.anim=true;
+				if(this.direction === 0)
+				{
+					this.body.anims.play("Character_idle_back");
+					if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_idle_back");
+                    if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_idle_back");
+                    if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_idle_back");
+				}
+				else if(this.direction === 1) 
+				{
+					this.body.anims.play("Character_idle_right");
+					if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_idle_right");
+                    if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_idle_right");
+                    if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_idle_right");
+				}
+				else if(this.direction === 2) 
+				{
+					this.body.anims.play("Character_idle_front");
+					if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_idle_front");
+                    if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_idle_front");
+                    if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_idle_front");
+				}
+				else if(this.direction === 3) 
+				{
+					this.body.anims.play("Character_idle_left");
+					if(this.hat !== undefined) this.hat.anims.play(this.hat.texture.key + "_idle_left");
+                    if(this.top !== undefined) this.top.anims.play(this.top.texture.key + "_idle_left");
+                    if(this.bottom !== undefined) this.bottom.anims.play(this.bottom.texture.key + "_idle_left");
+				}
+			}
+		
+			if(this.hat !== undefined) this.hat.x= this.body.x;
+            if(this.top !== undefined) this.top.x= this.body.x;
+            if(this.bottom !== undefined) this.bottom.x= this.body.x;
+		    if(this.hat !== undefined) this.hat.y= this.body.y;
+            if(this.top !== undefined) this.top.y= this.body.y;
+            if(this.bottom !== undefined) this.bottom.y= this.body.y;
+		this.body.depth = this.body.y;
+		if(this.hat !== undefined) this.hat.depth = this.body.depth;
+        if(this.top !== undefined) this.top.depth = this.body.depth;
+        if(this.bottom !== undefined) this.bottom.depth = this.body.depth;	
+    }
 
 	KillCharacter()
 	{
+		this.dead = 1;
 		this.scene.add.sprite(this.body.x, this.body.y, this.deadSprite).setScale(0.25);
 		this.body.setVisible(false);
 		if(this.hat !== undefined) this.hat.setVisible(false);
         if(this.top !== undefined) this.top.setVisible(false);
         if(this.bottom !== undefined) this.bottom.setVisible(false);
 	}
+	
+	GetCurrentX(){
+		return this.body.x;
+	}
+	
+	GetCurrentY(){
+		return this.body.y;
+	}
+	
+	SetCurrentX(val){
+		this.body.x=val;
+	}
+	
+	SetCurrentY(val){
+		this.body.y=val;
+	}
+	
+	GetDir(){
+		return this.direction;
+	}
+	
+	SetDir(val){
+		this.direction=val;
+	}
+	
+	GetNextX(){
+		return this.nextX;
+	}
+	
+	SetNextX(val){
+		this.nextX=val;
+	}
+	
+	GetNextY(){
+		return this.nextY;
+	}
+	
+	SetNextY(val){
+		this.nextY=val;
+	}
+	
+	GetDead(){
+		return this.dead;
+	}
+	
+
 }
